@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="input_space">15dp</dimen>
+    <dimen name="title_txtsize">19sp</dimen>
+    <dimen name="edittxt_height">50dp</dimen>
+    <dimen name="padding_lr">40dp</dimen>
+</resources>

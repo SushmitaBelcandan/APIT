@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">APIT</string>
+    <string-array name="cust_type">
+        <item>Rice Miller</item>
+        <item>Rice Trader</item>
+        <item>Rice Broker</item>
+        <item>Rice Engineer</item>
+        <item>Farmer</item>
+        <item>Research Students</item>
+        <item>Others</item>
+    </string-array>
+    <string name="first">First</string>
+    <string name="second">Second</string>
+    <string name="third">Third</string>
+    <drawable name="clr_normal">@color/white</drawable>
+    <drawable name="clr_pressed">@color/black</drawable>
+</resources>
