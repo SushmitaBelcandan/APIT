@@ -23,5 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tabLayout"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"/>
 </RelativeLayout>
