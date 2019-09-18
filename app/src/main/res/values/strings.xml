@@ -14,4 +14,7 @@
     <string name="third">Third</string>
     <drawable name="clr_normal">@color/white</drawable>
     <drawable name="clr_pressed">@color/black</drawable>
+
+    <string name="parboiling_drying_process">Parboiling / Drying</string>
+    <string name="steam_curing_drying">Steam curing Plant / Drying</string>
 </resources>

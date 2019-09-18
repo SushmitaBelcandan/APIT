@@ -24,14 +24,7 @@ public class VerifyForgotOtp_Act extends AppCompatActivity {
     Toolbar toolbar;
     private Button btnVerifyOtp;
     private TextView tvResendOtp;
-    private static final long START_TIME_IN_MILLIS = 60000; //60sec
-    //    TODO Accept Input from user & store it in  START_TIME_IN_MILLIS
-    int progress;
-    private CountDownTimer MyCountDownTimer;
-    private boolean TimerRunning;
-    //        Initially TimeLeftInMillis will be same as START_TIME_IN_MILLIS
-    private long TimeLeftInMillis = START_TIME_IN_MILLIS;
-    private int ProgressBarStatus;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,55 +61,5 @@ public class VerifyForgotOtp_Act extends AppCompatActivity {
         SpannableString spannableStrLogin = new SpannableString("Re-Send OTP");
         spannableStrLogin.setSpan(new UnderlineSpan(),0,spannableStrLogin.length(),0);
         tvResendOtp.setText(spannableStrLogin);
-
-        final TextView textViewShowTime = findViewById(R.id.tv_timerview_time);
-        final ProgressBar progressbar_timerview = findViewById(R.id.progressbar_timerview);
-
-        MyCountDownTimer = new CountDownTimer(START_TIME_IN_MILLIS, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-                TimeLeftInMillis = millisUntilFinished;
-                int minutes = (int) (TimeLeftInMillis / 1000) / 60;
-                int seconds = (int) (TimeLeftInMillis / 1000) % 60;
-                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
-                textViewShowTime.setText(timeLeftFormatted);
-                progressbar_timerview.setProgress((int)TimeLeftInMillis);
-
-
-
-                /*for incrementing progressbar every second calculating progress for every second*/
-                progress = (int) (START_TIME_IN_MILLIS / (1 * 100));
-                //incrementing progress on every tick
-                ProgressBarStatus += progress;
-                progressbar_timerview.setProgress(ProgressBarStatus);
-
-            }
-
-            @Override
-            public void onFinish() {
-                TimerRunning = false;
-                textViewShowTime.setText("00");
-                progressbar_timerview.setProgress(100);
-            }
-        }.start();
-
-        TimerRunning = true;
-        //resent otp
-        tvResendOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimeLeftInMillis =START_TIME_IN_MILLIS ;
-                int minutes = (int) (TimeLeftInMillis / 1000) / 60;
-                int seconds = (int) (TimeLeftInMillis / 1000) % 60;
-                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
-                textViewShowTime.setText(timeLeftFormatted);
-
-                progress = (int) (START_TIME_IN_MILLIS / (1 * 100));
-                //incrementing progress on every tick
-                ProgressBarStatus += progress;
-                progressbar_timerview.setProgress(ProgressBarStatus);
-            }
-        });
     }
 }

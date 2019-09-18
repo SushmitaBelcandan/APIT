@@ -38,15 +38,6 @@ public class SignUp_Act extends AppCompatActivity {
     private ImageView ivShowPass, ivHidePass, ivConfirmHidePass, ivConfirmShowPass;
     private EditText etNewPasswd, etConfirmPaswd;
     private Button btnNext;
-    private static final long START_TIME_IN_MILLIS = 60000; //60sec
-    //    TODO Accept Input from user & store it in  START_TIME_IN_MILLIS
-    int progress;
-    private CountDownTimer MyCountDownTimer;
-    private boolean TimerRunning;
-    //        Initially TimeLeftInMillis will be same as START_TIME_IN_MILLIS
-    private long TimeLeftInMillis = START_TIME_IN_MILLIS;
-    private int ProgressBarStatus;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,8 +105,6 @@ public class SignUp_Act extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* Intent intentMainActivity = new Intent(SignUp_Act.this,MainActivity.class);
-                startActivity(intentMainActivity)*/
                 signUpOTPAlert();
             }
         });
@@ -127,9 +116,6 @@ public class SignUp_Act extends AppCompatActivity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SignUp_Act.this, R.style.AlertDialogStyle);
         alertBuilder.setView(promptsView);
 
-        final TextView textViewShowTime = promptsView.findViewById(R.id.tv_timerview_time);
-        final ProgressBar progressbar_timerview = promptsView.findViewById(R.id.progressbar_timerview);
-
         EditText etOtp1 = promptsView.findViewById(R.id.etOtp1);
         EditText etOtp2 = promptsView.findViewById(R.id.etOtp2);
         EditText etOtp3 = promptsView.findViewById(R.id.etOtp3);
@@ -139,54 +125,7 @@ public class SignUp_Act extends AppCompatActivity {
         SpannableString spannable = new SpannableString("Re-Send OTP");
         spannable.setSpan(new UnderlineSpan(), 0, spannable.length(), 0);
         tvResendOtp.setText(spannable);
-        progressbar_timerview.setMax((int) TimeLeftInMillis);
-        MyCountDownTimer = new CountDownTimer(START_TIME_IN_MILLIS, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
 
-                TimeLeftInMillis = millisUntilFinished;
-                int minutes = (int) (TimeLeftInMillis / 1000) / 60;
-                int seconds = (int) (TimeLeftInMillis / 1000) % 60;
-                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
-                textViewShowTime.setText(timeLeftFormatted);
-                progressbar_timerview.setProgress((int) TimeLeftInMillis);
-
-
-
-                /*for incrementing progressbar every second calculating progress for every second*/
-                progress = (int) (START_TIME_IN_MILLIS / (1 * 100));
-                //incrementing progress on every tick
-                ProgressBarStatus += progress;
-                progressbar_timerview.setProgress(ProgressBarStatus);
-
-            }
-
-            @Override
-            public void onFinish() {
-                TimerRunning = false;
-                textViewShowTime.setText("00");
-                progressbar_timerview.setProgress(100);
-            }
-        }.start();
-
-        TimerRunning = true;
-        //resent otp
-        tvResendOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TimeLeftInMillis = START_TIME_IN_MILLIS;
-                int minutes = (int) (TimeLeftInMillis / 1000) / 60;
-                int seconds = (int) (TimeLeftInMillis / 1000) % 60;
-                String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
-                textViewShowTime.setText(timeLeftFormatted);
-
-
-                progress = (int) (START_TIME_IN_MILLIS / (1 * 100));
-                //incrementing progress on every tick
-                ProgressBarStatus += progress;
-                progressbar_timerview.setProgress(ProgressBarStatus);
-            }
-        });
         final AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }

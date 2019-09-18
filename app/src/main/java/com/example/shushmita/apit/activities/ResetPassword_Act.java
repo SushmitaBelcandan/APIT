@@ -16,7 +16,7 @@ import com.example.shushmita.apit.R;
 public class ResetPassword_Act extends AppCompatActivity {
 
     Toolbar toolbar;
-  private Button btnSignIn;
+  private Button btnSubmit;
 
 
     @Override
@@ -38,10 +38,10 @@ public class ResetPassword_Act extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        btnSignIn = findViewById(R.id.btnSignIn);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLogin = new Intent(ResetPassword_Act.this,Login_Act.class);
