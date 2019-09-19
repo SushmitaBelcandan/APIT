@@ -153,26 +153,110 @@
                     android:hint="Enter Pincode"
                     android:inputType="number" />
             </LinearLayout>
-
+            <!-- visible only for india-->
             <LinearLayout
+                android:id="@+id/llAddressDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_top"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/EnqFormTxtViewStyle"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="GST Number *" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/etGstNo"
-                    style="@style/EnqFormEditTxtStyle"
-                    android:hint="Enter GST No"
-                    android:inputType="text" />
+                    <TextView
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="State *" />
+
+                    <Spinner
+                        android:id="@+id/spnrState"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:entries="@array/cust_type" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="District *" />
+
+                    <Spinner
+                        android:id="@+id/spnrDistrict"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:entries="@array/cust_type" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Taluk *" />
+
+                    <Spinner
+                        android:id="@+id/spnrTaluk"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:entries="@array/cust_type" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Town/Village *" />
+
+                    <Spinner
+                        android:id="@+id/spnrTownorVillage"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:entries="@array/cust_type" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="GST Number *" />
+
+                    <EditText
+                        android:id="@+id/etGstNo"
+                        style="@style/EnqFormEditTxtStyle"
+                        android:hint="Enter GST No"
+                        android:inputType="text" />
+                </LinearLayout>
             </LinearLayout>
-
+            <!-- **************************************-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -228,6 +312,7 @@
                     android:hint="Enter Average Rain Fall in mm"
                     android:inputType="number" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -250,7 +335,7 @@
                         style="@style/EnqFormEditTxtStyle"
                         android:layout_weight="2"
                         android:hint="Grain Varities"
-                        android:inputType="number" />
+                        android:inputType="text" />
 
                     <LinearLayout
                         android:id="@+id/llAddGrainVarities"
@@ -265,14 +350,75 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:background="@drawable/plus"
-                            android:padding="8dp"/>
+                            android:padding="8dp" />
                     </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/llGrainDetailContainer"
+
+                <com.mindorks.placeholderview.PlaceHolderView
+                    android:id="@+id/phvGrains"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical"
+                    android:paddingTop="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Age of Paddy" />
+
+                    <Spinner
+                        android:id="@+id/spnrPaddyAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:entries="@array/cust_type" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAvgDensity"
+                        style="@style/EnqFormTxtViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <EditText
+                        android:id="@+id/etAvgDensity"
+                        style="@style/EnqFormEditTxtStyle"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center">
+
+                    <Button
+                        android:id="@+id/btnSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/yellow_roundcrnr"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Submit"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

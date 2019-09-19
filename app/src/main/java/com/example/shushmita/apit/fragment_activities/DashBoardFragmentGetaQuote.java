@@ -1,39 +1,36 @@
 package com.example.shushmita.apit.fragment_activities;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.ContextThemeWrapper;
 import android.text.Html;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.shushmita.apit.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.shushmita.apit.models.AddGrnVarty_Models;
+import com.example.shushmita.apit.models.RemoveGrnVarty_Models;
+import com.mindorks.placeholderview.PlaceHolderView;
 
 public class DashBoardFragmentGetaQuote extends Fragment {
 
-    private TextView tvSoilBearingCapacity;
-    private EditText etSoilBearingCapacity;
-    private LinearLayout llAddGrainVarities;
+    private TextView tvSoilBearingCapacity,tvAvgDensity;
+    private EditText etSoilBearingCapacity,etAvgDensity;
+    private LinearLayout llAddGrainVarities,llAddressDetails;
+    private EditText etPincode;
     LayoutInflater inflater;
-    private LinearLayout llGrainDetailContainer;
+    //private LinearLayout llGrainDetailContainer;
 
     EditText etGrainVarity;
-    List<View> allEds = new ArrayList<View>();
     int IdNum = 1;
+
+    public  static PlaceHolderView phvGrains;
 
     public DashBoardFragmentGetaQuote() {
         //required public constructor
@@ -50,58 +47,29 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etSoilBearingCapacity = view.findViewById(R.id.etSoilBearingCapacity);
         etSoilBearingCapacity.setHint(Html.fromHtml("Enter Soil Bearing Capacity in t/m<sup><small>2</small></sup>"));
 
-        llGrainDetailContainer = view.findViewById(R.id.llGrainDetailContainer);
+        etAvgDensity = view.findViewById(R.id.etAvgDensity);
+        etAvgDensity.setHint(Html.fromHtml("Enter Average Density of Paddy in kg/m<sup><small>2</small></sup>"));
+        tvAvgDensity = view.findViewById(R.id.tvAvgDensity);
+        tvAvgDensity.setText(Html.fromHtml("Average Density of Paddy ( kg/m<sup><small>3</small></sup> )"));
+
+        phvGrains = view.findViewById(R.id.phvGrains);
+        // llGrainDetailContainer = view.findViewById(R.id.llGrainDetailContainer);
         llAddGrainVarities = view.findViewById(R.id.llAddGrainVarities);
         llAddGrainVarities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* etGrainVarity= new EditText(new ContextThemeWrapper(getActivity(), R.style.GrainVerityStyle), null, 0);
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                        FrameLayout.LayoutParams.MATCH_PARENT);
-                params.gravity = Gravity.CENTER;
-                allEds.add(etGrainVarity);
-                etGrainVarity.setId(IdNum);
-                etGrainVarity.setHint("Grain Varities");
-                ((LinearLayout) view.findViewById(R.id.llGrainDetailContainer)).addView(etGrainVarity);
-                IdNum++;*/
-                onAddField(v);
-
+            phvGrains.addView(new RemoveGrnVarty_Models(view.getContext()));
             }
         });
+
+        //address details that will be visible for indian people only
+        llAddressDetails = view.findViewById(R.id.llAddressDetails);
+        etPincode = view.findViewById(R.id.etPincode);
+        if(!etPincode.getText().toString().isEmpty())
+        {
+            llAddressDetails.setVisibility(View.VISIBLE);
+        }
         return view;
 
-    }
-
-    public void onAddField(View v) {
-        inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View rowView = inflater.inflate(R.layout.field_grain_varities, null);
-        final LinearLayout llRemoveGrains = rowView.findViewById(R.id.llRemoveGrains);
-        final LinearLayout llAddGrains = rowView.findViewById(R.id.llAddGrains);
-        llRemoveGrains.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("--------delete item-------","----------delete item--------");
-                onDelete(v);
-
-            }
-        });
-        llAddGrains.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAddField(v);
-            }
-        });
-        // Add the new row before the add field button.
-        allEds.add(rowView);
-        llGrainDetailContainer.addView(rowView, llGrainDetailContainer.getChildCount() - 1);
-        if (allEds.size() > 1) {
-            llRemoveGrains.setVisibility(View.GONE);
-            llAddGrains.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public void onDelete(View v) {
-        LinearLayout linearChild = (LinearLayout) v.getParent().getParent().getParent().getParent();//getting rootparent
-        linearChild.setVisibility(View.GONE);
     }
 }
