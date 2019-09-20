@@ -12,7 +12,7 @@
     </style>
     <!-- tolbar text color-->
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
-        <item name="android:textColorSecondary">@color/blue_shade1</item>
+        <item name="android:textColorSecondary">@color/blue_shade2</item>
     </style>
 
     <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">

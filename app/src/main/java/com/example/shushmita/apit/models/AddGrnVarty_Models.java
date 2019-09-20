@@ -14,7 +14,6 @@ import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
-import static com.example.shushmita.apit.fragment_activities.DashBoardFragmentGetaQuote.phvGrains;
 
 @NonReusable
 @Layout(R.layout.remove_grain_varities)

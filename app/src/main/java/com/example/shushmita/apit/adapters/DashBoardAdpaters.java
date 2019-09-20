@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.example.shushmita.apit.fragment_activities.DashBoardFragmentAbtUs;
 import com.example.shushmita.apit.fragment_activities.DashBoardFragmentEProcess;
 import com.example.shushmita.apit.fragment_activities.DashBoardFragmentGetaQuote;
+import com.example.shushmita.apit.fragment_activities.ModuleFragment;
 
 public class DashBoardAdpaters extends FragmentPagerAdapter {
 

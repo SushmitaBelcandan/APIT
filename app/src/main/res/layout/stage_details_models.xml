@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llStageItems"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="2dp"
+    android:background="@color/blue_shade2"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/ivToggle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_weight=".9"
+        android:gravity="center|right"
+        android:padding="5dp"
+        android:src="@drawable/arrow_right_white"
+        android:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/tvStageNo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/ivToggle"
+        android:layout_weight=".1"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="left|center"
+        android:padding="10dp"
+        android:text="Menu Item"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+</LinearLayout>

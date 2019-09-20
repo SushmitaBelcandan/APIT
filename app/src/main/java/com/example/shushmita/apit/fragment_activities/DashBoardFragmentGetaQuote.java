@@ -3,6 +3,7 @@ package com.example.shushmita.apit.fragment_activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Editable;
@@ -11,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,6 +28,7 @@ import com.mindorks.placeholderview.PlaceHolderView;
 
 public class DashBoardFragmentGetaQuote extends Fragment {
 
+    ConstraintLayout clGetaQuoteContainer;
     private TextView tvSoilBearingCapacity, tvAvgDensity;
     private EditText etSoilBearingCapacity, etAvgDensity;
     private LinearLayout llAddGrainVarities, llAddressDetails;
@@ -35,6 +38,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     private RadioButton rdoBtnParboiling, rdoBtnSteamCuring;
     private LinearLayout llPaddyImages;
     public static PlaceHolderView phvGrains;
+    private Button btnSubmit;
 
     public DashBoardFragmentGetaQuote() {
         //required public constructor
@@ -45,6 +49,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.get_a_quote_frag, container, false);
+        clGetaQuoteContainer = view.findViewById(R.id.clGetaQuoteContainer);
         tvSoilBearingCapacity = view.findViewById(R.id.tvSoilBearingCapacity);
         tvSoilBearingCapacity.setText(Html.fromHtml("Soil Bearing Capacity ( t/m<sup><small>2</small></sup> )"));
 
@@ -105,6 +110,18 @@ public class DashBoardFragmentGetaQuote extends Fragment {
 
         //---------------------------------------------------------------------------------------------------------------------
         onRadioButtonClicked(view);
+        //----------------------------------------call new fragment------------------------------------------------------------
+        btnSubmit = view.findViewById(R.id.btnSubmit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment mFragment = new ModuleFragment();//background color should set on parent layout of new fragment
+                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.clGetaQuoteContainer, mFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
         return view;
 
     }
