@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="110dp"
+    android:layout_margin="5dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/yellow_bg">
+
+        <ImageView
+            android:id="@+id/ivGrainImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/default_img" />
+
+        <CheckBox
+            android:id="@+id/cbGrain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:button="@drawable/custom_check_box"
+            android:padding="5dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvPaddyClrName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_weight="8"
+        android:fontFamily="@font/roboto_regular"
+        android:text="Paddy Color"
+        android:textAlignment="center"
+        android:textColor="@color/black_shade2"
+        android:textSize="14sp" />
+</LinearLayout>
