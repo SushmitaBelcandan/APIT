@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 
 import com.example.shushmita.apit.R;
+import com.example.shushmita.apit.models.FeedStageDetailsModels;
+import com.example.shushmita.apit.models.PaddyColorsModels;
 import com.example.shushmita.apit.models.StageDetailsModels;
 import com.example.shushmita.apit.models.StageModels;
 import com.mindorks.placeholderview.ExpandablePlaceHolderView;
@@ -46,13 +48,22 @@ public class ModuleFragment extends Fragment {
 
         //----------------model list-----------------------------------------
         exphvModels = view.findViewById(R.id.exphvModels);
-        for (int i = 0; i < 2; i++) {
+       /* for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
                 exphvModels.addView(new StageDetailsModels(getActivity()));
+                Log.e("------sub items------", String.valueOf(j));
             }
             exphvModels.addView(new StageModels(getActivity()));
-        }
+            Log.e("------items------", String.valueOf(i));
 
+        }*/
+        exphvModels.addView(new StageModels(getActivity()))
+                .addView(new FeedStageDetailsModels(getActivity()))
+                .addView(new StageModels(getActivity()))
+                .addView(new StageDetailsModels(getActivity()))
+                .addView(new StageDetailsModels(getActivity()))
+                .addView(new StageDetailsModels(getActivity()))
+                .addView(new StageDetailsModels(getActivity()));
         //-------------------------------------------------------------------
         return view;
     }
