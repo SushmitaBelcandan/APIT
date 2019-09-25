@@ -9,6 +9,12 @@
         <item>Research Students</item>
         <item>Others</item>
     </string-array>
+    <string-array name="processes">
+        <item>Select type of processes</item>
+        <item>Parboiling</item>
+        <item>Steam Curing Plant</item>
+        <item>Drying</item>
+    </string-array>
     <string name="first">First</string>
     <string name="second">Second</string>
     <string name="third">Third</string>
@@ -31,7 +37,12 @@
     <string name = "processing_location">Processing Location</string>
     <string name = "paddy_s_moisture">Moisture of the Paddy</string>
 
+    <string name="moisture">Moisture*</string>
+    <string name="grain_temperature">Grain Temperature*</string>
+    <string name="rest_time">Rest Time (in Bins)*</string>
+    <string name="total_weight">Total Weight*</string>
    <string name="stage_model_desc">Gel cook stations are the key quality produce in any parboiling plant.APIT with the inputs from Worlds Greatest Grain Scientist Dr. Kshirod Bhattacharya,have developed a unique gel cook station for producing High Quality parboilng paddy.Unlike the conventional type of cookers where the body is cylindrical and the steaming process is intense,the state-of-the-art APIT Gel Cook stations have a contoured design inernal to facilitate proper mixing of padddy while it is steamed.
    </string>
     <string name="after_process_txt">All the values to be mentioned from Drier output</string>
+    <string name="your_id">Your ID : </string>
 </resources>

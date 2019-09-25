@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/tvProcessName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/roboto_medium"
+    android:gravity="center"
+    android:padding="7dp"
+    android:text=""
+    android:textColor="@drawable/selected_spnr_txt"
+    android:background="@drawable/selected_spnr_bg"
+    android:textSize="14sp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

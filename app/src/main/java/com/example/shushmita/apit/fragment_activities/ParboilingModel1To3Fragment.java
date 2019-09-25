@@ -1,5 +1,6 @@
 package com.example.shushmita.apit.fragment_activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,11 +13,13 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.example.shushmita.apit.R;
+import com.example.shushmita.apit.activities.AfterProcess_Act;
 
 public class ParboilingModel1To3Fragment extends Fragment {
 
@@ -24,6 +27,7 @@ public class ParboilingModel1To3Fragment extends Fragment {
     private TextView tvProcessModelTitle;
     private ImageView ivHydrTank, ivDryerMethodName;
     private TextView tvNumHydrn;
+    private Button btnSubmit;
 
     public ParboilingModel1To3Fragment() {
         //required constructor
@@ -50,6 +54,16 @@ public class ParboilingModel1To3Fragment extends Fragment {
         ivDryerMethodName.setClipToOutline(true);//fit with parent container
 
         tvNumHydrn = view.findViewById(R.id.tvNumHydrn);
+
+        btnSubmit = view.findViewById(R.id.btnSubmit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentAfterProcess = new Intent(getActivity(),AfterProcess_Act.class);
+                startActivity(intentAfterProcess);
+             }
+        });
+
         return view;
     }
 

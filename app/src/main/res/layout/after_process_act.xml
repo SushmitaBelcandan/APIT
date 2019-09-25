@@ -19,11 +19,9 @@
         app:contentInsetStartWithNavigation="0dp">
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:padding="8dp"
-            android:src="@drawable/toggle_white" />
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:background="@drawable/toggle_w" />
 
         <TextView
             style="@style/toolbar_title"
@@ -41,97 +39,295 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/padding_lr2"
-                android:paddingRight="@dimen/padding_lr2"
                 android:paddingTop="@dimen/margin_tb"
+                android:paddingRight="@dimen/padding_lr2"
                 android:paddingBottom="@dimen/margin_tb">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/after_process_txt"
-                    android:textColor="@color/black_shade2"
-                    android:textSize="14sp"
                     android:textAlignment="center"
-                    android:fontFamily="@font/roboto_regular"/>
+                    android:textColor="@color/black_shade2"
+                    android:textSize="14sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingRight="@dimen/padding_lr1"
-                android:paddingLeft="@dimen/padding_lr1">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
                 <LinearLayout
+                    android:id="@+id/llBatchNo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="5"
                     android:background="@color/blue_shade2"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:orientation="vertical">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/after_process_2c"
-                        android:text="Enter batch no"
-                        android:duplicateParentState="true"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:background="@color/yellow_shade1"
-                        android:layout_alignParentBottom="true"></View>
+
+                        <TextView
+                            android:id="@+id/tvBatchNum"
+                            style="@style/after_process_2c"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:duplicateParentState="true"
+                            android:paddingTop="@dimen/padding_five"
+                            android:paddingBottom="@dimen/margin_tb"
+                            android:text="Enter Batch No" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/yellow_shade1"></View>
                     </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="4"
                     android:background="@color/blue_shade2"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp">
+                    android:orientation="vertical">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/after_process_2c"
-                        android:text="Select Type of Process"
-                        android:duplicateParentState="true"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:background="@color/yellow_shade1"
-                        android:layout_alignParentBottom="true"></View>
+
+                        <Spinner
+                            android:id="@+id/spnrAPProcessType"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/blue_spnr_selector"
+                            android:entries="@array/processes"
+                            android:paddingRight="30dp"
+                            android:spinnerMode="dropdown"
+                            android:popupBackground="@android:color/white"
+                            android:dropDownVerticalOffset="50dp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/yellow_shade1"></View>
                     </RelativeLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="5"
                     android:background="@color/blue_shade2"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp">
+                    android:orientation="vertical">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@style/after_process_2c"
-                        android:text="Select Date"
-                        android:duplicateParentState="true"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:background="@color/yellow_shade1"
-                        android:layout_alignParentBottom="true"></View>
+
+                        <LinearLayout
+                            android:id="@+id/llSelectDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/padding_five">
+
+                            <TextView
+                                style="@style/after_process_2c"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:duplicateParentState="true"
+                                android:paddingTop="@dimen/padding_five"
+                                android:paddingBottom="@dimen/margin_tb"
+                                android:text="Select Date" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="7"
+                                android:paddingTop="@dimen/padding_five"
+                                android:paddingBottom="@dimen/margin_tb"
+                                android:gravity="right">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/date_w"
+                                    android:scaleType="fitXY"
+                                    android:adjustViewBounds="true"
+                                    android:layout_gravity="center"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/yellow_shade1"></View>
                     </RelativeLayout>
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/padding_lr2"
+                android:paddingTop="@dimen/twenty_five"
+                android:paddingRight="@dimen/padding_lr2"
+                android:paddingBottom="@dimen/padding_lr2">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="left"
+                    android:text="@string/your_id"
+                    android:textColor="@color/blue_shade2"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvUserId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="left"
+                    android:text=" XXXXXXXXX"
+                    android:textColor="@color/black_shade2"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_lr"
+                android:paddingRight="@dimen/padding_lr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvAPMoisture"
+                        style="@style/dryer_textView"
+                        android:text="@string/moisture" />
+
+                    <EditText
+                        android:id="@+id/etAPMoisture"
+                        style="@style/dryer_editText"
+                        android:hint="Enter Moisture"
+                        android:inputType="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_lr"
+                android:paddingRight="@dimen/padding_lr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvAPGrainTemp"
+                        style="@style/dryer_textView"
+                        android:text="@string/grain_temperature" />
+
+                    <EditText
+                        android:id="@+id/etAPGrainTemp"
+                        style="@style/dryer_editText"
+                        android:hint="Enter Grain Temperature"
+                        android:inputType="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_lr"
+                android:paddingRight="@dimen/padding_lr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvAPRestTime"
+                        style="@style/dryer_textView"
+                        android:text="@string/rest_time" />
+
+                    <EditText
+                        android:id="@+id/etAPRestTime"
+                        style="@style/dryer_editText"
+                        android:hint="Enter Rest Time (in Bins)"
+                        android:inputType="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_lr"
+                android:paddingRight="@dimen/padding_lr">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvAPTotalWeight"
+                        style="@style/dryer_textView"
+                        android:text="@string/total_weight" />
+
+                    <EditText
+                        android:id="@+id/etAPTotalWeight"
+                        style="@style/dryer_editText"
+                        android:hint="Enter Total Weight"
+                        android:inputType="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp">
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/yellow_roundcrnr"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

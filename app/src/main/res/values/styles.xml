@@ -116,6 +116,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:paddingBottom">2dp</item>
     </style>
+
     <style name="dryer_hydrtn_title">
         <item name="android:textColor">@color/blue_shade6</item>
         <item name="android:textSize">16sp</item>
@@ -123,6 +124,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textAlignment">center</item>
     </style>
+
     <style name="dryer_method_title">
         <item name="android:textColor">@color/blue_shade2</item>
         <item name="android:textSize">16sp</item>
@@ -130,6 +132,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textAlignment">center</item>
     </style>
+
     <style name="dryer_textView">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">match_parent</item>
@@ -140,6 +143,7 @@
         <item name="android:paddingBottom">3dp</item>
         <item name="android:inputType">textCapWords</item>
     </style>
+
     <style name="dryer_editText">
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_width">match_parent</item>
@@ -152,16 +156,22 @@
         <item name="android:background">@drawable/edit_txt_border</item>
         <item name="android:textCursorDrawable">@drawable/et_cursor_color_gray</item>
     </style>
+
     <style name="toolbar_title">
         <item name="android:textSize">20dp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="after_process_2c">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="MyThemeOverlay">
+        <item name="android:colorAccent">@color/blue_shade2</item>
     </style>
 </resources>
