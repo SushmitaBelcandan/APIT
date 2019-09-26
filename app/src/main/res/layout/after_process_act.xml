@@ -83,8 +83,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:duplicateParentState="true"
-                            android:paddingTop="@dimen/padding_five"
-                            android:paddingBottom="@dimen/margin_tb"
+                            android:paddingTop="@dimen/padding_three"
+                            android:paddingBottom="@dimen/padding_five"
                             android:text="Enter Batch No" />
 
                         <View
@@ -146,21 +146,24 @@
                             android:padding="@dimen/padding_five">
 
                             <TextView
+                                android:id="@+id/tvSelectDate"
                                 style="@style/after_process_2c"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="3"
                                 android:duplicateParentState="true"
-                                android:paddingTop="@dimen/padding_five"
-                                android:paddingBottom="@dimen/margin_tb"
+                                android:paddingTop="@dimen/padding_three"
+                                android:paddingBottom="@dimen/padding_five"
                                 android:text="Select Date" />
 
                             <LinearLayout
+                                android:id="@+id/llDate"
+                                android:visibility="visible"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="7"
                                 android:paddingTop="@dimen/padding_five"
-                                android:paddingBottom="@dimen/margin_tb"
+                                android:paddingBottom="@dimen/padding_five"
                                 android:gravity="right">
 
                                 <ImageView
@@ -200,135 +203,19 @@
                     android:textColor="@color/blue_shade2"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/tvUserId"
+                <EditText
+                    android:id="@+id/etUserId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="left"
                     android:text=" XXXXXXXXX"
                     android:textColor="@color/black_shade2"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:background="@drawable/et_bg_w"/>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_lr"
-                android:paddingRight="@dimen/padding_lr">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp">
-
-                    <TextView
-                        android:id="@+id/tvAPMoisture"
-                        style="@style/dryer_textView"
-                        android:text="@string/moisture" />
-
-                    <EditText
-                        android:id="@+id/etAPMoisture"
-                        style="@style/dryer_editText"
-                        android:hint="Enter Moisture"
-                        android:inputType="text" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_lr"
-                android:paddingRight="@dimen/padding_lr">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp">
-
-                    <TextView
-                        android:id="@+id/tvAPGrainTemp"
-                        style="@style/dryer_textView"
-                        android:text="@string/grain_temperature" />
-
-                    <EditText
-                        android:id="@+id/etAPGrainTemp"
-                        style="@style/dryer_editText"
-                        android:hint="Enter Grain Temperature"
-                        android:inputType="text" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_lr"
-                android:paddingRight="@dimen/padding_lr">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp">
-
-                    <TextView
-                        android:id="@+id/tvAPRestTime"
-                        style="@style/dryer_textView"
-                        android:text="@string/rest_time" />
-
-                    <EditText
-                        android:id="@+id/etAPRestTime"
-                        style="@style/dryer_editText"
-                        android:hint="Enter Rest Time (in Bins)"
-                        android:inputType="text" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_lr"
-                android:paddingRight="@dimen/padding_lr">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp">
-
-                    <TextView
-                        android:id="@+id/tvAPTotalWeight"
-                        style="@style/dryer_textView"
-                        android:text="@string/total_weight" />
-
-                    <EditText
-                        android:id="@+id/etAPTotalWeight"
-                        style="@style/dryer_editText"
-                        android:hint="Enter Total Weight"
-                        android:inputType="text" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="50dp">
-
-                <Button
-                    android:id="@+id/btnSubmit"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/yellow_roundcrnr"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Submit"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

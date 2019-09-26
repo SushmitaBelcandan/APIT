@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvAPMoisture"
+                style="@style/dryer_textView"
+                android:text="@string/moisture" />
+
+            <EditText
+                android:id="@+id/etAPMoisture"
+                style="@style/dryer_editText"
+                android:hint="Enter Moisture"
+                android:inputType="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvAPGrainTemp"
+                style="@style/dryer_textView"
+                android:text="@string/grain_temperature" />
+
+            <EditText
+                android:id="@+id/etAPGrainTemp"
+                style="@style/dryer_editText"
+                android:hint="Enter Grain Temperature"
+                android:inputType="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvAPRestTime"
+                style="@style/dryer_textView"
+                android:text="@string/rest_time" />
+
+            <EditText
+                android:id="@+id/etAPRestTime"
+                style="@style/dryer_editText"
+                android:hint="Enter Rest Time (in Bins)"
+                android:inputType="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvAPTotalWeight"
+                style="@style/dryer_textView"
+                android:text="@string/total_weight" />
+
+            <EditText
+                android:id="@+id/etAPTotalWeight"
+                style="@style/dryer_editText"
+                android:hint="Enter Total Weight"
+                android:inputType="text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/yellow_roundcrnr"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>
