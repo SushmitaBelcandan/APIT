@@ -15,6 +15,8 @@
         <item>Steam Curing Plant</item>
         <item>Drying</item>
     </string-array>
+    <string name="navigation_drawer_open">Open Drawer</string>
+    <string name="navigation_drawer_close">Close Drawer</string>
     <string name="first">First</string>
     <string name="second">Second</string>
     <string name="third">Third</string>
@@ -45,4 +47,19 @@
    </string>
     <string name="after_process_txt">All the values to be mentioned from Drier output</string>
     <string name="your_id">Your ID : </string>
+
+    <string name="broken">broken</string>
+    <string name="total_paddy_weight">Total Paddy Weight</string>
+    <string name="de_husker">De Husker</string>
+    <string name="polisher_1">Polisher 1</string>
+    <string name="polisher_2">Polisher 2</string>
+    <string name="polisher_3">Polisher 3</string>
+    <string name="polisher_4">Polisher 4</string>
+    <string name="polisher_5">Polisher 5</string>
+    <string name="polisher_6">Polisher 6</string>
+    <string name="grader">Grader</string>
+    <string name="sorter">Sorter</string>
+    <string name="head">head rice</string>
+    <string name="total_percentage">total percentage</string>
+    <string name="graph">Graph</string>
 </resources>

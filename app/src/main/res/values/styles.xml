@@ -181,4 +181,26 @@
         <item name="listPreferredItemHeightSmall">45dp</item>
         <item name="android:colorAccent">@color/blue_shade2</item>
     </style>
+
+    <style name="yeild_2nd_col">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/black_shade2</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:inputType">textCapWords</item>
+    </style>
+    <style name="yeild_1st_col">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/black_shade2</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:paddingBottom">1dp</item>
+        <item name="android:inputType">textCapWords</item>
+    </style>
+
 </resources>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llYeildModuleContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr"
+        android:paddingTop="8dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="broken"
+            android:textAllCaps="true"
+            android:textColor="@color/black_shade2"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingBottom="3dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvTotalPaddyWt"
+                style="@style/dryer_textView"
+                android:text="@string/total_paddy_weight" />
+
+            <EditText
+                android:id="@+id/etTotalPaddyWt"
+                style="@style/dryer_editText"
+                android:hint="Enter Total Paddy Weight in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvDeHusker"
+                style="@style/dryer_textView"
+                android:text="@string/de_husker" />
+
+            <EditText
+                android:id="@+id/etDeHusker"
+                style="@style/dryer_editText"
+                android:hint="Enter De Husker in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPolisher_1"
+                style="@style/dryer_textView"
+                android:text="@string/polisher_1" />
+
+            <EditText
+                android:id="@+id/etPolisher_1"
+                style="@style/dryer_editText"
+                android:hint="Enter Polisher in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPolisher_2"
+                style="@style/dryer_textView"
+                android:text="@string/polisher_2" />
+
+            <EditText
+                android:id="@+id/etPolisher_2"
+                style="@style/dryer_editText"
+                android:hint="Enter Polisher in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPolisher_3"
+                style="@style/dryer_textView"
+                android:text="@string/polisher_3" />
+
+            <EditText
+                android:id="@+id/etPolisher_3"
+                style="@style/dryer_editText"
+                android:hint="Enter Polisher in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPolisher_4"
+                style="@style/dryer_textView"
+                android:text="@string/polisher_4" />
+
+            <EditText
+                android:id="@+id/etPolisher_4"
+                style="@style/dryer_editText"
+                android:hint="Enter Polisher in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPolisher_5"
+                style="@style/dryer_textView"
+                android:text="@string/polisher_5" />
+
+            <EditText
+                android:id="@+id/etPolisher_5"
+                style="@style/dryer_editText"
+                android:hint="Enter Polisher in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvPolisher_6"
+                style="@style/dryer_textView"
+                android:text="@string/polisher_6" />
+
+            <EditText
+                android:id="@+id/etPolisher_6"
+                style="@style/dryer_editText"
+                android:hint="Enter Polisher in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvGraderBroken"
+                style="@style/dryer_textView"
+                android:text="@string/grader" />
+
+            <EditText
+                android:id="@+id/etGraderBroken"
+                style="@style/dryer_editText"
+                android:hint="Enter Grader in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvSorter"
+                style="@style/dryer_textView"
+                android:text="@string/sorter" />
+
+            <EditText
+                android:id="@+id/etSorter"
+                style="@style/dryer_editText"
+                android:hint="Enter Sorter in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr"
+        android:paddingTop="23dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/head"
+            android:textAllCaps="true"
+            android:textColor="@color/black_shade2"
+            android:textSize="16sp"
+            android:fontFamily="@font/roboto_medium"
+            android:paddingBottom="3dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvGraderHeadRice"
+                style="@style/dryer_textView"
+                android:text="@string/grader" />
+
+            <EditText
+                android:id="@+id/etGraderHeadRice"
+                style="@style/dryer_editText"
+                android:hint="Enter Grader in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_lr"
+        android:paddingRight="@dimen/padding_lr">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp">
+
+            <TextView
+                android:id="@+id/tvSorterHeadRice"
+                style="@style/dryer_textView"
+                android:text="@string/sorter" />
+
+            <EditText
+                android:id="@+id/etSorterHeadRice"
+                style="@style/dryer_editText"
+                android:hint="Enter Sorter in kgs"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp">
+
+        <Button
+            android:id="@+id/btnSubmitYeildModule"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/yellow_roundcrnr"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

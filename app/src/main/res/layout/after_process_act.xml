@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drwLayout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drwLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,6 +31,7 @@
                 android:background="@drawable/toggle_w" />
 
             <TextView
+                android:id="@+id/tvtoolbarTitle1"
                 style="@style/toolbar_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -120,10 +120,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/blue_spnr_selector"
-                                android:dropDownVerticalOffset="50dp"
+                                android:dropDownVerticalOffset="45dp"
                                 android:entries="@array/processes"
                                 android:paddingRight="30dp"
-                                android:popupBackground="@android:color/white"
+                                android:popupBackground="@drawable/popup_bg"
                                 android:spinnerMode="dropdown" />
 
                             <View
@@ -208,7 +208,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="left"
                         android:text="@string/your_id"
-                        android:textColor="@color/blue_shade2"
+                        android:textColor="@color/blue_shade6"
                         android:textSize="16sp" />
 
                     <EditText
@@ -223,11 +223,11 @@
                         android:textSize="16sp" />
                 </LinearLayout>
 
-              <LinearLayout
-                  android:id="@+id/llFragContainer"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical"></LinearLayout>
+                <LinearLayout
+                    android:id="@+id/llFragContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"></LinearLayout>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

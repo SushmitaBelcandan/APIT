@@ -19,8 +19,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="F:\APIT Doc\Icons\APIT Assets\drop_down_w.png" />
-                                      <entry key="outputName" value="drop_down_img_assets" />
+                                      <entry key="imageAsset" value="F:\APIT Doc\Icons\APIT Assets\top_arrow_w.png" />
+                                      <entry key="outputName" value="arrow_white" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>

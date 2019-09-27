@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,12 +29,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.adapters.ProcessList;
 import com.example.shushmita.apit.fragment_activities.AfterProcessFragment;
 import com.example.shushmita.apit.fragment_activities.DashBoardFragmentAbtUs;
 import com.example.shushmita.apit.fragment_activities.DashBoardFragmentEProcess;
 import com.example.shushmita.apit.fragment_activities.DashBoardFragmentGetaQuote;
+import com.example.shushmita.apit.fragment_activities.YeildModuleFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -51,9 +54,10 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
     View headerView;
     CircleImageView ivProfilePic;
     List<String> processList;
+    Toolbar toolbarAfterProcess;
     private Spinner spnrAPProcessType;
     private LinearLayout llSelectDate, llBatchNo, llDate, llProfileDesc, llEditProfile;
-    private TextView tvBatchNum, tvSelectDate, tvName, tvEmail, tvMobileNo;
+    private TextView tvBatchNum, tvSelectDate, tvName, tvEmail, tvMobileNo, tvtoolbarTitle1;
     private EditText etUserId;
     private String strBatchNum, strProcessName, strDate;
     private Button btnSubmit;
@@ -81,6 +85,7 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
         tvBatchNum = findViewById(R.id.tvBatchNum);
         tvSelectDate = findViewById(R.id.tvSelectDate);
         btnSubmit = findViewById(R.id.btnSubmit);
+        tvtoolbarTitle1 = findViewById(R.id.tvtoolbarTitle1);
         // etAPMoisture = findViewById(R.id.etAPMoisture);
         //-----------------------left nav----------
         nav_viewProfile = (NavigationView) findViewById(R.id.nav_viewProfile);
@@ -100,6 +105,8 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
                 drwLayout.openDrawer(Gravity.LEFT);
             }
         });
+        //--------------------toolbar--------------------------------
+        toolbarAfterProcess = findViewById(R.id.toolbarAfterProcess);
         //-----------------------------------------------------------
         strBatchNum = "null";
         strProcessName = "null";
@@ -175,9 +182,12 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
         switch (itemId) {
             case R.id.menuleft_after_process:
                 fragment = new AfterProcessFragment();
+                tvtoolbarTitle1.setText("After Process / Output");
                 break;
             case R.id.menuleft_yeild_mod:
-                fragment = new DashBoardFragmentEProcess();
+                fragment = new YeildModuleFragment();
+                tvtoolbarTitle1.setText("Yeild Module");
+
                 break;
             case R.id.menuleft_mass_blnc:
                 fragment = new DashBoardFragmentGetaQuote();
