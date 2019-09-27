@@ -1,221 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drwLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/llPraboilModel1to3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarAfterProcess"
+    <RelativeLayout
+        android:id="@+id/llPraboilModel1to3"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/blue_shade2"
-        android:gravity="center"
-        android:theme="@style/ToolbarColoredBackArrow"
-        app:contentInsetLeft="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetStartWithNavigation="0dp">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="25dp"
-            android:background="@drawable/toggle_w" />
-
-        <TextView
-            style="@style/toolbar_title"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarAfterProcess"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="After Process / Output" />
-    </android.support.v7.widget.Toolbar>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/blue_shade2"
+            android:gravity="center"
+            android:theme="@style/ToolbarColoredBackArrow"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStartWithNavigation="0dp">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbarAfterProcess">
+            <ImageButton
+                android:id="@+id/ibToggleIcon"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:background="@drawable/toggle_w" />
 
-        <LinearLayout
+            <TextView
+                style="@style/toolbar_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="After Process / Output" />
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_below="@+id/toolbarAfterProcess">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/padding_lr2"
-                android:paddingTop="@dimen/margin_tb"
-                android:paddingRight="@dimen/padding_lr2"
-                android:paddingBottom="@dimen/margin_tb">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="@string/after_process_txt"
-                    android:textAlignment="center"
-                    android:textColor="@color/black_shade2"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/llBatchNo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:background="@color/blue_shade2"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/padding_lr2"
+                    android:paddingTop="@dimen/margin_tb"
+                    android:paddingRight="@dimen/padding_lr2"
+                    android:paddingBottom="@dimen/margin_tb">
 
-                    <RelativeLayout
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/tvBatchNum"
-                            style="@style/after_process_2c"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:duplicateParentState="true"
-                            android:paddingTop="@dimen/padding_three"
-                            android:paddingBottom="@dimen/padding_five"
-                            android:text="Enter Batch No" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="5dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/yellow_shade1"></View>
-                    </RelativeLayout>
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/after_process_txt"
+                        android:textAlignment="center"
+                        android:textColor="@color/black_shade2"
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="4"
-                    android:background="@color/blue_shade2"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:orientation="horizontal">
 
-                    <RelativeLayout
+                    <LinearLayout
+                        android:id="@+id/llBatchNo"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:background="@color/blue_shade2"
+                        android:orientation="vertical">
 
-                        <Spinner
-                            android:id="@+id/spnrAPProcessType"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/blue_spnr_selector"
-                            android:entries="@array/processes"
-                            android:paddingRight="30dp"
-                            android:spinnerMode="dropdown"
-                            android:popupBackground="@android:color/white"
-                            android:dropDownVerticalOffset="50dp"/>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="5dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/yellow_shade1"></View>
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="5"
-                    android:background="@color/blue_shade2"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:id="@+id/llSelectDate"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/padding_five">
+                            android:layout_height="match_parent">
 
                             <TextView
-                                android:id="@+id/tvSelectDate"
+                                android:id="@+id/tvBatchNum"
                                 style="@style/after_process_2c"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="3"
                                 android:duplicateParentState="true"
                                 android:paddingTop="@dimen/padding_three"
                                 android:paddingBottom="@dimen/padding_five"
-                                android:text="Select Date" />
+                                android:text="Enter Batch No" />
 
-                            <LinearLayout
-                                android:id="@+id/llDate"
-                                android:visibility="visible"
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="5dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/yellow_shade1"></View>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="4"
+                        android:background="@color/blue_shade2"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <Spinner
+                                android:id="@+id/spnrAPProcessType"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:layout_weight="7"
-                                android:paddingTop="@dimen/padding_five"
-                                android:paddingBottom="@dimen/padding_five"
-                                android:gravity="right">
+                                android:background="@drawable/blue_spnr_selector"
+                                android:dropDownVerticalOffset="50dp"
+                                android:entries="@array/processes"
+                                android:paddingRight="30dp"
+                                android:popupBackground="@android:color/white"
+                                android:spinnerMode="dropdown" />
 
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:src="@drawable/date_w"
-                                    android:scaleType="fitXY"
-                                    android:adjustViewBounds="true"
-                                    android:layout_gravity="center"/>
-                            </LinearLayout>
-                        </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="5dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/yellow_shade1"></View>
+                        </RelativeLayout>
+                    </LinearLayout>
 
-                        <View
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="5"
+                        android:background="@color/blue_shade2"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="5dp"
-                            android:layout_alignParentBottom="true"
-                            android:background="@color/yellow_shade1"></View>
-                    </RelativeLayout>
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/llSelectDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="@dimen/padding_five">
+
+                                <TextView
+                                    android:id="@+id/tvSelectDate"
+                                    style="@style/after_process_2c"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="3"
+                                    android:duplicateParentState="true"
+                                    android:paddingTop="@dimen/padding_three"
+                                    android:paddingBottom="@dimen/padding_five"
+                                    android:text="Select Date" />
+
+                                <LinearLayout
+                                    android:id="@+id/llDate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="7"
+                                    android:gravity="right"
+                                    android:paddingTop="@dimen/padding_five"
+                                    android:paddingBottom="@dimen/padding_five"
+                                    android:visibility="visible">
+
+                                    <ImageView
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:adjustViewBounds="true"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/date_w" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="5dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@color/yellow_shade1"></View>
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/padding_lr2"
-                android:paddingTop="@dimen/twenty_five"
-                android:paddingRight="@dimen/padding_lr2"
-                android:paddingBottom="@dimen/padding_lr2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:gravity="left"
-                    android:text="@string/your_id"
-                    android:textColor="@color/blue_shade2"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/etUserId"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="left"
-                    android:text=" XXXXXXXXX"
-                    android:textColor="@color/black_shade2"
-                    android:textSize="16sp"
-                    android:background="@drawable/et_bg_w"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_lr2"
+                    android:paddingTop="@dimen/twenty_five"
+                    android:paddingRight="@dimen/padding_lr2"
+                    android:paddingBottom="@dimen/padding_lr2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="left"
+                        android:text="@string/your_id"
+                        android:textColor="@color/blue_shade2"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etUserId"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/et_bg_w"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="left"
+                        android:text=" XXXXXXXXX"
+                        android:textColor="@color/black_shade2"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+              <LinearLayout
+                  android:id="@+id/llFragContainer"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"></LinearLayout>
             </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+    <!-- left navigation -->
+    <LinearLayout
+        android:layout_width="281dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:background="@color/white"
+        android:orientation="vertical">
 
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_viewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_margin="0dp"
+            android:background="@color/white"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/left_nav_header"
+            app:itemBackground="@color/white"
+            app:itemIconPadding="12dp"
+            app:menu="@menu/left_nav_menu"
+            app:theme="@style/LeftNavTheme">
 
-        </LinearLayout>
-    </ScrollView>
-</RelativeLayout>
+        </android.support.design.widget.NavigationView>
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

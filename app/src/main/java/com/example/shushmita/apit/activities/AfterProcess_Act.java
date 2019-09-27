@@ -1,17 +1,20 @@
 package com.example.shushmita.apit.activities;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +30,13 @@ import android.widget.Toast;
 
 import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.adapters.ProcessList;
+import com.example.shushmita.apit.fragment_activities.AfterProcessFragment;
+import com.example.shushmita.apit.fragment_activities.DashBoardFragmentAbtUs;
+import com.example.shushmita.apit.fragment_activities.DashBoardFragmentEProcess;
+import com.example.shushmita.apit.fragment_activities.DashBoardFragmentGetaQuote;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,25 +44,34 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-public class AfterProcess_Act extends AppCompatActivity {
+public class AfterProcess_Act extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Spinner spnrAPProcessType;
-    public static final String[] processArr = new String[]{"Select Type of Process",
-            "Parboiling", "Steam Curing Plant", "Drying"};
+    DrawerLayout drwLayout;
+    NavigationView nav_viewProfile;
+    View headerView;
+    CircleImageView ivProfilePic;
     List<String> processList;
-    final Calendar myCalendar = Calendar.getInstance();
-    private LinearLayout llSelectDate, llBatchNo, llDate;
-    private TextView  tvBatchNum, tvSelectDate;
+    private Spinner spnrAPProcessType;
+    private LinearLayout llSelectDate, llBatchNo, llDate, llProfileDesc, llEditProfile;
+    private TextView tvBatchNum, tvSelectDate, tvName, tvEmail, tvMobileNo;
     private EditText etUserId;
     private String strBatchNum, strProcessName, strDate;
     private Button btnSubmit;
     //private EditText etAPMoisture;
+    private ImageButton ibToggleIcon;
+
+    final Calendar myCalendar = Calendar.getInstance();
+    public static final String[] processArr = new String[]{"Select Type of Process",
+            "Parboiling", "Steam Curing Plant", "Drying"};
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.after_process_act);
 
+        drwLayout = findViewById(R.id.drwLayout);
         spnrAPProcessType = findViewById(R.id.spnrAPProcessType);
         llSelectDate = findViewById(R.id.llSelectDate);
         llBatchNo = findViewById(R.id.llBatchNo);
@@ -61,12 +81,30 @@ public class AfterProcess_Act extends AppCompatActivity {
         tvBatchNum = findViewById(R.id.tvBatchNum);
         tvSelectDate = findViewById(R.id.tvSelectDate);
         btnSubmit = findViewById(R.id.btnSubmit);
-       // etAPMoisture = findViewById(R.id.etAPMoisture);
-
+        // etAPMoisture = findViewById(R.id.etAPMoisture);
+        //-----------------------left nav----------
+        nav_viewProfile = (NavigationView) findViewById(R.id.nav_viewProfile);
+        nav_viewProfile.setNavigationItemSelectedListener(this);
+        setNavMenuItemThemeColors();
+        headerView = nav_viewProfile.getHeaderView(0);
+        tvName = headerView.findViewById(R.id.tvName);
+        tvEmail = headerView.findViewById(R.id.tvEmail);
+        tvMobileNo = headerView.findViewById(R.id.tvMobileNo);
+        llProfileDesc = headerView.findViewById(R.id.llProfileDesc);
+        llEditProfile = headerView.findViewById(R.id.llEditProfile);
+        ivProfilePic = headerView.findViewById(R.id.ivProfilePic);
+        ibToggleIcon = findViewById(R.id.ibToggleIcon);
+        ibToggleIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drwLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+        //-----------------------------------------------------------
         strBatchNum = "null";
         strProcessName = "null";
         strDate = "null";
-
+        //----------------------------------spinner select process---------------------------------------------
         processList = new ArrayList<String>();
         for (int i = 0; i < processArr.length; i++) {
 
@@ -86,9 +124,10 @@ public class AfterProcess_Act extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                    strProcessName = "null";
+                strProcessName = "null";
             }
         });
+        //-------------------------------------------------------------------------------------------------------
         //select date---------------------------
         datePicker();
         llBatchNo.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +156,96 @@ public class AfterProcess_Act extends AppCompatActivity {
 
         //--------------------------------------------------------------------
 
+    }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drwLayout);
+        if (drawer.isDrawerOpen(Gravity.START)) {
+            drawer.closeDrawer(Gravity.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+    private void displaySelectedScreen(int itemId) {
+
+        //creating fragment object
+        Fragment fragment = null;
+
+        //initializing the fragment object which is selected
+        switch (itemId) {
+            case R.id.menuleft_after_process:
+                fragment = new AfterProcessFragment();
+                break;
+            case R.id.menuleft_yeild_mod:
+                fragment = new DashBoardFragmentEProcess();
+                break;
+            case R.id.menuleft_mass_blnc:
+                fragment = new DashBoardFragmentGetaQuote();
+                break;
+            case R.id.menuleft_process_batch:
+                fragment = new DashBoardFragmentAbtUs();
+                break;
+            case R.id.menuleft_notifi:
+                fragment = new AfterProcessFragment();
+                break;
+            case R.id.menuleft_logout:
+                fragment = new AfterProcessFragment();
+                break;
+
+        }
+
+        //replacing the fragment
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.llFragContainer, fragment);
+            ft.commit();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drwLayout);
+        drawer.closeDrawer(Gravity.START);
+    }
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        //calling the method displayselectedscreen and passing the id of selected menu
+        displaySelectedScreen(menuItem.getItemId());
+        //make this method blank
+        return true;
+    }
+    public void setNavMenuItemThemeColors() {
+        //Setting default colors for menu item Text and Icon
+        int navDefaultTextColor = Color.parseColor("#0C53A0");
+        int navDefaultIconColor = Color.parseColor("#0C53A0");
+        int navActiveIconColor = Color.parseColor("#4A4A4A");
+
+        //Defining ColorStateList for menu item Text
+        ColorStateList navMenuTextList = new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_checked},
+                        new int[]{-android.R.attr.state_checked}
+
+                },
+                new int[]{
+                        navDefaultTextColor,
+                        navDefaultTextColor
+                }
+        );
+
+        //Defining ColorStateList for menu item Icon
+        ColorStateList navMenuIconList = new ColorStateList(
+                new int[][]{
+
+                        new int[]{android.R.attr.state_checked},
+                        new int[]{-android.R.attr.state_checked}
+                },
+                new int[]{
+                        navActiveIconColor,
+                        navDefaultIconColor
+                }
+        );
+
+        nav_viewProfile.setItemTextColor(navMenuTextList);
+        nav_viewProfile.setItemIconTintList(navMenuIconList);
     }
 
     //----------------------------------------------------------select date methods-------------------------------------
@@ -154,14 +283,11 @@ public class AfterProcess_Act extends AppCompatActivity {
         String dateFormat = "dd/MM/yyyy";//In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         SimpleDateFormat sdfDate = new SimpleDateFormat(dateFormat, Locale.US);
-        if(!sdf.equals("null"))
-        {
+        if (!sdf.equals("null")) {
             strDate = sdf.format(myCalendar.getTime());
             llDate.setVisibility(View.GONE);
             tvSelectDate.setText(" " + sdfDate.format(myCalendar.getTime()));
-        }
-        else
-        {
+        } else {
             strDate = "null";
         }
 
@@ -195,19 +321,16 @@ public class AfterProcess_Act extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  strBatchNum = etBatchNo.getText().toString();
+                //  strBatchNum = etBatchNo.getText().toString();
 
 
-                if(!etBatchNo.getText().toString().trim().equals(null) &&
+                if (!etBatchNo.getText().toString().trim().equals(null) &&
                         !etBatchNo.getText().toString().trim().equals("null") &&
-                        !etBatchNo.getText().toString().trim().isEmpty())
-                {
+                        !etBatchNo.getText().toString().trim().isEmpty()) {
                     strBatchNum = etBatchNo.getText().toString();
                     tvBatchNum.setText(strBatchNum);
                     alertDialog.dismiss();
-                }
-                else
-                {
+                } else {
                     strBatchNum = "null";
                     etBatchNo.requestFocus();
                     etBatchNo.setError("Invalid Batch Number");
@@ -218,10 +341,10 @@ public class AfterProcess_Act extends AppCompatActivity {
 
 
     }
-    public void setUserId()
-    {
+
+    public void setUserId() {
         //---------------your id dispaly-----------------------
-        if(!strBatchNum.equals("null")&&!strProcessName.equals("null")&&!strDate.equals("null"))
+        if (!strBatchNum.equals("null") && !strProcessName.equals("null") && !strDate.equals("null"))
 
         {
             if (strProcessName.equals("Parboiling")) {
@@ -231,8 +354,7 @@ public class AfterProcess_Act extends AppCompatActivity {
             } else {
                 etUserId.setText(strBatchNum + "D" + strDate);
             }
-        }
-        else
+        } else
 
         {
             if (strBatchNum.equals("null")) {

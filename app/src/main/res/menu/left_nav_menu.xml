@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/menuLeftGroup1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menuleft_after_process"
+            android:icon="@drawable/after_process_img_assets"
+            android:title="After Process Data" />
+        <item
+            android:id="@+id/menuleft_yeild_mod"
+            android:icon="@drawable/yeild_module_img_assets"
+            android:title="Yeild Module" />
+        <item
+            android:id="@+id/menuleft_mass_blnc"
+            android:icon="@drawable/mass_blnc_img_assets"
+            android:title="Mass Balance Module" />
+        <item
+            android:id="@+id/menuleft_process_batch"
+            android:icon="@drawable/past_process_img_assets"
+            android:title="Past Process Batch Data" />
+        <item
+            android:id="@+id/menuleft_notifi"
+            android:icon="@drawable/notification_img_assets"
+            android:title="Notification" />
+        <item
+            android:id="@+id/menuleft_logout"
+            android:icon="@drawable/logout_img_assets"
+            android:title="Logout" />
+    </group>
+</menu>

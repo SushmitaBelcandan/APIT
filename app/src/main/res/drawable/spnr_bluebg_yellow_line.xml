@@ -29,9 +29,11 @@
         android:gravity="center_vertical|right"
         android:right="5dp">
         <layer-list>
-            <item>
+            <item
+                android:id="@+id/imgDrawable">
                 <bitmap android:gravity="center|right"
-                    android:src="@drawable/drop_down_w" />
+                    android:src="@drawable/drop_down_w"
+                    android:tint="@color/white" />
             </item>
             <item
                 android:width="30dp"
