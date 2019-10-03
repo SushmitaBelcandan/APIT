@@ -7,15 +7,15 @@
                 <shape>
                     <gradient android:angle="90" android:type="linear" />
                     <solid android:color="@color/white"></solid>
-
+                    <size android:height="45dp"></size>
 
                     <corners android:radius="5dp" />
 
                     <padding
-                        android:bottom="9.0dip"
+                        android:bottom="7.0dip"
                         android:left="9.0dip"
                         android:right="9.0dip"
-                        android:top="9.0dip" />
+                        android:top="7.0dip" />
                 </shape>
             </item>
             <item>

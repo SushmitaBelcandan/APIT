@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,9 @@ public class YeildModuleFragment extends Fragment {
         btnSubmitYeildModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment mFragment = new YeildModuleGraphFragment();//background color should set on parent layout of new fragment
-                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.replace(R.id.llYeildModuleContainer, mFragment);
-                ft.addToBackStack(null);
+                final Fragment mFragment = new YeildModuleGraphFragment();//background color should set on parent layout of new fragment
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(((ViewGroup)getView().getParent()).getId(), mFragment);
                 ft.commit();
             }
         });

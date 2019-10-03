@@ -143,9 +143,14 @@
                     <Spinner
                         android:id="@+id/spnrCountry"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/spnr_bg_gray"
-                        android:entries="@array/cust_type" />
+                        android:popupBackground="@drawable/popup_bg"
+                        android:spinnerMode="dropdown"
+                        android:dropDownVerticalOffset="40dp"
+                        android:dropDownWidth="match_parent"
+                        android:paddingLeft="0dp"
+                        android:paddingRight="0dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -394,9 +399,14 @@
                     <Spinner
                         android:id="@+id/spnrPaddyAge"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/spnr_bg_gray"
-                        android:entries="@array/cust_type" />
+                        android:popupBackground="@drawable/popup_bg"
+                        android:spinnerMode="dropdown"
+                        android:dropDownVerticalOffset="40dp"
+                        android:dropDownWidth="match_parent"
+                        android:paddingLeft="0dp"
+                        android:paddingRight="0dp"  />
                 </LinearLayout>
 
                 <LinearLayout

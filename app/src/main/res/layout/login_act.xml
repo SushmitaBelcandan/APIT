@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -65,6 +66,8 @@
                             android:paddingLeft="12dp"
                             android:paddingTop="8dp"
                             android:paddingRight="12dp"
+                            android:gravity="left|center"
+                            android:inputType="text"
                             android:paddingBottom="8dp"
                             android:textColor="@color/black"
                             android:textCursorDrawable="@drawable/et_cursor_color"
@@ -80,6 +83,7 @@
                             android:hint="Password"
                             android:paddingLeft="12dp"
                             android:inputType="textPassword"
+                            android:gravity="left|center"
                             android:paddingTop="8dp"
                             android:paddingRight="12dp"
                             android:paddingBottom="8dp"
@@ -111,10 +115,13 @@
                         android:orientation="horizontal">
 
                         <LinearLayout
+                            android:id="@+id/llForgotPassword"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp">
 
                             <TextView
                                 android:id="@+id/tvForgotPasswd"
@@ -124,14 +131,18 @@
                                 android:text="forgot password"
                                 android:textAlignment="textStart"
                                 android:textColor="@color/blue_shade3"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                android:gravity="start" />
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/llSignUp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp">
 
                             <TextView
                                 android:id="@+id/tvCreateAccount"
@@ -141,7 +152,8 @@
                                 android:text="Create an Account"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/blue_shade3"
-                                android:textSize="12sp" />
+                                android:textSize="12sp"
+                                android:gravity="end" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

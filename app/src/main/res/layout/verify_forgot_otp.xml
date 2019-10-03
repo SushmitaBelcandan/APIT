@@ -73,12 +73,14 @@
                         android:id="@+id/etOtp1"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:theme="@style/otp_et_style" />
 
                     <EditText
                         android:id="@+id/etOtp2"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_marginLeft="20dp"
                         android:theme="@style/otp_et_style" />
 
@@ -86,6 +88,7 @@
                         android:id="@+id/etOtp3"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_marginLeft="20dp"
                         android:theme="@style/otp_et_style" />
 
@@ -93,6 +96,7 @@
                         android:id="@+id/etOtp4"
                         android:layout_width="30dp"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/white"
                         android:layout_marginLeft="20dp"
                         android:theme="@style/otp_et_style" />
                 </LinearLayout>
@@ -119,9 +123,12 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llResendOtp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp">
 
                     <TextView
                         android:id="@+id/tvResendOtp"

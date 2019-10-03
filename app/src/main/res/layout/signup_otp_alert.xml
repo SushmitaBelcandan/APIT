@@ -39,6 +39,7 @@
                 android:id="@+id/etOtp1"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:theme="@style/otp_et_style" />
 
             <EditText
@@ -46,6 +47,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/white"
                 android:theme="@style/otp_et_style" />
 
             <EditText
@@ -53,6 +55,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/white"
                 android:theme="@style/otp_et_style" />
 
             <EditText
@@ -60,6 +63,7 @@
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/white"
                 android:theme="@style/otp_et_style" />
         </LinearLayout>
 

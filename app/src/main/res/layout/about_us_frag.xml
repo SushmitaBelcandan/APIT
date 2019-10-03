@@ -5,205 +5,318 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/flDashboard"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/pbLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:indeterminate="true" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/ivBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/rice_mill" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="10dp">
+
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/yellow_bg"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="3dp"
+                                android:src="@drawable/icon_about" />
+
+                            <TextView
+                                style="@style/slogan_about_us"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:text="who we are" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="80dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/yellow_bg"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="0dp"
+                                android:src="@drawable/icon_philosophy" />
+
+                            <TextView
+                                style="@style/slogan_about_us"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:text="our philosophy" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="80dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/yellow_bg"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="3dp"
+                                android:src="@drawable/icon_expert" />
+
+                            <TextView
+                                style="@style/slogan_about_us"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="6"
+                                android:text="you want expert" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <WebView
+                        android:id="@+id/webvDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginTop="@dimen/margin_tb"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:layout_marginBottom="@dimen/margin_tb"
+                        android:visibility="visible"></WebView>
+
+                    <LinearLayout
+                        android:id="@+id/llAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginTop="@dimen/margin_tb"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Address"
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text=""
+                            android:textColor="@color/black_shade2"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Phone: "
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text=""
+                            android:autoLink="phone"
+                            android:linksClickable="true"
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Email ID: "
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text=""
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llWebsite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Website: "
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvWebsite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text=""
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llFacebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Facebook: "
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvFacebook"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llLinkedin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_lr"
+                        android:layout_marginRight="@dimen/margin_lr"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="LinkedIn: "
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvLinkedIn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:justificationMode="inter_word"
+                            android:linksClickable="true"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/blue_shade4"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </ScrollView>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvEmptyPage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/rice_mill" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp">
-
-                <LinearLayout
-                    android:layout_width="120dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/yellow_bg"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="3dp"
-                        android:src="@drawable/icon_about" />
-
-                    <TextView
-                        style="@style/slogan_about_us"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:text="who we are" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="120dp"
-                    android:layout_height="80dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/yellow_bg"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="0dp"
-                        android:src="@drawable/icon_philosophy" />
-
-                    <TextView
-                        style="@style/slogan_about_us"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:text="our philosophy" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="120dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/yellow_bg"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="3dp"
-                        android:src="@drawable/icon_expert" />
-
-                    <TextView
-                        style="@style/slogan_about_us"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:text="you want expert" />
-                </LinearLayout>
-            </LinearLayout>
-            <WebView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_lr"
-                android:layout_marginTop="@dimen/margin_tb"
-                android:layout_marginRight="@dimen/margin_lr"
-                android:layout_marginBottom="@dimen/margin_tb"></WebView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="@dimen/margin_lr"
-                android:layout_marginLeft="@dimen/margin_lr"
-                android:layout_marginTop="@dimen/margin_tb">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:textColor="@color/blue_shade4"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="BTM 1st stage , maruthi nagar,bangalore,karnataka,560029"
-                    android:justificationMode="inter_word"
-                    android:textSize="14sp"
-                    android:textColor="@color/black_shade2"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginRight="@dimen/margin_lr"
-                android:layout_marginLeft="@dimen/margin_lr">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Phone: "
-                    android:textColor="@color/blue_shade4"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="90789 98069 / +91 234699 7890"
-                    android:justificationMode="inter_word"
-                    android:textSize="14sp"
-                    android:textColor="@color/blue_shade4"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginRight="@dimen/margin_lr"
-                android:layout_marginLeft="@dimen/margin_lr">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email ID: "
-                    android:textColor="@color/blue_shade4"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="mail@api.co.in"
-                    android:justificationMode="inter_word"
-                    android:textSize="14sp"
-                    android:textColor="@color/blue_shade4"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginRight="@dimen/margin_lr"
-                android:layout_marginLeft="@dimen/margin_lr">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Website: "
-                    android:textColor="@color/blue_shade4"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="www.api.co.in"
-                    android:justificationMode="inter_word"
-                    android:textSize="14sp"
-                    android:textColor="@color/blue_shade4"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp"/>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+            android:gravity="center"
+            android:text="Page unavailable."
+            android:visibility="gone" />
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

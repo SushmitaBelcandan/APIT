@@ -28,7 +28,7 @@ public class APIClient {
                 .create();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://3.213.33.73/Ecommerce/upload/")
+                .baseUrl("http://3.213.33.73/APIT/public/api/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();

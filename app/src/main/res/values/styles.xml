@@ -170,6 +170,15 @@
         <item name="android:textAlignment">center</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:gravity">center</item>
+
+    </style>
+    <style name="cust_list">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">10dp</item>
     </style>
     <style name="MyThemeOverlay">
         <item name="android:colorAccent">@color/blue_shade2</item>
