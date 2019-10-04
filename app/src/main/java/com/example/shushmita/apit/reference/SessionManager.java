@@ -18,10 +18,13 @@ public class SessionManager {
     private static final String KEY_MOBILE = "mobileno";
     private static final String KEY_EMAIL = "email";
     private static final String KEY_CTYPE_ID = "customer_type_id";
-    private static final String KEY_GEO_DETAIL = "geo_details";
-    private static final String KEY_GST_NO = "gst_no";
-    private static final String KEY_PASS = "password";
     private static final String KEY_PROF_PIC = "profilepic";
+
+    private static final String KEY_IMG_Id = "image_id";
+    private static final String KEY_CB_STATUS = "false";
+
+   private static final String KEY_GRNS_VRTY = "verity";
+
 
     public SessionManager(Context contxt) {
         this.mContext = contxt;
@@ -38,6 +41,7 @@ public class SessionManager {
         editor.putString(KEY_EMAIL, str_email_id);
         editor.putString(KEY_CTYPE_ID, cust_type_id);
         editor.putString(KEY_PROF_PIC, profile_pic);
+        editor.commit();
     }
 
     public String getUsrId() {
@@ -62,5 +66,28 @@ public class SessionManager {
 
     public String getProfilePic() {
         return shref.getString(KEY_PROF_PIC, null);
+    }
+
+    public void selectedImage(Integer img_id, Boolean chkbx_flag) {
+        editor.putInt(KEY_IMG_Id, img_id);
+        editor.putBoolean(KEY_CB_STATUS, chkbx_flag);
+        editor.commit();
+    }
+
+    public Integer getImageID() {
+        return shref.getInt(KEY_IMG_Id, 0);
+    }
+    public Boolean getChkBoxStatus()
+    {
+        return shref.getBoolean(KEY_CB_STATUS,false);
+    }
+
+    public void setVarietyGrains(String grains_name) {
+        editor.putString(KEY_GRNS_VRTY, grains_name);
+        editor.commit();
+    }
+
+    public String getVarietyGrains() {
+        return shref.getString(KEY_GRNS_VRTY, null);
     }
 }

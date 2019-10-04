@@ -22,7 +22,7 @@
                 android:id="@+id/etGrainVarities"
                 style="@style/EnqFormEditTxtStyle"
                 android:hint="Grain Varities"
-                android:inputType="number" />
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout

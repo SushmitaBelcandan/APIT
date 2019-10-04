@@ -1,5 +1,6 @@
 package com.example.shushmita.apit.retrofit_models;
 
+import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
 
 public class PostEnquiryDataModel {
@@ -59,6 +60,37 @@ public class PostEnquiryDataModel {
     public String ave_density ;
 
     @SerializedName("graindetails")
-    public Object graindetails;
+    public JsonArray graindetails;
+
+    public PostEnquiryDataModel(String usrId, String procsId, String procsImgId, String fName,String contctPerson,String phn,
+                                String country, String pincode, String state, String district, String taluk, String village,
+                                String gstNo, String soilCap, String windSpeed, String rainFall, String agePaddy, String avgDensity,
+                                JsonArray grainDetails)
+    {
+        this.user_id = usrId;
+        this.process_id = procsId;
+        this.process_image_id = procsImgId;
+        this.first_name = fName;
+        this.contact_person  = contctPerson;
+        this.phone = phn;
+        this.country = country;
+        this.pincode = pincode;
+        this.state = state;
+        this.district = district;
+        this.taluk = taluk;
+        this.village = village;
+        this.gst_no = gstNo;
+        this.soil_capacity = soilCap;
+        this.wind_speed = windSpeed;
+        this.rain_fall = rainFall;
+        this.age_paddy = agePaddy;
+        this.ave_density = avgDensity;
+        this.graindetails = grainDetails;
+    }
+    @SerializedName("status")
+    public String status ;
+
+    @SerializedName("message")
+    public String message ;
 
 }

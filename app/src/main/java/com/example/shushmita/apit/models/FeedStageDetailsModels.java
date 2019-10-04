@@ -1,6 +1,8 @@
 package com.example.shushmita.apit.models;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class FeedStageDetailsModels {
         this.mContext = contxt;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Resolve
     public void onResolved()
     {

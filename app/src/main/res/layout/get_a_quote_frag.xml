@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/clGetaQuoteContainer"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -145,12 +144,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/spnr_bg_gray"
-                        android:popupBackground="@drawable/popup_bg"
-                        android:spinnerMode="dropdown"
-                        android:dropDownVerticalOffset="40dp"
                         android:dropDownWidth="match_parent"
+                        android:dropDownVerticalOffset="40dp"
                         android:paddingLeft="0dp"
-                        android:paddingRight="0dp" />
+                        android:paddingRight="0dp"
+                        android:popupBackground="@drawable/popup_bg"
+                        android:spinnerMode="dropdown" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -191,12 +190,11 @@
                             android:layout_height="match_parent"
                             android:text="State *" />
 
-                        <Spinner
-                            android:id="@+id/spnrState"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/spnr_bg_gray"
-                            android:entries="@array/cust_type" />
+                        <EditText
+                            android:id="@+id/etState"
+                            style="@style/EnqFormEditTxtStyle"
+                            android:enabled="false"
+                            android:inputType="text" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -211,12 +209,11 @@
                             android:layout_height="match_parent"
                             android:text="District *" />
 
-                        <Spinner
-                            android:id="@+id/spnrDistrict"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/spnr_bg_gray"
-                            android:entries="@array/cust_type" />
+                        <EditText
+                            android:id="@+id/etDistrict"
+                            style="@style/EnqFormEditTxtStyle"
+                            android:enabled="false"
+                            android:inputType="text" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -231,12 +228,11 @@
                             android:layout_height="match_parent"
                             android:text="Taluk *" />
 
-                        <Spinner
-                            android:id="@+id/spnrTaluk"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/spnr_bg_gray"
-                            android:entries="@array/cust_type" />
+                        <EditText
+                            android:id="@+id/etTaluk"
+                            style="@style/EnqFormEditTxtStyle"
+                            android:enabled="false"
+                            android:inputType="text" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -251,12 +247,11 @@
                             android:layout_height="match_parent"
                             android:text="Town/Village *" />
 
-                        <Spinner
-                            android:id="@+id/spnrTownorVillage"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/spnr_bg_gray"
-                            android:entries="@array/cust_type" />
+                        <EditText
+                            android:id="@+id/etTown"
+                            style="@style/EnqFormEditTxtStyle"
+                            android:enabled="false"
+                            android:inputType="text" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -401,12 +396,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/spnr_bg_gray"
-                        android:popupBackground="@drawable/popup_bg"
-                        android:spinnerMode="dropdown"
-                        android:dropDownVerticalOffset="40dp"
                         android:dropDownWidth="match_parent"
+                        android:dropDownVerticalOffset="40dp"
                         android:paddingLeft="0dp"
-                        android:paddingRight="0dp"  />
+                        android:paddingRight="0dp"
+                        android:popupBackground="@drawable/popup_bg"
+                        android:spinnerMode="dropdown" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -445,12 +440,14 @@
                     android:layout_marginRight="@dimen/padding_lr"
                     android:text="Color of Paddy" />
 
-                <com.mindorks.placeholderview.PlaceHolderView
-                    android:id="@+id/phvPaddyColor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="35dp"
-                    android:paddingRight="35dp"></com.mindorks.placeholderview.PlaceHolderView>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/phvPaddyColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="35dp"
+                        android:paddingRight="35dp">
+                    </android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
             <LinearLayout
