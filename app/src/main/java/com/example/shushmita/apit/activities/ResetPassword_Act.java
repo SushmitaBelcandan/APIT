@@ -64,14 +64,15 @@ public class ResetPassword_Act extends AppCompatActivity {
 
         etConfirmPasswd = findViewById(R.id.etConfirmPasswd);
         etNewPasswd = findViewById(R.id.etNewPasswd);
+        mobile = getIntent().getExtras().getString("Mobile1", "defaultKey");
+        email = getIntent().getExtras().getString("Email1", "defaultKey");
 
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                mobile = getIntent().getExtras().getString("Mobileno", "defaultKey");
-                email = getIntent().getExtras().getString("Email", "defaultKey");
+
                 sNewPass = etNewPasswd.getText().toString().trim();
                 sConfPass = etConfirmPasswd.getText().toString().trim();
 

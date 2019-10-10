@@ -21,8 +21,8 @@
         <ImageButton
             android:layout_width="30dp"
             android:layout_height="25dp"
-            android:padding="5dp"
-            android:background="@drawable/toggle_g" />
+            android:background="@drawable/toggle_g"
+            android:padding="5dp" />
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
@@ -78,35 +78,116 @@
                 </RadioGroup>
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/llModels"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/padding_lr"
-                android:paddingBottom="8dp"
-                android:visibility="gone">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tvModelName"
-                    style="@style/radiobtn_r_process_title"
+                <LinearLayout
+                    android:id="@+id/llModels"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/parboiling" />
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_lr"
+                    android:paddingBottom="8dp"
+                    android:visibility="gone">
 
-                <RadioGroup
-                    android:id="@+id/rdioGrpModels"
+                    <TextView
+                        android:id="@+id/tvModelName"
+                        style="@style/radiobtn_r_process_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/parboiling" />
+
+                    <RadioGroup
+                        android:id="@+id/rdioGrpModels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:onClick="getParboilingModels">
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnPModel1"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_1" />
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnPModel2"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_2" />
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnPModel3"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_3" />
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnPModel4"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_4" />
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnPModel5"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_5" />
+
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llModelsSteam"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_lr"
+                    android:paddingBottom="8dp"
+                    android:visibility="gone">
 
-                </RadioGroup>
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvModelNameSteam"
+                        style="@style/radiobtn_r_process_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/parboiling" />
+
+                    <RadioGroup
+                        android:id="@+id/rdioGrpModelsSteam"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnSteamModel1"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_1" />
+
+                        <RadioButton
+                            android:id="@+id/rdoBtnSteamModel2"
+                            style="@style/radiobtn_model_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/model_2" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/llDryingMethods"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/llModels"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/padding_lr"
                 android:paddingBottom="8dp"
@@ -123,8 +204,27 @@
                     android:id="@+id/rdioGrpDryMethod"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"></RadioGroup>
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rdoBtnBatchWise"
+                        style="@style/radiobtn_model_dryer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/batch_wise" />
+
+                    <RadioButton
+                        android:id="@+id/rdoBtnMixedWise"
+                        style="@style/radiobtn_model_dryer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mixed_wise" />
+
+
+                </RadioGroup>
             </LinearLayout>
+            <!-- steam curing -->
+
 
             <LinearLayout
                 android:layout_width="match_parent"

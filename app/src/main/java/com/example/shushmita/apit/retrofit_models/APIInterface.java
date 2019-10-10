@@ -43,4 +43,13 @@ public interface APIInterface {
     @POST("enquiry")
     Call<PostEnquiryDataModel> submitEnquiryData(@Body PostEnquiryDataModel data);
 
+    @POST("enquiry_status")
+    Call<EnqFormStatusModel> getEnqFormStatus(@Body EnqFormStatusModel data);
+
+    @POST("e_process_images")
+    Call<EProcessImagesModel> getImages(@Body EProcessImagesModel data);
+
+    @POST("registerResend_otp")
+    Call<SignUpResendOtp> getOtp(@Body SignUpResendOtp data);
+
 }

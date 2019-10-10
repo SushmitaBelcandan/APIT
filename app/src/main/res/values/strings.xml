@@ -28,9 +28,19 @@
     <string name="drying">Drying</string>
     <string name="parboiling">parboiling</string>
 
+    <string name="soaking_tank">Soaking Tank</string>
+    <string name="batch_wise_title">Batch Wise LSU Layer</string>
+    <string name="mixed_wise_title">Mixed Wise Continuous Dryer</string>
     <string name = "no_of_hydration">No. of Hydration</string>
+    <string name="no_of_hydration_tanks">No. of Hydration Tanks</string>
+    <string name="no_post_stmng_tanks">No. of Post Steaming Tanks</string>
+    <string name="post_steamng_tanks_capacity">Post Steaming Tanks Capacity</string>
     <string name = "capacity">Capacity</string>
     <string name = "dryer_capacity">Dryer Capacity</string>
+    <string name="no_final_steaming_tank">No. of Final Steaming Tank</string>
+    <string name="no_of_cooker">No. of Cooker</string>
+    <string name="cooker_capacity">Cooker Capacity</string>
+    <string name="no_of_pre_steaming_tanks">No. of Pre-Steaming Tanks</string>
     <string name = "num_of_dryers">No. of Dryers</string>
     <string name = "variety_of_paddy">Variety of Paddy</string>
     <string name = "age_of_paddy">Age of Paddy</string>
@@ -46,6 +56,7 @@
    </string>
     <string name="after_process_txt">All the values to be mentioned from Drier output</string>
     <string name="your_id">Your ID : </string>
+    <string name="color_of_rice">Desired Output Color of Rice</string>
 
     <string name="broken">broken</string>
     <string name="total_paddy_weight">Total Paddy Weight</string>
@@ -66,4 +77,12 @@
     <string name="linkedin_link">&lt;a href="https://www.linkedin.com">https://www.linkedin.com&lt;/a></string>
 
     <string name="google_maps_key">AIzaSyD1n0H3wRjD8k4R-9t7M-QWcc08jd6TKH4</string>
+
+    <string name="model_1">Model 1</string>
+    <string name="model_2">Model 2</string>
+    <string name="model_3">Model 3</string>
+    <string name="model_4">Model 4</string>
+    <string name="model_5">Model 5</string>
+    <string name="batch_wise">Batch Wise LSU Layer</string>
+    <string name="mixed_wise">Mixed Wise Continuous Dryer</string>
 </resources>

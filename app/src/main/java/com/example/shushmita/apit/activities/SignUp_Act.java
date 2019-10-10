@@ -1,6 +1,7 @@
 package com.example.shushmita.apit.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +30,7 @@ import com.example.shushmita.apit.retrofit_models.APIClient;
 import com.example.shushmita.apit.retrofit_models.APIInterface;
 import com.example.shushmita.apit.retrofit_models.CustTypeModel;
 import com.example.shushmita.apit.retrofit_models.SignUpModel;
+import com.example.shushmita.apit.retrofit_models.SignUpResendOtp;
 import com.example.shushmita.apit.retrofit_models.SignUpVerifyModel;
 
 import java.util.ArrayList;
@@ -155,10 +157,12 @@ public class SignUp_Act extends AppCompatActivity {
         final EditText etOtp3 = promptsView.findViewById(R.id.etOtp3);
         final EditText etOtp4 = promptsView.findViewById(R.id.etOtp4);
         Button btnSubmitOtp = promptsView.findViewById(R.id.btnSubmitOtp);
-        TextView tvResendOtp = promptsView.findViewById(R.id.tvResendOtp);
+        final TextView tvResendOtp = promptsView.findViewById(R.id.tvResendOtp);
         SpannableString spannable = new SpannableString("Re-Send OTP");
         spannable.setSpan(new UnderlineSpan(), 0, spannable.length(), 0);
         tvResendOtp.setText(spannable);
+
+        final AlertDialog alertDialog = alertBuilder.create();
         btnSubmitOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +172,7 @@ public class SignUp_Act extends AppCompatActivity {
                 strOtp3 = etOtp3.getText().toString();
                 strOtp4 = etOtp4.getText().toString();
                 str1Otp = strOtp1 + strOtp2 + strOtp3 + strOtp4;
-
+                //-----------------------------------------------------------------------------verify otp---------------
                 if (Utils.CheckInternetConnection(getApplicationContext())) {
                     SignUpVerifyModel suvm = new SignUpVerifyModel(str_usr_name, str_mobile_number, str_email_id,
                             cust_type_id, str_geo_details, str_gst_no, str_pass, profile_pic, str1Otp);
@@ -180,6 +184,10 @@ public class SignUp_Act extends AppCompatActivity {
                             SignUpVerifyModel resourceSgnUpVerfy = response.body();
                             if (resourceSgnUpVerfy.status.equals("success")) {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                Intent intentLogin = new Intent(SignUp_Act.this, Login_Act.class);
+                                intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentLogin);
                             } else {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
                             }
@@ -190,15 +198,45 @@ public class SignUp_Act extends AppCompatActivity {
 
                         }
                     });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Please Check Internet Connection",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        //----------------------------------------------------------------------resend otp---------------------------------
+        tvResendOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Utils.CheckInternetConnection(getApplicationContext())) {
+                    SignUpResendOtp signUpResendOtp = new SignUpResendOtp(str_mobile_number);
+                    Call<SignUpResendOtp> signUpResendOtpCall = apiInterface.getOtp(signUpResendOtp);
+                    signUpResendOtpCall.enqueue(new Callback<SignUpResendOtp>() {
+                        @Override
+                        public void onResponse(Call<SignUpResendOtp> call, Response<SignUpResendOtp> response) {
+
+                            SignUpResendOtp resourceSgnUpVerfy = response.body();
+                            if (resourceSgnUpVerfy.status.equals("success")) {
+                                Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
+                                Intent intentLogin = new Intent(SignUp_Act.this, Login_Act.class);
+                                intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentLogin);
+                            } else {
+                                Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SignUpResendOtp> call, Throwable t) {
+                            call.cancel();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getApplicationContext(), "Please Check Internet Connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        final AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
 
@@ -380,7 +418,7 @@ public class SignUp_Act extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<SignUpModel> call, Throwable t) {
-
+                    call.cancel();
                 }
             });
 

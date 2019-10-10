@@ -17,7 +17,8 @@ import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.reference.SessionManager;
 
 import java.util.ArrayList;
-public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.SingleViewHolder> {
+
+public class PaddyImagesAdapter2 extends RecyclerView.Adapter<PaddyImagesAdapter2.SingleViewHolder> {
 
 
     SessionManager session;
@@ -26,8 +27,9 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
     private ArrayList<Images> imgList;
     private int checkedPosition = 1;
    // List<Images> data= Collections.emptyList();
+   private OnImageClickListener onImageClickListener;
 
-    public PaddyImagesAdapter(Context context, ArrayList<Images> imgs_list) {
+    public PaddyImagesAdapter2(Context context, ArrayList<Images> imgs_list) {
         this.context = context;
         this.imgList = imgs_list;
     }
@@ -46,8 +48,9 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PaddyImagesAdapter.SingleViewHolder singleViewHolder, int i) {
+    public void onBindViewHolder(@NonNull PaddyImagesAdapter2.SingleViewHolder singleViewHolder, int i) {
         singleViewHolder.bind(imgList.get(i));
+
     }
 
     @Override
@@ -93,7 +96,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
                         //send selected image id to fragment
                         int imgId = getAdapterPosition();
                         Intent intent = new Intent("custom-message");
-                        intent.putExtra("image_id",id);
+                        intent.putExtra("process_image_id",id);
                         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                     }
                 }

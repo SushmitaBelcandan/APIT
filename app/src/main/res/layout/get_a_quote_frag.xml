@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clGetaQuoteContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,6 +32,7 @@
                     android:textSize="18sp" />
 
                 <LinearLayout
+                    android:id="@+id/llProcess"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -126,7 +128,6 @@
                         android:hint="Enter Phone Number"
                         android:inputType="number" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -250,8 +251,8 @@
                         <EditText
                             android:id="@+id/etTown"
                             style="@style/EnqFormEditTxtStyle"
-                            android:enabled="false"
-                            android:inputType="text" />
+                            android:inputType="text"
+                            android:hint="Enter Town or Village Name"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -289,7 +290,8 @@
                     <EditText
                         android:id="@+id/etSoilBearingCapacity"
                         style="@style/EnqFormEditTxtStyle"
-                        android:inputType="text" />
+                        android:hint="Enter Soil Bearing Capacity"
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -438,7 +440,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/padding_lr"
                     android:layout_marginRight="@dimen/padding_lr"
-                    android:text="Color of Paddy" />
+                    android:text="@string/color_of_rice" />
 
 
                     <android.support.v7.widget.RecyclerView

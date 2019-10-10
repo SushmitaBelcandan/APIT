@@ -6,6 +6,13 @@ public class Images {
     private String img_name;
     private String img_url;
 
+   public Images(int imgId, String imgName, String imgUrl)
+   {
+       this.img_id = imgId;
+       this.img_name = imgName;
+       this.img_url = imgUrl;
+   }
+
     public Integer getImagId() {
         return img_id;
     }

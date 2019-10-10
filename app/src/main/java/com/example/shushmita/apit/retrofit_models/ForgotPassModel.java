@@ -33,7 +33,7 @@ public class ForgotPassModel {
         @SerializedName("email")
         public String email;
 
-        @SerializedName("customer_type")
+        @SerializedName("customer_type_id")
         public String customer_type;
 
         @SerializedName("mobileno")

@@ -65,12 +65,12 @@ public class PaddyColorsModels {
             Glide.with(mContext).load(R.drawable.default_img).into(ivGrainImg);
         }
         //------------checkbox-----------------
-        cbGrain.setOnClickListener(new android.view.View.OnClickListener() {
+       /* cbGrain.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
                 if(cbGrain.isChecked())
                 {
-                    session.selectedImage(imgId,true);
+
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class PaddyColorsModels {
                 }
             }
         });
-
+*/
     }
 
 }

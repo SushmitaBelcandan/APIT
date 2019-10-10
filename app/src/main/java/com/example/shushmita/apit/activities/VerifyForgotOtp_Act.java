@@ -49,6 +49,7 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
     private LinearLayout llResendOtp;
     private  String finalOtp;
     private int whoHasFocus;
+    private String str_mobile, str_email;
     char[] code = new char[4];//Store the digits in charArray.
 
 
@@ -85,8 +86,8 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
         btnVerifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobile = getIntent().getExtras().getString("Mobile1", "defaultKey");
-                email = getIntent().getExtras().getString("Email1", "defaultKey");
+                mobile = getIntent().getExtras().getString("Mobile_1", "defaultKey");
+                email = getIntent().getExtras().getString("Email_1", "defaultKey");
 
                 strOtp1 = etOtp1.getText().toString().trim();
                 strOtp2 = etOtp2.getText().toString().trim();
@@ -116,8 +117,8 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
         llResendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mobile = getIntent().getExtras().getString("Mobile1", "defaultKey");
-                email = getIntent().getExtras().getString("Email1", "defaultKey");
+                mobile = getIntent().getExtras().getString("Mobile_1", "defaultKey");
+                email = getIntent().getExtras().getString("Email_1", "defaultKey");
 
                 if (Utils.CheckInternetConnection(VerifyForgotOtp_Act.this)) {
                     if(!mobile.equals(null)) {
@@ -150,9 +151,13 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
                     Intent intentResetPassword = new Intent(VerifyForgotOtp_Act.this, ResetPassword_Act.class);
                     intentResetPassword.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     if (loginid.matches("[0-9]+")) {
-                        intentResetPassword.putExtra("Mobile1", loginid);
+                        str_mobile = loginid;
+                        str_email = null;
+                       intentResetPassword.putExtra("Mobile1", loginid);
                     } else {
-                        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(loginid).matches()) {
+                        if (android.util.Patterns.EMAIL_ADDRESS.matcher(loginid).matches()) {
+                            str_email = loginid;
+                            str_mobile = null;
                             intentResetPassword.putExtra("Email1", loginid);
                         }
                     }
@@ -189,10 +194,10 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
                         Intent intentVerifyOtp = new Intent(VerifyForgotOtp_Act.this, VerifyForgotOtp_Act.class);
                         intentVerifyOtp.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         if (strInput.matches("[0-9]+")) {
-                            intentVerifyOtp.putExtra("Mobileno", fogotDatum.mobileno);
+                            intentVerifyOtp.putExtra("Mobile_1", fogotDatum.mobileno);
                         } else {
                             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(strInput).matches()) {
-                                intentVerifyOtp.putExtra("Email", fogotDatum.email);
+                                intentVerifyOtp.putExtra("Email_1", fogotDatum.email);
                             }
                         }
                         startActivity(intentVerifyOtp);
