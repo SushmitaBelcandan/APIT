@@ -20,46 +20,461 @@
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="?attr/homeAsUpIndicator"></android.support.v7.widget.Toolbar>
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_below="@+id/toolbarParboiling">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_lr1"
+            android:paddingRight="@dimen/padding_lr1">
 
-            <TextView
-                android:id="@+id/tvProcessModelTitle1"
-                style="@style/dryer_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/llTitleContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_line"
-                android:paddingBottom="2dp"
-                android:text="PARBOILING-model 1"
-                android:padding="5dp"/>
-        </LinearLayout>
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvProcessModelTitle2"
-                style="@style/dryer_title"
-                android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/tvProcessModelTitle1"
+                        style="@style/dryer_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_line"
+                        android:paddingBottom="2dp"
+                        android:text="PARBOILING-model 1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvProcessModelTitle2"
+                        style="@style/dryer_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_line"
+                        android:text="BATCH WISE LSU DRYER" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvHeading1"
+                    style="@style/dryer_hydrtn_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/soaking_tank" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_line"
-                android:text="MIXED WISE CONTINUOUS DRYER"
-                android:padding="5dp"/>
-        </LinearLayout>
-    </LinearLayout>
+                android:background="@drawable/yellow_bg"
+                android:padding="1dp">
 
+                <ImageView
+                    android:id="@+id/ivHydrTank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/yellow_bg"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rice_mill" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/llModel1BatchWise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="10dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvNumStmngModel1"
+                            style="@style/dryer_textView"
+                            android:text="@string/no_of_steamng_tanks" />
+
+                        <EditText
+                            android:id="@+id/etNumStmngModel1"
+                            style="@style/dryer_editText"
+                            android:hint="Enter number of steaming tanks"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvStmngCapctyModel1"
+                            style="@style/dryer_textView"
+                            android:text="@string/capacity" />
+
+                        <EditText
+                            android:id="@+id/etStmngCapctyModel1"
+                            style="@style/dryer_editText"
+                            android:hint="Enter capacity"
+                            android:inputType="text" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llModel2BatchWise"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="10dp"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvNumStmngModel2"
+                            style="@style/dryer_textView"
+                            android:text="@string/no_of_steamng_tanks" />
+
+                        <EditText
+                            android:id="@+id/etNumStmngModel2"
+                            style="@style/dryer_editText"
+                            android:hint="Enter number of steaming tanks"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvSteamngCapctyModel2"
+                            style="@style/dryer_textView"
+                            android:text="@string/capacity" />
+
+                        <EditText
+                            android:id="@+id/etSteamngCapctyModel2"
+                            style="@style/dryer_editText"
+                            android:hint="Enter capacity"
+                            android:inputType="text" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvAgeingTanksModel2"
+                            style="@style/dryer_textView"
+                            android:text="@string/ageing_tanks" />
+
+                        <EditText
+                            android:id="@+id/etAgeingTanksModel2"
+                            style="@style/dryer_editText"
+                            android:hint="Enter number of ageing tanks"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp">
+
+                        <TextView
+                            android:id="@+id/tvAgeingCapctyModel2"
+                            style="@style/dryer_textView"
+                            android:text="@string/capacity" />
+
+                        <EditText
+                            android:id="@+id/etAgeingCapctyModel2"
+                            style="@style/dryer_editText"
+                            android:hint="Enter capacity"
+                            android:inputType="text" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvHeading2"
+                        style="@style/dryer_method_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/batch_wise_title"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/yellow_bg"
+                android:padding="1dp">
+
+                <ImageView
+                    android:id="@+id/ivDryerMethodName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/yellow_bg"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rice_mill" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/llDryerCapacity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvDryerCapacity"
+                            style="@style/dryer_textView"
+                            android:text="@string/dryer_capacity" />
+
+                        <EditText
+                            android:id="@+id/etDyerCapacity"
+                            style="@style/dryer_editText"
+                            android:hint="Enter dryer capacity"
+                            android:inputType="text" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llDmCapacity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="8dp"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/tvDMCapacity"
+                            style="@style/dryer_textView"
+                            android:text="@string/capacity" />
+
+                        <EditText
+                            android:id="@+id/etDMCapacity"
+                            style="@style/dryer_editText"
+                            android:hint="Enter capacity"
+                            android:inputType="text" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvDMNumDryers"
+                        style="@style/dryer_textView"
+                        android:text="@string/num_of_dryers" />
+
+                    <EditText
+                        android:id="@+id/etDMNumDryers"
+                        style="@style/dryer_editText"
+                        android:hint="Enter number of dryers"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvDMPaddyVariety"
+                        style="@style/dryer_textView"
+                        android:text="@string/variety_of_paddy" />
+
+                    <EditText
+                        android:id="@+id/etPaddyVariety"
+                        style="@style/dryer_editText"
+                        android:hint="Enter variety of paddy"
+                        android:inputType="text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvDMPaddyAge"
+                        style="@style/dryer_textView"
+                        android:text="@string/age_of_paddy" />
+
+                    <Spinner
+                        android:id="@+id/spnrDMPaddyAge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:dropDownWidth="match_parent"
+                        android:dropDownVerticalOffset="40dp"
+                        android:paddingLeft="0dp"
+                        android:paddingRight="0dp"
+                        android:popupBackground="@drawable/popup_bg"
+                        android:spinnerMode="dropdown" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvDMPincode"
+                        style="@style/dryer_textView"
+                        android:text="@string/pincode" />
+
+                    <EditText
+                        android:id="@+id/etDMPincode"
+                        style="@style/dryer_editText"
+                        android:hint="Enter pincode"
+                        android:inputType="number" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvDMProssLoc"
+                        style="@style/dryer_textView"
+                        android:text="@string/processing_location" />
+
+                    <EditText
+                        android:id="@+id/etDMProssLoc"
+                        style="@style/dryer_editText"
+                        android:hint="Enter processing location"
+                        android:inputType="text" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/tvPaddyMoisture"
+                        style="@style/dryer_textView"
+                        android:text="@string/paddy_s_moisture" />
+
+                    <EditText
+                        android:id="@+id/etPaddyMoisture"
+                        style="@style/dryer_editText"
+                        android:hint="Enter moisture of paddy"
+                        android:inputType="text" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llPaddyImages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_top"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tvPaddyColor"
+                    style="@style/dryer_textView"
+                    android:text="@string/color_of_rice" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/phvPaddyColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="50dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/yellow_roundcrnr"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

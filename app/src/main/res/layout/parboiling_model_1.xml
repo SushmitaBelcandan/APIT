@@ -127,7 +127,7 @@
                         <EditText
                             android:id="@+id/etNo_ofHydrn"
                             style="@style/dryer_editText"
-                            android:hint="Enter number of hydration"
+                            android:hint="Enter number of soaking"
                             android:inputType="number" />
                     </LinearLayout>
 
@@ -172,7 +172,7 @@
                         <EditText
                             android:id="@+id/etNo_ofHydrnModel2"
                             style="@style/dryer_editText"
-                            android:hint="Enter number of hydration"
+                            android:hint="Enter number of soaking"
                             android:inputType="number" />
                     </LinearLayout>
 
@@ -251,7 +251,7 @@
                         <EditText
                             android:id="@+id/etNo_ofHydrnModel3"
                             style="@style/dryer_editText"
-                            android:hint="Enter number of hydration"
+                            android:hint="Enter number of soaking"
                             android:inputType="number" />
                     </LinearLayout>
 
@@ -365,7 +365,7 @@
                         <EditText
                             android:id="@+id/etNumHydrtnTankModel4"
                             style="@style/dryer_editText"
-                            android:hint="Enter no. of hydration tanks"
+                            android:hint="Enter no. of soaking tanks"
                             android:inputType="number" />
                     </LinearLayout>
                     <LinearLayout
@@ -478,7 +478,7 @@
                         <EditText
                             android:id="@+id/etNumHydrtnTankModel5"
                             style="@style/dryer_editText"
-                            android:hint="Enter no. of hydration tanks"
+                            android:hint="Enter no. of soaking tanks"
                             android:inputType="number" />
                     </LinearLayout>
                     <LinearLayout

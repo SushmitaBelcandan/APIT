@@ -59,33 +59,27 @@ import retrofit2.Response;
 
 import static android.view.View.GONE;
 
-public class ParboilingModelEPFragment extends Fragment {
+public class SteamCuringFragment extends Fragment {
 
     SessionManager session;
     APIInterface apiInterface;
     Toolbar toolbarParboiling;
     private TextView tvProcessModelTitle1, tvProcessModelTitle2, tvHeading1, tvHeading2;
     private ImageView ivHydrTank, ivDryerMethodName;
-    private TextView tvNumHydrn;
+    private TextView tvNumStmngModel1;
     private Button btnSubmit;
     private LinearLayout llTitleContainer;
     private LinearLayout llModel1BatchWise, llDmCapacity, llDryerCapacity, llModel2BatchWise, llModel3BatchWise, llModel4BatchWise, llModel5BatchWise;
-    private EditText etNo_ofHydrn, etCapacity, etDMCapacity, etDMNumDryers, etPaddyVariety, etDMPincode, etDMProssLoc, etPaddyMoisture;
-    private EditText etDyerCapacity, etSteamngCapcityModel2, etFinalStemngModel2, etCapacityModel2, etNo_ofHydrnModel2;
-    private EditText etCookerCapacityModel3, etNoOfCookerModel3, etCapacityModel3, etNo_ofHydrnModel3;
-    private EditText etPostTankCapacityModel4, etNumPostStmngTankModel4, etCookerCapacityModel4, etNumHydrtnTankModel4, etCapacityModel4, etNumPreSteamngModel4;
-    private EditText etCookerCapacityModel5, etNumCookerModel5, etHydrTankCapacityModel5, etNumHydrtnTankModel5, etPreSteamngCapacityModel5, etNumPreSteamngModel5;
+    private EditText etNumStmngModel1, etStmngCapctyModel1, etDMCapacity, etDMNumDryers, etPaddyVariety, etDMPincode, etDMProssLoc, etPaddyMoisture;
+    private EditText etDyerCapacity, etNumStmngModel2, etSteamngCapctyModel2, etAgeingTanksModel2, etAgeingCapctyModel2;
     private Spinner spnrDMPaddyAge;
     RecyclerView phvPaddyColor;
     private LinearLayout llPaddyImages;
 
     private String str_usr_id;
-    private String str_num_hydration_1, str_hydrn_capcty_1;
+    private String str_num_stmng_1, str_stng_capcty_1;
     private String str_mixed_capcty, str_batch_capcty, str_num_dryers, str_paddy_variety, str_pincode, str_paddy_moisture, str_prosc_loc;
-    private String str_final_stmng_capcty_2, str_final_stmng_2, str_hydrn_capcty_2, str_num_hydrn_2;
-    private String str_cooker_capacty_3, str_num_cooker_3, str_hydrn_capacty_3, str_num_hydrn_3;
-    private String str_post_capcty_4, str_num_post_tnk_4, str_cooker_capcty_4, str_num_hydrn_tnk_4, str_pre_stmng_capcty_4, str_num_pre_steaming_4;
-    private String str_cooker_capcty_5, str_num_cooker_5, str_hydrn_tnk_5, str_hydrn_capcty_5, str_pre_stmng_capcty_5, str_num_pre_stmng_5;
+    private String str_num_stmng_2, str_capcty_stmng_2, str_num_ageing_2, str_ageing_capcty_2;
     private String id, title1, title2, title3, title4;
     private String process_id, model_id, dryer_id;
 
@@ -96,7 +90,7 @@ public class ParboilingModelEPFragment extends Fragment {
     private PaddyImagesAdapter2 adapter;
     ArrayList<Images> imgList;
 
-    public ParboilingModelEPFragment() {
+    public SteamCuringFragment() {
         //required constructor
     }
 
@@ -105,7 +99,7 @@ public class ParboilingModelEPFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.parboiling_model_1, container, false);
+        View view = inflater.inflate(R.layout.steam_curing_models_1, container, false);
         toolbarParboiling = view.findViewById(R.id.toolbarParboiling);
         toolbarParboiling.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,9 +127,9 @@ public class ParboilingModelEPFragment extends Fragment {
 
         //-----------------------------------------------------------parboiling/model-1/batchwise------------------------------
         llModel1BatchWise = view.findViewById(R.id.llModel1BatchWise);
-        tvNumHydrn = view.findViewById(R.id.tvNumHydrn);
-        etNo_ofHydrn = view.findViewById(R.id.etNo_ofHydrn);
-        etCapacity = view.findViewById(R.id.etCapacity);
+        tvNumStmngModel1 = view.findViewById(R.id.tvNumStmngModel1);
+        etNumStmngModel1 = view.findViewById(R.id.etNumStmngModel1);
+        etStmngCapctyModel1 = view.findViewById(R.id.etStmngCapctyModel1);
 
         etDMCapacity = view.findViewById(R.id.etDMCapacity);
         etDMNumDryers = view.findViewById(R.id.etDMNumDryers);
@@ -156,32 +150,11 @@ public class ParboilingModelEPFragment extends Fragment {
         etDyerCapacity = view.findViewById(R.id.etDyerCapacity);
         //---------------------------------------------------------parboiling/model2/batchwise------------------------
         llModel2BatchWise = view.findViewById(R.id.llModel2BatchWise);
-        etSteamngCapcityModel2 = view.findViewById(R.id.etSteamngCapcityModel2);
-        etFinalStemngModel2 = view.findViewById(R.id.etFinalStemngModel2);
-        etCapacityModel2 = view.findViewById(R.id.etCapacityModel2);
-        etNo_ofHydrnModel2 = view.findViewById(R.id.etNo_ofHydrnModel2);
-        //-------------------------------------------------------parboiling/model3/batchwise-------------------------
-        llModel3BatchWise = view.findViewById(R.id.llModel3BatchWise);
-        etCookerCapacityModel3 = view.findViewById(R.id.etCookerCapacityModel3);
-        etNoOfCookerModel3 = view.findViewById(R.id.etNoOfCookerModel3);
-        etCapacityModel3 = view.findViewById(R.id.etCapacityModel3);
-        etNo_ofHydrnModel3 = view.findViewById(R.id.etNo_ofHydrnModel3);
-        //-----------------------------------------------------parboiling/model4/batchwise---------------------------
-        llModel4BatchWise = view.findViewById(R.id.llModel4BatchWise);
-        etPostTankCapacityModel4 = view.findViewById(R.id.etPostTankCapacityModel4);
-        etNumPostStmngTankModel4 = view.findViewById(R.id.etNumPostStmngTankModel4);
-        etCookerCapacityModel4 = view.findViewById(R.id.etCookerCapacityModel4);
-        etNumHydrtnTankModel4 = view.findViewById(R.id.etNumHydrtnTankModel4);
-        etCapacityModel4 = view.findViewById(R.id.etCapacityModel4);
-        etNumPreSteamngModel4 = view.findViewById(R.id.etNumPreSteamngModel4);
-        //---------------------------------------------------parboiling/model5/batchwise----------------------------
-        llModel5BatchWise = view.findViewById(R.id.llModel5BatchWise);
-        etCookerCapacityModel5 = view.findViewById(R.id.etCookerCapacityModel5);
-        etNumCookerModel5 = view.findViewById(R.id.etNumCookerModel5);
-        etHydrTankCapacityModel5 = view.findViewById(R.id.etHydrTankCapacityModel5);
-        etNumHydrtnTankModel5 = view.findViewById(R.id.etNumHydrtnTankModel5);
-        etPreSteamngCapacityModel5 = view.findViewById(R.id.etPreSteamngCapacityModel5);
-        etNumPreSteamngModel5 = view.findViewById(R.id.etNumPreSteamngModel5);
+        etNumStmngModel2 = view.findViewById(R.id.etNumStmngModel2);
+        etSteamngCapctyModel2 = view.findViewById(R.id.etSteamngCapctyModel2);
+        etAgeingTanksModel2 = view.findViewById(R.id.etAgeingTanksModel2);
+        etAgeingCapctyModel2 = view.findViewById(R.id.etAgeingCapctyModel2);
+
 
         getPaddysAge();
         getForms();
@@ -200,121 +173,48 @@ public class ParboilingModelEPFragment extends Fragment {
                 str_prosc_loc = etDMProssLoc.getText().toString().trim();
                 str_paddy_moisture = etPaddyMoisture.getText().toString().trim();
 
-                str_num_hydration_1 = etNo_ofHydrn.getText().toString().trim();
-                str_hydrn_capcty_1 = etCapacity.getText().toString().trim();
+                str_num_stmng_1 = etNumStmngModel1.getText().toString().trim();
+                str_stng_capcty_1 = etStmngCapctyModel1.getText().toString().trim();
 
-                str_final_stmng_capcty_2 = etSteamngCapcityModel2.getText().toString().trim();
-                str_final_stmng_2 = etFinalStemngModel2.getText().toString().trim();
-                str_hydrn_capcty_2 = etCapacityModel2.getText().toString().trim();
-                str_num_hydrn_2 = etNo_ofHydrnModel2.getText().toString().trim();
+                str_num_stmng_2 = etNumStmngModel2.getText().toString().trim();
+                str_capcty_stmng_2 = etSteamngCapctyModel2.getText().toString().trim();
+                str_num_ageing_2 = etAgeingTanksModel2.getText().toString().trim();
+                str_ageing_capcty_2 = etAgeingCapctyModel2.getText().toString().trim();
 
-                str_cooker_capacty_3 = etCookerCapacityModel3.getText().toString().trim();
-                str_num_cooker_3 = etNoOfCookerModel3.getText().toString().trim();
-                str_hydrn_capacty_3 = etCapacityModel3.getText().toString().trim();
-                str_num_hydrn_3 = etNo_ofHydrnModel3.getText().toString().trim();
 
-                str_post_capcty_4 = etPostTankCapacityModel4.getText().toString().trim();
-                str_num_post_tnk_4 = etNumPostStmngTankModel4.getText().toString().trim();
-                str_cooker_capcty_4 = etCookerCapacityModel4.getText().toString().trim();
-                str_num_hydrn_tnk_4 = etNumHydrtnTankModel4.getText().toString().trim();
-                str_pre_stmng_capcty_4 = etCapacityModel4.getText().toString().trim();
-                str_num_pre_steaming_4 = etNumPreSteamngModel4.getText().toString().trim();
-
-                str_cooker_capcty_5 = etCookerCapacityModel5.getText().toString().trim();
-                str_num_cooker_5 = etNumCookerModel5.getText().toString().trim();
-                str_hydrn_tnk_5 = etNumHydrtnTankModel5.getText().toString().trim();
-                str_hydrn_capcty_5 = etHydrTankCapacityModel5.getText().toString().trim();
-                str_pre_stmng_capcty_5 = etPreSteamngCapacityModel5.getText().toString().trim();
-                str_num_pre_stmng_5 = etNumPreSteamngModel5.getText().toString().trim();
-
-                if (id.equals("p1m1d1")) {
-                    sendData(str_usr_id, "1", "1", "1", str_num_hydration_1, str_hydrn_capcty_1,
+                if (id.equals("p2m1d1")) {
+                    sendData(str_usr_id, "2", "6", "1", "", "",
                             str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", "", "", "",
-                            "", "", "", "", "",
+                            "", "", str_num_stmng_1, str_stng_capcty_1, "",
                             "");
-                } else if (id.equals("p1m1d2")) {
+                } else if (id.equals("p2m1d2")) {
 
-                    sendData(str_usr_id, "1", "1", "2", str_num_hydration_1, str_hydrn_capcty_1,
+                    sendData(str_usr_id, "2", "6", "2", "", "",
                             "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", str_mixed_capcty, "", "",
-                            "", "", "", "", "",
+                            "", "", str_num_stmng_1, str_stng_capcty_1,"" ,
                             "");
-                } else if (id.equals("p1m2d1")) {
-                    sendData(str_usr_id, "1", "2", "1",
-                            str_num_hydrn_2, str_hydrn_capcty_2,
+                } else if (id.equals("p2m2d1")) {
+                    sendData(str_usr_id, "2", "7", "1",
+                            "", "",
                             str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
-                            "", "", str_final_stmng_2, str_final_stmng_capcty_2,
-                            "", "", "", "", "",
-                            "");
+                            "", "", "", "",
+                            "", "", str_num_stmng_2, str_capcty_stmng_2, str_num_ageing_2,
+                            str_ageing_capcty_2);
 
-                } else if (id.equals("p1m2d2")) {
-                    sendData(str_usr_id, "1", "2", "2",
-                            str_num_hydrn_2, str_hydrn_capcty_2,
+                } else{
+                    sendData(str_usr_id, "2", "7", "2",
+                            "", "",
                             "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
-                            "", str_mixed_capcty, str_final_stmng_2, str_final_stmng_capcty_2,
-                            "", "", "", "", "",
-                            "");
+                            "", str_mixed_capcty, "", "",
+                            "", "", str_num_stmng_2, str_capcty_stmng_2, str_num_ageing_2,
+                            str_ageing_capcty_2);
 
-                } else if (id.equals("p1m3d1")) {
-
-                    sendData(str_usr_id, "1", "3", "1",
-                            str_num_hydrn_3, str_hydrn_capacty_3,
-                            str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
-                            str_paddy_moisture, "", "", str_num_cooker_3,
-                            str_cooker_capacty_3, "", "", "",
-                            "", "", "", "",
-                            "", "");
-
-                } else if (id.equals("p1m3d2")) {
-                    sendData(str_usr_id, "1", "3", "2",
-                            str_num_hydrn_3, str_hydrn_capacty_3,
-                            "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
-                            str_paddy_moisture, "", "", str_num_cooker_3,
-                            str_cooker_capacty_3, str_mixed_capcty, "", "",
-                            "", "", "", "",
-                            "", "");
-
-                } else if (id.equals("p1m4d1")) {
-                    sendData(str_usr_id, "1", "4", "1",
-                            str_num_hydrn_tnk_4, "",
-                            str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
-                            str_paddy_moisture, str_num_pre_steaming_4, str_pre_stmng_capcty_4, "",
-                            str_cooker_capcty_4, "", "", "",
-                            str_num_post_tnk_4, str_post_capcty_4, "", "",
-                            "", "");
-
-                } else if (id.equals("p1m4d2")) {
-                    sendData(str_usr_id, "1", "4", "2",
-                            str_num_hydrn_tnk_4, "",
-                            "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
-                            str_paddy_moisture, str_num_pre_steaming_4, str_pre_stmng_capcty_4, "",
-                            str_cooker_capcty_4, str_mixed_capcty, "", "",
-                            str_num_post_tnk_4, str_post_capcty_4, "", "",
-                            "", "");
-
-                } else if (id.equals("p1m5d1")) {
-                    sendData(str_usr_id, "1", "5", "1",
-                            str_hydrn_tnk_5, str_hydrn_capcty_5,
-                            str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
-                            str_paddy_moisture, str_num_pre_stmng_5, str_pre_stmng_capcty_5, str_num_cooker_5,
-                            str_cooker_capcty_5, "", "", "",
-                            "", "", "", "",
-                            "", "");
-                }
-                else
-                {
-                    sendData(str_usr_id, "1", "5", "2",
-                            str_hydrn_tnk_5, str_hydrn_capcty_5,
-                            null, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
-                            str_paddy_moisture, str_num_pre_stmng_5, str_pre_stmng_capcty_5, str_num_cooker_5,
-                            str_cooker_capcty_5, str_mixed_capcty, "", "",
-                            "", "", "", "",
-                            "", "");
                 }
               /*  Intent intentAfterProcess = new Intent(getActivity(), AfterProcess_Act.class);
                 startActivity(intentAfterProcess);*/
@@ -566,49 +466,14 @@ public class ParboilingModelEPFragment extends Fragment {
     }
 
     public void getForms() {
-        if (id.equals("p1m1d1")) {
-            displayImages("1", "1", "1");
-            llModel1BatchWise.setVisibility(View.VISIBLE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(GONE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(GONE);
-
-            llDmCapacity.setVisibility(View.VISIBLE);
-            llDryerCapacity.setVisibility(GONE);
-
-            tvProcessModelTitle1.setText(title1);
-            tvProcessModelTitle2.setText(title2);
-            tvHeading1.setText(title3);
-            tvHeading2.setText(title4);
-        } else if (id.equals("p1m1d2")) {
-            displayImages("1", "1", "2");
+        if (id.equals("p2m1d1")) {
+            displayImages("2", "6", "1");
             llTitleContainer.setOrientation(LinearLayout.VERTICAL);
             tvProcessModelTitle1.setPadding(5, 5, 0, 5);
             tvProcessModelTitle2.setPadding(0, 5, 5, 5);
-
 
             llModel1BatchWise.setVisibility(View.VISIBLE);
-            llModel5BatchWise.setVisibility(GONE);
             llModel2BatchWise.setVisibility(GONE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(GONE);
-
-            llDmCapacity.setVisibility(View.GONE);
-            llDryerCapacity.setVisibility(View.VISIBLE);
-
-            tvProcessModelTitle1.setText(title1);
-            tvProcessModelTitle2.setText(title2);
-
-            tvHeading1.setText(title3);
-            tvHeading2.setText(title4);
-        } else if (id.equals("p1m2d1")) {
-            displayImages("1", "2", "1");
-            llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(View.VISIBLE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(GONE);
 
             llDmCapacity.setVisibility(View.VISIBLE);
             llDryerCapacity.setVisibility(GONE);
@@ -617,123 +482,49 @@ public class ParboilingModelEPFragment extends Fragment {
             tvProcessModelTitle2.setText(title2);
             tvHeading1.setText(title3);
             tvHeading2.setText(title4);
-        } else if (id.equals("p1m2d2")) {
-            displayImages("1", "2", "2");
+        } else if (id.equals("p2m1d2")) {
+            displayImages("2", "6", "2");
             llTitleContainer.setOrientation(LinearLayout.VERTICAL);
             tvProcessModelTitle1.setPadding(5, 5, 0, 5);
             tvProcessModelTitle2.setPadding(0, 5, 5, 5);
 
 
-            llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(View.VISIBLE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(GONE);
+            llModel1BatchWise.setVisibility(View.VISIBLE);
+            llModel2BatchWise.setVisibility(GONE);
 
             llDmCapacity.setVisibility(View.GONE);
             llDryerCapacity.setVisibility(View.VISIBLE);
 
             tvProcessModelTitle1.setText(title1);
             tvProcessModelTitle2.setText(title2);
+
             tvHeading1.setText(title3);
             tvHeading2.setText(title4);
-        } else if (id.equals("p1m3d1")) {
-            displayImages("1", "3", "1");
+        } else if (id.equals("p2m2d1")) {
+            displayImages("2", "7", "1");
+            llTitleContainer.setOrientation(LinearLayout.VERTICAL);
+            tvProcessModelTitle1.setPadding(5, 5, 0, 5);
+            tvProcessModelTitle2.setPadding(0, 5, 5, 5);
+
             llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(View.GONE);
-            llModel3BatchWise.setVisibility(View.VISIBLE);
-            llModel4BatchWise.setVisibility(GONE);
+            llModel2BatchWise.setVisibility(View.VISIBLE);
 
             llDmCapacity.setVisibility(View.VISIBLE);
             llDryerCapacity.setVisibility(GONE);
-
-            tvProcessModelTitle1.setText(title1);
-            tvProcessModelTitle2.setText(title2);
-            tvHeading1.setText(title3);
-            tvHeading2.setText(title4);
-        } else if (id.equals("p1m3d2")) {
-            displayImages("1", "3", "2");
-            llTitleContainer.setOrientation(LinearLayout.VERTICAL);
-            tvProcessModelTitle1.setPadding(5, 5, 0, 5);
-            tvProcessModelTitle2.setPadding(0, 5, 5, 5);
-
-
-            llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(View.GONE);
-            llModel3BatchWise.setVisibility(View.VISIBLE);
-            llModel4BatchWise.setVisibility(GONE);
-
-            llDmCapacity.setVisibility(View.GONE);
-            llDryerCapacity.setVisibility(View.VISIBLE);
-
-            tvProcessModelTitle1.setText(title1);
-            tvProcessModelTitle2.setText(title2);
-            tvHeading1.setText(title3);
-            tvHeading2.setText(title4);
-        } else if (id.equals("p1m4d1")) {
-            displayImages("1", "4", "1");
-            llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(View.GONE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(View.VISIBLE);
-
-            llDmCapacity.setVisibility(View.VISIBLE);
-            llDryerCapacity.setVisibility(View.GONE);
-
-            tvProcessModelTitle1.setText(title1);
-            tvProcessModelTitle2.setText(title2);
-            tvHeading1.setText(title3);
-            tvHeading2.setText(title4);
-        } else if (id.equals("p1m4d2")) {
-            displayImages("1", "4", "2");
-            llTitleContainer.setOrientation(LinearLayout.VERTICAL);
-            tvProcessModelTitle1.setPadding(5, 5, 0, 5);
-            tvProcessModelTitle2.setPadding(0, 5, 5, 5);
-
-            llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(GONE);
-            llModel2BatchWise.setVisibility(View.GONE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(View.VISIBLE);
-
-            llDmCapacity.setVisibility(View.GONE);
-            llDryerCapacity.setVisibility(View.VISIBLE);
-
-            tvProcessModelTitle1.setText(title1);
-            tvProcessModelTitle2.setText(title2);
-            tvHeading1.setText(title3);
-            tvHeading2.setText(title4);
-        } else if (id.equals("p1m5d1")) {
-            displayImages("1", "5", "1");
-            llModel1BatchWise.setVisibility(View.GONE);
-            llModel5BatchWise.setVisibility(View.VISIBLE);
-            llModel2BatchWise.setVisibility(View.GONE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(GONE);
-
-            llDmCapacity.setVisibility(View.VISIBLE);
-            llDryerCapacity.setVisibility(View.GONE);
 
             tvProcessModelTitle1.setText(title1);
             tvProcessModelTitle2.setText(title2);
             tvHeading1.setText(title3);
             tvHeading2.setText(title4);
         } else {
-
-            displayImages("1", "5", "2");
+            displayImages("2", "7", "2");
             llTitleContainer.setOrientation(LinearLayout.VERTICAL);
             tvProcessModelTitle1.setPadding(5, 5, 0, 5);
             tvProcessModelTitle2.setPadding(0, 5, 5, 5);
 
 
             llModel1BatchWise.setVisibility(View.GONE);
-            llModel2BatchWise.setVisibility(View.GONE);
-            llModel3BatchWise.setVisibility(GONE);
-            llModel4BatchWise.setVisibility(GONE);
-            llModel5BatchWise.setVisibility(View.VISIBLE);
+            llModel2BatchWise.setVisibility(View.VISIBLE);
 
             llDmCapacity.setVisibility(View.GONE);
             llDryerCapacity.setVisibility(View.VISIBLE);

@@ -22,9 +22,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbarParboiling">
+        android:layout_below="@+id/toolbarDryBatchWise">
 
         <LinearLayout
+            android:id="@+id/llContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -35,6 +36,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/dryer_method_title"
                     style="@style/dryer_method_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -46,7 +48,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/yellow_bg"
                 android:padding="1dp">
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/ivDryerMethodName"
                     android:layout_width="match_parent"
@@ -54,7 +58,18 @@
                     android:adjustViewBounds="true"
                     android:background="@drawable/yellow_bg"
                     android:scaleType="fitXY"
-                    android:src="@drawable/rice_mill" />
+                    android:src="@drawable/rice_mill"
+                    android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/ivDryerMethodName1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/yellow_bg"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/rice_mill"
+                    android:visibility="gone"/>
+            </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -70,16 +85,51 @@
                     android:orientation="vertical"
                     android:paddingTop="8dp">
 
-                    <TextView
-                        android:id="@+id/tvDMCapacity"
-                        style="@style/dryer_textView"
-                        android:text="@string/capacity" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/etDMCapacity"
-                        style="@style/dryer_editText"
-                        android:hint="Enter capacity"
-                        android:inputType="text"/>
+                        <LinearLayout
+                            android:id="@+id/llDryerCapacity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingTop="8dp"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:id="@+id/tvDryerCapacity"
+                                style="@style/dryer_textView"
+                                android:text="@string/dryer_capacity" />
+
+                            <EditText
+                                android:id="@+id/etDyerCapacity"
+                                style="@style/dryer_editText"
+                                android:hint="Enter dryer capacity"
+                                android:inputType="text" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDmCapacity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingTop="8dp"
+                            android:visibility="visible">
+
+                            <TextView
+                                android:id="@+id/tvDMCapacity"
+                                style="@style/dryer_textView"
+                                android:text="@string/capacity" />
+
+                            <EditText
+                                android:id="@+id/etDMCapacity"
+                                style="@style/dryer_editText"
+                                android:hint="Enter capacity"
+                                android:inputType="text" />
+                        </LinearLayout>
+                    </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -132,9 +182,14 @@
                     <Spinner
                         android:id="@+id/spnrDMPaddyAge"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/spnr_bg_gray"
-                        android:entries="@array/cust_type" />
+                        android:dropDownWidth="match_parent"
+                        android:dropDownVerticalOffset="40dp"
+                        android:paddingLeft="0dp"
+                        android:paddingRight="0dp"
+                        android:popupBackground="@drawable/popup_bg"
+                        android:spinnerMode="dropdown" />
                 </LinearLayout>
 
                 <LinearLayout

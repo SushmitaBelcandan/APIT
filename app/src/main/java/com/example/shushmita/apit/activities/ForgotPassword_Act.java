@@ -257,7 +257,7 @@ public class ForgotPassword_Act extends AppCompatActivity implements GoogleApiCl
 
     @Override
     public void onOtpReceived(String otp) {
-        Toast.makeText(this, "Otp Received " + otp, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Otp Received " + otp, Toast.LENGTH_LONG).show();
         etOtp1.setText(otp.charAt(0));
         etOtp2.setText(otp.charAt(1));
         etOtp3.setText(otp.charAt(2));
@@ -291,7 +291,7 @@ public class ForgotPassword_Act extends AppCompatActivity implements GoogleApiCl
             @Override public void onSuccess(Void aVoid) {
                 llRequestOtp.setVisibility(View.GONE);
                 llVerifyOtp.setVisibility(View.VISIBLE);
-                Toast.makeText(ForgotPassword_Act.this, "SMS Retriever starts", Toast.LENGTH_LONG).show();
+               // Toast.makeText(ForgotPassword_Act.this, "SMS Retriever starts", Toast.LENGTH_LONG).show();
             }
         });
         mTask.addOnFailureListener(new OnFailureListener() {
@@ -322,7 +322,7 @@ public class ForgotPassword_Act extends AppCompatActivity implements GoogleApiCl
                 if (data != null) {
                     Credential credential = data.getParcelableExtra(Credential.EXTRA_KEY);
                     // credential.getId();  <-- will need to process phone number string
-                    Toast.makeText(getApplicationContext(),"get credential"+credential.getId(),Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(),"get credential"+credential.getId(),Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -49,6 +49,8 @@ public interface APIInterface {
     @POST("e_process_images")
     Call<EProcessImagesModel> getImages(@Body EProcessImagesModel data);
 
+    @POST("e_process_form")
+    Call<EProcessSubmitFormModel> postForm(@Body EProcessSubmitFormModel data);
     @POST("registerResend_otp")
     Call<SignUpResendOtp> getOtp(@Body SignUpResendOtp data);
 

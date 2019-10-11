@@ -31,8 +31,8 @@
     <string name="soaking_tank">Soaking Tank</string>
     <string name="batch_wise_title">Batch Wise LSU Layer</string>
     <string name="mixed_wise_title">Mixed Wise Continuous Dryer</string>
-    <string name = "no_of_hydration">No. of Hydration</string>
-    <string name="no_of_hydration_tanks">No. of Hydration Tanks</string>
+    <string name = "no_of_hydration">No. of Soaking</string>
+    <string name="no_of_hydration_tanks">No. of Soaking Tanks</string>
     <string name="no_post_stmng_tanks">No. of Post Steaming Tanks</string>
     <string name="post_steamng_tanks_capacity">Post Steaming Tanks Capacity</string>
     <string name = "capacity">Capacity</string>
@@ -41,6 +41,8 @@
     <string name="no_of_cooker">No. of Cooker</string>
     <string name="cooker_capacity">Cooker Capacity</string>
     <string name="no_of_pre_steaming_tanks">No. of Pre-Steaming Tanks</string>
+    <string name="no_of_steamng_tanks">No. of Steaming Tanks</string>
+    <string name="ageing_tanks">Ageing Tanks</string>
     <string name = "num_of_dryers">No. of Dryers</string>
     <string name = "variety_of_paddy">Variety of Paddy</string>
     <string name = "age_of_paddy">Age of Paddy</string>

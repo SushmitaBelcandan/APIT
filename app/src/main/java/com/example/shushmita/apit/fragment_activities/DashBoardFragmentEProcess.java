@@ -52,6 +52,12 @@ public class DashBoardFragmentEProcess extends Fragment {
     private String soaking_tank_with_pre_and_post_steaming_tank = "Soaking Tank With Pre-Steaming Tank and Post-Steaming";
     private String parboil_model5 = "PARBOILING - Model 5";
     private String soaking_tank_with_pre_and_cooker = "Soaking Tank With Pre-Steaming Tank and Cooker";
+    private String steam_model1 = "STEAM CURING PLANT Model - 1";
+    private String steam_tank_capcty = "Steaming Tank Capacity";
+    private String steam_model2 = "STEAM CURING PLANT Model - 1";
+    private String steam_tank_capcty2 = "Tank Capacity With Ageing Tank";
+
+
 
     Handler handler;
 
@@ -253,8 +259,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-                    Toast.makeText(getActivity(), "parboiling-model1-batchwise", Toast.LENGTH_SHORT).show();
-
                 } else if (str_dry_method_id.equals("2")) {
                     //parboiling-model1-mixedwise
 
@@ -272,7 +276,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-                    Toast.makeText(getActivity(), "parboiling-model1-mixedwise", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
@@ -294,8 +297,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-
-                    Toast.makeText(getActivity(), "parboiling-model2-batchwise", Toast.LENGTH_SHORT).show();
                 } else if (str_dry_method_id.equals("2")) {
                     //parboiling-model2-mixedwise
 
@@ -313,8 +314,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-
-                    Toast.makeText(getActivity(), "parboiling-model2-mixedwise", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
@@ -337,8 +336,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-
-                    Toast.makeText(getActivity(), "parboiling-model3-batchwise", Toast.LENGTH_SHORT).show();
                 } else if (str_dry_method_id.equals("2")) {
                     //parboiling-model3-mixedwise
 
@@ -357,7 +354,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-                    Toast.makeText(getActivity(), "parboiling-model3-mixedwise", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
@@ -380,7 +376,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-                    Toast.makeText(getActivity(), "parboiling-model4-batchwise", Toast.LENGTH_SHORT).show();
                 } else if (str_dry_method_id.equals("2")) {
                     //parboiling-model4-mixedwise
 
@@ -398,8 +393,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.replace(R.id.rlProcess, mFragment);
                     ft.addToBackStack(null);
                     ft.commit();
-
-                    Toast.makeText(getActivity(), "parboiling-model4-mixedwise", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
@@ -421,9 +414,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-
-                    Toast.makeText(getActivity(), "parboiling-model5-batchwise", Toast.LENGTH_SHORT).show();
-
                 } else if (str_dry_method_id.equals("2")) {
                     //parboiling-model5-mixedwise
 
@@ -441,8 +431,6 @@ public class DashBoardFragmentEProcess extends Fragment {
                     ft.addToBackStack(null);
                     ft.commit();
 
-
-                    Toast.makeText(getActivity(), "parboiling-model5-mixedwise", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
@@ -454,20 +442,77 @@ public class DashBoardFragmentEProcess extends Fragment {
             if (str_model_id.equals("1")) {
                 if (str_dry_method_id.equals("1")) {
                     //steam-model1-batchwise
-                    Toast.makeText(getActivity(), "steam-model1-batchwise", Toast.LENGTH_SHORT).show();
+
+                    Fragment mFragment = new SteamCuringFragment();//background color should set on parent layout of new fragment
+                    android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", "p2m1d1");
+                    bundle.putString("title1", steam_model1);
+                    bundle.putString("title2", batch_wise_tr);
+                    bundle.putString("title3", steam_tank_capcty);
+                    bundle.putString("title4", batch_wise_scnd);
+                    mFragment.setArguments(bundle);
+                    ft.replace(R.id.rlProcess, mFragment);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
                 } else if (str_dry_method_id.equals("2")) {
                     //steam-model1-mixedwise
-                    Toast.makeText(getActivity(), "steam-model1-mixedwise", Toast.LENGTH_SHORT).show();
+
+                    Fragment mFragment = new SteamCuringFragment();//background color should set on parent layout of new fragment
+                    android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", "p2m1d2");
+                    bundle.putString("title1", steam_model1);
+                    bundle.putString("title2", mixed_wise_tr);
+                    bundle.putString("title3", steam_tank_capcty);
+                    bundle.putString("title4", mixed_wise_scnd);
+                    mFragment.setArguments(bundle);
+                    ft.replace(R.id.rlProcess, mFragment);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
             } else if (str_model_id.equals("2")) {
                 if (str_dry_method_id.equals("1")) {
                     //steam-model2-batchwise
-                    Toast.makeText(getActivity(), "steam-model2-batchwise", Toast.LENGTH_SHORT).show();
+
+                    Fragment mFragment = new SteamCuringFragment();//background color should set on parent layout of new fragment
+                    android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", "p2m2d1");
+                    bundle.putString("title1", steam_model2);
+                    bundle.putString("title2", batch_wise_tr);
+                    bundle.putString("title3", steam_tank_capcty2);
+                    bundle.putString("title4", batch_wise_scnd);
+                    mFragment.setArguments(bundle);
+                    ft.replace(R.id.rlProcess, mFragment);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
                 } else if (str_dry_method_id.equals("2")) {
                     //steam-model2-mixedwise
-                    Toast.makeText(getActivity(), "steam-model2-mixedwise", Toast.LENGTH_SHORT).show();
+
+
+                    Fragment mFragment = new SteamCuringFragment();//background color should set on parent layout of new fragment
+                    android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("id", "p2m2d2");
+                    bundle.putString("title1", steam_model2);
+                    bundle.putString("title2", mixed_wise_tr);
+                    bundle.putString("title3", steam_tank_capcty2);
+                    bundle.putString("title4", mixed_wise_scnd);
+                    mFragment.setArguments(bundle);
+                    ft.replace(R.id.rlProcess, mFragment);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
                 } else {
                     Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
                 }
@@ -479,10 +524,32 @@ public class DashBoardFragmentEProcess extends Fragment {
 
             if (str_dry_method_id.equals("1")) {
                 //batchwise
-                Toast.makeText(getActivity(), "batchwise", Toast.LENGTH_SHORT).show();
+
+                Fragment mFragment = new DryingBatchWiseFragment();//background color should set on parent layout of new fragment
+                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("id", "p3d1");
+                bundle.putString("title1", batch_wise_scnd);
+                mFragment.setArguments(bundle);
+                ft.replace(R.id.rlProcess, mFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
             } else if (str_dry_method_id.equals("2")) {
                 //mixedwise
-                Toast.makeText(getActivity(), "mixedwise", Toast.LENGTH_SHORT).show();
+
+                Fragment mFragment = new DryingBatchWiseFragment();//background color should set on parent layout of new fragment
+                android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("id", "p3d2");
+                bundle.putString("title1", mixed_wise_scnd);
+                mFragment.setArguments(bundle);
+                ft.replace(R.id.rlProcess, mFragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
             } else {
                 Toast.makeText(getActivity(), "Please select Drying Method", Toast.LENGTH_SHORT).show();
             }
