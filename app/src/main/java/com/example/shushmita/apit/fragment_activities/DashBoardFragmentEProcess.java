@@ -58,7 +58,6 @@ public class DashBoardFragmentEProcess extends Fragment {
     private String steam_tank_capcty2 = "Tank Capacity With Ageing Tank";
 
 
-
     Handler handler;
 
     public DashBoardFragmentEProcess() {
@@ -103,25 +102,17 @@ public class DashBoardFragmentEProcess extends Fragment {
         rdoBtnPModel3 = view.findViewById(R.id.rdoBtnPModel3);
         rdoBtnPModel2 = view.findViewById(R.id.rdoBtnPModel2);
         rdoBtnPModel1 = view.findViewById(R.id.rdoBtnPModel1);
-        handler = new Handler();
-
-        final Runnable r = new Runnable() {
-            public void run() {
-
-                handler.postDelayed(this, 3000);
-            }
-        };
-
-        handler.postDelayed(r, 3000);
 
         getProcess();
-
-        //Event Apply
+        str_prcs_id = "0";
+        str_model_id = "0";
+        str_dry_method_id = "0";//Event Apply
         btnApply = view.findViewById(R.id.btnApply);
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getForms();
+
             }
         });
         return view;
@@ -132,6 +123,7 @@ public class DashBoardFragmentEProcess extends Fragment {
         rdoGrpProcess.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+
                 if (checkedId == R.id.rdoBtnParboiling) {
 
                     str_prcs_id = "1";
@@ -152,12 +144,15 @@ public class DashBoardFragmentEProcess extends Fragment {
                     getDryingMethods();
                     return;
 
-                } else {
+                } else if (checkedId == R.id.rdoBtnDrying) {
                     str_prcs_id = "3";
                     llModelsSteam.setVisibility(View.GONE);
                     llModels.setVisibility(View.GONE);
                     llDryingMethods.setVisibility(View.VISIBLE);
                     getDryingMethods();
+                    return;
+                } else {
+                    str_prcs_id = "0";
                     return;
                 }
 
@@ -192,7 +187,7 @@ public class DashBoardFragmentEProcess extends Fragment {
 
                 } else {
 
-                    str_model_id = "5";
+                    str_model_id = "0";
                     return;
 
                 }
@@ -210,8 +205,11 @@ public class DashBoardFragmentEProcess extends Fragment {
                     str_model_id = "1";
                     return;
 
-                } else {
+                } else if (checkedId == R.id.rdoBtnSteamModel2) {
                     str_model_id = "2";
+                    return;
+                } else {
+                    str_model_id = "0";
                     return;
                 }
             }
@@ -228,8 +226,11 @@ public class DashBoardFragmentEProcess extends Fragment {
                     str_dry_method_id = "1";
                     return;
 
-                } else {
+                } else if (checkedId == R.id.rdoBtnMixedWise) {
                     str_dry_method_id = "2";
+                    return;
+                } else {
+                    str_dry_method_id = "0";
                     return;
                 }
             }

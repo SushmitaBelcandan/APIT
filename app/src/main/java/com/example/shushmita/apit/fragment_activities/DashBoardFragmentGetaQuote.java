@@ -132,7 +132,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         apiInterface = APIClient.getClient().create(APIInterface.class);
         postalInterface = POSTALClient.getClient().create(POSTALInterface.class);
         session = new SessionManager(getActivity());
-
+        //getEnquiryFormStatus(session.getUsrId());//maintain form status
         arrayListSelctedImg = new ArrayList<>();
         clGetaQuoteContainer = view.findViewById(R.id.clGetaQuoteContainer);
         tvSoilBearingCapacity = view.findViewById(R.id.tvSoilBearingCapacity);
@@ -301,7 +301,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         });
         //------------------------------get image id from adapter----------------------------------------
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
-       // LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver1, new IntentFilter("custom-message"));
+        // LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver1, new IntentFilter("custom-message"));
         return view;
 
     }
@@ -314,25 +314,26 @@ public class DashBoardFragmentGetaQuote extends Fragment {
             imgId = intent.getIntExtra("image_id", 0);
         }
     };
-  /*  //getting grains list from adapter
-    public BroadcastReceiver mMessageReceiver1 = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
+
+    /*  //getting grains list from adapter
+      public BroadcastReceiver mMessageReceiver1 = new BroadcastReceiver() {
+          @Override
+          public void onReceive(Context context, Intent intent) {
+              // Get extra data included in the Intent
 
 
-            final Bundle stringArrayList = intent.getBundleExtra("BUNDLE");
-            ArrayList<Object> object = (ArrayList<Object>) stringArrayList.getSerializable("verity");
-            //grainsVarietyList.addAll(grainsVartyArr);
-            for (int i = 0; i < object.size(); i++) {
-                JsonObject object1 = new JsonObject();
-                object1.addProperty("verity", (String) object.get(i));
-                datas.add(object1);
-            }
-            Toast.makeText(getActivity(), grainsVarityName + " ", Toast.LENGTH_SHORT).show();
-        }
-    };
-*/
+              final Bundle stringArrayList = intent.getBundleExtra("BUNDLE");
+              ArrayList<Object> object = (ArrayList<Object>) stringArrayList.getSerializable("verity");
+              //grainsVarietyList.addAll(grainsVartyArr);
+              for (int i = 0; i < object.size(); i++) {
+                  JsonObject object1 = new JsonObject();
+                  object1.addProperty("verity", (String) object.get(i));
+                  datas.add(object1);
+              }
+              Toast.makeText(getActivity(), grainsVarityName + " ", Toast.LENGTH_SHORT).show();
+          }
+      };
+  */
     public void callEnqFormAPI(String usrId, String procsId, String procsImgId, String fName, String contctPerson, String phn,
                                String country, String pincode, final String state, String district, String taluk, String village,
                                String gstNo, String soilCap, String windSpeed, String rainFall, String agePaddy, String avgDensity,
@@ -457,6 +458,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etFName.setText(str1_first_name);
         etContctPersn.setText(str1_contact_person);
         etPhnNo.setText(str1_mobileno);
+       // spnr_country.setSelection(strCountryId);
         //  spnr_country.setText(str1_first_name);
         etPincode.setText(str1_pincode);
         etState.setText(str1_state_id);
@@ -467,8 +469,11 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etSoilBearingCapacity.setText(str1_soil_bearing);
         etMaxWindSpeed.setText(str1_wind_speed);
         etAvgRainFall.setText(str1_avg_rainfall);
+      //  spnrPaddyAge.setSelection(strPaddyId);
         // spnrPaddyAge.setText(str1_first_name);
         etAvgDensity.setText(str1_paddy_density);
+        rdoBtnParboiling.setEnabled(false);
+        rdoBtnSteamCuring.setEnabled(false);
 
         btnSubmit.setText("Submitted");
         btnSubmit.setEnabled(false);
@@ -479,6 +484,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etFName.setEnabled(false);
         etContctPersn.setEnabled(false);
         etPhnNo.setEnabled(false);
+        spnr_country.setEnabled(false);
         etPincode.setEnabled(false);
         etState.setEnabled(false);
         etDistrict.setEnabled(false);
@@ -488,6 +494,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etSoilBearingCapacity.setEnabled(false);
         etMaxWindSpeed.setEnabled(false);
         etAvgRainFall.setEnabled(false);
+        spnrPaddyAge.setEnabled(false);
         etAvgDensity.setEnabled(false);
 
     }
@@ -496,7 +503,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etFName.setText("");
         etContctPersn.setText("");
         etPhnNo.setText("");
-        //  spnr_country.setText(str1_first_name);
+        spnr_country.setEnabled(true);
         etPincode.setText("");
         etState.setText("");
         etDistrict.setText("");
@@ -506,7 +513,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etSoilBearingCapacity.setText("");
         etMaxWindSpeed.setText("");
         etAvgRainFall.setText("");
-        // spnrPaddyAge.setText(str1_first_name);
+        spnrPaddyAge.setEnabled(true);
         etAvgDensity.setText("");
 
         Fragment mFragment = new ModuleFragment();//background color should set on parent layout of new fragment
@@ -753,5 +760,13 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         }
 
         return true;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        setRetainInstance(true);
+        getEnquiryFormStatus(session.getUsrId());
     }
 }

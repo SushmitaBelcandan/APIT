@@ -41,6 +41,7 @@ public class DashBoardFragmentAbtUs extends Fragment {
     private WebView webvDesc;
     private LinearLayout llAddress, llPhone, llEmail, llWebsite, llFacebook, llLinkedin;
     private FrameLayout flDashboard;
+    private String str_Website;
 
     public DashBoardFragmentAbtUs() {
         //required public constructor
@@ -157,7 +158,11 @@ public class DashBoardFragmentAbtUs extends Fragment {
                         if (abtusResources.website != null && !abtusResources.website.isEmpty() &&
                                 !abtusResources.website.equals("null")) {
                             llWebsite.setVisibility(View.VISIBLE);
-                            tvWebsite.setText(" " + abtusResources.website);
+
+                            str_Website = abtusResources.website;
+                            tvWebsite.setMovementMethod(LinkMovementMethod.getInstance()); //make text redirect to website
+                            tvWebsite.setText(Html.fromHtml(getResources().getString(R.string.website_link)));
+                            tvWebsite.setLinkTextColor(Color.parseColor("#0c53a0"));
                         } else {
                             llWebsite.setVisibility(View.GONE);
 

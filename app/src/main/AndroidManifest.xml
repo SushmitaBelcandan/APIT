@@ -13,11 +13,12 @@
     <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/apit_logo"
+        android:roundIcon="@drawable/apit_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.Login_Act"
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name">
+        <activity android:name=".activities.SplashScreen"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +27,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".activities.Login_Act"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>

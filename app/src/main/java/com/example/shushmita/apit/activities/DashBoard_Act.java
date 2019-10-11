@@ -7,12 +7,26 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.adapters.DashBoardAdpaters;
+import com.example.shushmita.apit.reference.SessionManager;
+import com.example.shushmita.apit.retrofit_models.APIClient;
+import com.example.shushmita.apit.retrofit_models.APIInterface;
+import com.example.shushmita.apit.retrofit_models.EnqFormStatusModel;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashBoard_Act extends AppCompatActivity {
 
+    APIInterface apiInterface;
+    SessionManager sessionManager;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     @Override
@@ -20,6 +34,8 @@ public class DashBoard_Act extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard_activity);
 
+        apiInterface = APIClient.getClient().create(APIInterface.class);
+        sessionManager = new SessionManager(getApplicationContext());
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
@@ -36,6 +52,7 @@ public class DashBoard_Act extends AppCompatActivity {
                 tab.requestLayout();
             }
         }
+        getEnquiryFormStatus(sessionManager.getUsrId());
         //----------------------
         DashBoardAdpaters dbAdapters = new DashBoardAdpaters(this,getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(dbAdapters);
@@ -57,5 +74,35 @@ public class DashBoard_Act extends AppCompatActivity {
 
             }
         });
+    }
+
+    //--------------------refersh admin status -----------------------
+    public void getEnquiryFormStatus(String usr_id) {
+
+        EnqFormStatusModel enqFStausModel = new EnqFormStatusModel(usr_id);
+        final Call<EnqFormStatusModel> enqFormStatusModelCall = apiInterface.getEnqFormStatus(enqFStausModel);
+        enqFormStatusModelCall.enqueue(new Callback<EnqFormStatusModel>() {
+            @Override
+            public void onResponse(Call<EnqFormStatusModel> call, Response<EnqFormStatusModel> response) {
+                EnqFormStatusModel enqFormStatusResources = response.body();
+                List<EnqFormStatusModel.EnqFormRespDatum> formStatus = enqFormStatusResources.response;
+                for (EnqFormStatusModel.EnqFormRespDatum formStatusList : formStatus) {
+                    if (formStatusList.status.equals("1")) {
+                        Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
+                    } else if (formStatusList.status.equals("2")) {
+                        Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
+                    } else {
+                        //do nothing
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EnqFormStatusModel> call, Throwable t) {
+
+            }
+        });
+
+
     }
 }

@@ -127,7 +127,7 @@ public class DryingBatchWiseFragment extends Fragment {
                 str_paddy_moisture = etPaddyMoisture.getText().toString().trim();
 
                 if (id.equals("p3d1")) {
-                    sendData(str_usr_id, "3", "0", "1", "", "",
+                    sendData(str_usr_id, "3", "NA", "1", "", "",
                             str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", "", "", "",
@@ -136,7 +136,7 @@ public class DryingBatchWiseFragment extends Fragment {
                 }
                 else {
 
-                    sendData(str_usr_id, "3", "0", "2", "", "",
+                    sendData(str_usr_id, "3", "NA", "2", "", "",
                             "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", str_mixed_capcty, "", "",
@@ -245,13 +245,13 @@ public class DryingBatchWiseFragment extends Fragment {
                          String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
                          String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
 
-        if (procsId == null || procsId.isEmpty() || procsId.equals("null")) {
+        if (procsId == null || procsId.isEmpty() || procsId.equals("null")  || modelId.equals("0")) {
             procsId = "NA";
         }
-        if (modelId == null || modelId.isEmpty() || modelId.equals("null")) {
+        if (modelId == null || modelId.isEmpty() || modelId.equals("null") || modelId.equals("0")) {
             modelId = "NA";
         }
-        if (dryerId == null || dryerId.isEmpty() || dryerId.equals("null")) {
+        if (dryerId == null || dryerId.isEmpty() || dryerId.equals("null") || modelId.equals("0")) {
             dryerId = "NA";
         }
         if (noHydn == null || noHydn.isEmpty() || noHydn.equals("null")) {

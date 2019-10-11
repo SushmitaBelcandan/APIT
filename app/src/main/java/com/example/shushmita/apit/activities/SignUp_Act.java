@@ -185,8 +185,9 @@ public class SignUp_Act extends AppCompatActivity {
                             if (resourceSgnUpVerfy.status.equals("success")) {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
-                                Intent intentLogin = new Intent(SignUp_Act.this, Login_Act.class);
-                                intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                Intent intentLogin = new Intent(SignUp_Act.this, DashBoard_Act.class);
+                                intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intentLogin);
                             } else {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();

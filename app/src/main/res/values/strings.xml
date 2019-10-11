@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">APIT</string>
+
+    <string name="player_error">Error initializing YouTube player: %s</string>
+    <string name="seek_to">Jump To</string>
+    <string name="seek_to_hint">Seconds</string>
+
+
     <string-array name="cust_type">
         <item>Rice Miller</item>
         <item>Rice Trader</item>
@@ -77,6 +83,7 @@
 
     <string name="facebook_link">&lt;a href="https://www.facebook.com">https://www.facebook.com&lt;/a></string>
     <string name="linkedin_link">&lt;a href="https://www.linkedin.com">https://www.linkedin.com&lt;/a></string>
+    <string name="website_link">&lt;a href="https://www.apit.co.in">https://www.apit.co.in&lt;/a></string>
 
     <string name="google_maps_key">AIzaSyD1n0H3wRjD8k4R-9t7M-QWcc08jd6TKH4</string>
 

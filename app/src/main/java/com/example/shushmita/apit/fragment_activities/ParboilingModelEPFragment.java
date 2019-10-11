@@ -349,26 +349,35 @@ public class ParboilingModelEPFragment extends Fragment {
                         dryer_id = eProcsImgesResources.dryer_id;
 
                         List<EProcessImagesModel.ImagesEProcessDatum1> datumList = eProcsImgesResources.data1;
+                        if(datumList == null || datumList.isEmpty() || datumList.equals("null") || datumList.equals("NA")) {
+                            Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivHydrTank);
+                            Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivDryerMethodName);
 
-                        Glide.with(getActivity()).load(datumList.get(0).image).into(ivHydrTank);
-                        Glide.with(getActivity()).load(datumList.get(1).image).into(ivDryerMethodName);
+                        }else {
 
-                        llPaddyImages.setVisibility(View.VISIBLE);
-                        List<EProcessImagesModel.ImagesEProcessDatum2> imageListDatum = eProcsImgesResources.data2;
-                        imgList = new ArrayList<Images>();
-
-                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
-                        phvPaddyColor.setLayoutManager(mLayoutManager);
-                        //phvPaddyColor.addItemDecoration(new DividerItemDecoration(getActivity(),0));//remove divider
-                        adapter = new PaddyImagesAdapter2(getActivity(), imgList);
-                        phvPaddyColor.setAdapter(adapter);
-
-                        for (EProcessImagesModel.ImagesEProcessDatum2 imageCount : imageListDatum) {
-
-                            imageId = Integer.parseInt(imageCount.process_image_id);
-                            imgList.add(new Images(imageId, imageCount.image_color, imageCount.process_image_name));
+                            Glide.with(getActivity()).load(datumList.get(0).image).into(ivHydrTank);
+                            Glide.with(getActivity()).load(datumList.get(1).image).into(ivDryerMethodName);
                         }
-                        adapter.setEmployees(imgList);
+                        List<EProcessImagesModel.ImagesEProcessDatum2> imageListDatum = eProcsImgesResources.data2;
+                        if(imageListDatum == null || imageListDatum.isEmpty() || imageListDatum.equals("null") || imageListDatum.equals("NA")) {
+                            llPaddyImages.setVisibility(GONE);
+                        }else {
+                            llPaddyImages.setVisibility(View.VISIBLE);
+                            imgList = new ArrayList<Images>();
+
+                            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
+                            phvPaddyColor.setLayoutManager(mLayoutManager);
+                            //phvPaddyColor.addItemDecoration(new DividerItemDecoration(getActivity(),0));//remove divider
+                            adapter = new PaddyImagesAdapter2(getActivity(), imgList);
+                            phvPaddyColor.setAdapter(adapter);
+
+                            for (EProcessImagesModel.ImagesEProcessDatum2 imageCount : imageListDatum) {
+
+                                imageId = Integer.parseInt(imageCount.process_image_id);
+                                imgList.add(new Images(imageId, imageCount.image_color, imageCount.process_image_name));
+                            }
+                            adapter.setEmployees(imgList);
+                        }
 
                     } else {
                         llPaddyImages.setVisibility(GONE);
