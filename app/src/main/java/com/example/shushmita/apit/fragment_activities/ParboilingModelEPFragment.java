@@ -1,5 +1,6 @@
 package com.example.shushmita.apit.fragment_activities;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.activities.AfterProcess_Act;
+import com.example.shushmita.apit.adapters.ImageId;
 import com.example.shushmita.apit.adapters.Images;
 import com.example.shushmita.apit.adapters.OnImageClickListener;
 import com.example.shushmita.apit.adapters.PaddyImagesAdapter;
@@ -95,6 +97,8 @@ public class ParboilingModelEPFragment extends Fragment {
     private int imgId, imageId;
     private PaddyImagesAdapter2 adapter;
     ArrayList<Images> imgList;
+    ImageId img_id;
+    ProgressDialog progressdialog;
 
     public ParboilingModelEPFragment() {
         //required constructor
@@ -119,6 +123,9 @@ public class ParboilingModelEPFragment extends Fragment {
         title2 = getArguments().getString("title2");
         title3 = getArguments().getString("title3");
         title4 = getArguments().getString("title4");
+
+        progressdialog = new ProgressDialog(getActivity());
+        progressdialog.setMessage("Please Wait....");
 
         //------------------------------------------------------------------------------------
         session = new SessionManager(getActivity());
@@ -365,10 +372,12 @@ public class ParboilingModelEPFragment extends Fragment {
                             llPaddyImages.setVisibility(View.VISIBLE);
                             imgList = new ArrayList<Images>();
 
+                            img_id = new ImageId(0);
+
                             RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
                             phvPaddyColor.setLayoutManager(mLayoutManager);
                             //phvPaddyColor.addItemDecoration(new DividerItemDecoration(getActivity(),0));//remove divider
-                            adapter = new PaddyImagesAdapter2(getActivity(), imgList);
+                            adapter = new PaddyImagesAdapter2(getActivity(), imgList,img_id);
                             phvPaddyColor.setAdapter(adapter);
 
                             for (EProcessImagesModel.ImagesEProcessDatum2 imageCount : imageListDatum) {
@@ -550,6 +559,13 @@ public class ParboilingModelEPFragment extends Fragment {
                           String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                           String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
                           String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+
+        try {
+            progressdialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         EProcessSubmitFormModel epSubmitFormModel = new EProcessSubmitFormModel(usrId, procsId, modelId, dryerId,
                 noHydn, hydrnTnkCapcty, batchDryerCapcty, noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations,
                 paddyMoisture, noPreStmngTnk, preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk,
@@ -565,6 +581,7 @@ public class ParboilingModelEPFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Request Failed", Toast.LENGTH_SHORT).show();
                 }
+                progressdialog.dismiss();
             }
 
             @Override

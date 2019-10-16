@@ -1,5 +1,6 @@
 package com.example.shushmita.apit.fragment_activities;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.activities.AfterProcess_Act;
+import com.example.shushmita.apit.adapters.ImageId;
 import com.example.shushmita.apit.adapters.Images;
 import com.example.shushmita.apit.adapters.OnImageClickListener;
 import com.example.shushmita.apit.adapters.PaddyImagesAdapter;
@@ -89,6 +92,9 @@ public class SteamCuringFragment extends Fragment {
     private int imgId, imageId;
     private PaddyImagesAdapter2 adapter;
     ArrayList<Images> imgList;
+    ImageId img_id;
+    ProgressDialog progressdialog;
+
 
     public SteamCuringFragment() {
         //required constructor
@@ -113,6 +119,9 @@ public class SteamCuringFragment extends Fragment {
         title2 = getArguments().getString("title2");
         title3 = getArguments().getString("title3");
         title4 = getArguments().getString("title4");
+
+        progressdialog = new ProgressDialog(getActivity());
+        progressdialog.setMessage("Please Wait....");
 
         //------------------------------------------------------------------------------------
         session = new SessionManager(getActivity());
@@ -158,10 +167,15 @@ public class SteamCuringFragment extends Fragment {
 
         getPaddysAge();
         getForms();
+
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                Log.e("------imgid00000------",String.valueOf(img_id.getImagId()));
+
 
                 str_usr_id = session.getUsrId();
                 str_mixed_capcty = etDyerCapacity.getText().toString().trim();
@@ -180,6 +194,10 @@ public class SteamCuringFragment extends Fragment {
                 str_capcty_stmng_2 = etSteamngCapctyModel2.getText().toString().trim();
                 str_num_ageing_2 = etAgeingTanksModel2.getText().toString().trim();
                 str_ageing_capcty_2 = etAgeingCapctyModel2.getText().toString().trim();
+
+
+
+
 
 
                 if (id.equals("p2m1d1")) {
@@ -257,10 +275,12 @@ public class SteamCuringFragment extends Fragment {
                         List<EProcessImagesModel.ImagesEProcessDatum2> imageListDatum = eProcsImgesResources.data2;
                         imgList = new ArrayList<Images>();
 
+                        img_id = new ImageId(0);
+
                         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
                         phvPaddyColor.setLayoutManager(mLayoutManager);
                         //phvPaddyColor.addItemDecoration(new DividerItemDecoration(getActivity(),0));//remove divider
-                        adapter = new PaddyImagesAdapter2(getActivity(), imgList);
+                        adapter = new PaddyImagesAdapter2(getActivity(), imgList, img_id);
                         phvPaddyColor.setAdapter(adapter);
 
                         for (EProcessImagesModel.ImagesEProcessDatum2 imageCount : imageListDatum) {
@@ -441,6 +461,13 @@ public class SteamCuringFragment extends Fragment {
                           String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                           String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
                           String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+        try {
+            progressdialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         EProcessSubmitFormModel epSubmitFormModel = new EProcessSubmitFormModel(usrId, procsId, modelId, dryerId,
                 noHydn, hydrnTnkCapcty, batchDryerCapcty, noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations,
                 paddyMoisture, noPreStmngTnk, preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk,
@@ -456,6 +483,7 @@ public class SteamCuringFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Request Failed", Toast.LENGTH_SHORT).show();
                 }
+                progressdialog.dismiss();
             }
 
             @Override

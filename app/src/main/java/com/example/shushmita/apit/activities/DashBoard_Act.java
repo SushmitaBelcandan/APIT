@@ -90,9 +90,10 @@ public class DashBoard_Act extends AppCompatActivity {
                     if (formStatusList.status.equals("1")) {
                         Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
                     } else if (formStatusList.status.equals("2")) {
-                        Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
+                       Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
                     } else {
                         //do nothing
+                       // sessionManager.clearEnquiryForm();
                     }
                 }
             }

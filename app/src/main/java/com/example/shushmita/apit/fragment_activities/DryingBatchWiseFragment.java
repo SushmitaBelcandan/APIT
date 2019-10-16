@@ -1,5 +1,6 @@
 package com.example.shushmita.apit.fragment_activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -64,7 +65,7 @@ public class DryingBatchWiseFragment extends Fragment {
     private int strPaddyId;
     int hidingItemIndex = 0;
     private String id, title1, title2, title3, title4;
-
+    ProgressDialog progressdialog;
 
     public DryingBatchWiseFragment() {
         //required constructor
@@ -87,6 +88,9 @@ public class DryingBatchWiseFragment extends Fragment {
         id = getArguments().getString("id");
         title1 = getArguments().getString("title1");
         //-------------------------------------------------------xml data---------------------------
+        progressdialog = new ProgressDialog(getActivity());
+        progressdialog.setMessage("Please Wait....");
+
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
         session = new SessionManager(getActivity());
@@ -337,6 +341,13 @@ public class DryingBatchWiseFragment extends Fragment {
                           String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                           String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
                           String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+
+        try {
+            progressdialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         EProcessSubmitFormModel epSubmitFormModel = new EProcessSubmitFormModel(usrId, procsId, modelId, dryerId,
                 noHydn, hydrnTnkCapcty, batchDryerCapcty, noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations,
                 paddyMoisture, noPreStmngTnk, preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk,
@@ -352,6 +363,7 @@ public class DryingBatchWiseFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Request Failed", Toast.LENGTH_SHORT).show();
                 }
+                progressdialog.dismiss();
             }
 
             @Override

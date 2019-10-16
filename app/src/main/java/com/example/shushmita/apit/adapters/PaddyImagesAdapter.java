@@ -25,11 +25,13 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
     private LayoutInflater inflater;
     private ArrayList<Images> imgList;
     private int checkedPosition = 1;
+    ImageId im_id;
    // List<Images> data= Collections.emptyList();
 
-    public PaddyImagesAdapter(Context context, ArrayList<Images> imgs_list) {
+    public PaddyImagesAdapter(Context context, ArrayList<Images> imgs_list, ImageId img_id) {
         this.context = context;
         this.imgList = imgs_list;
+        this.im_id = img_id;
     }
 
     public void setEmployees(ArrayList<Images> images) {
@@ -91,10 +93,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
                         notifyItemChanged(checkedPosition);
                         checkedPosition = getAdapterPosition();
                         //send selected image id to fragment
-                        int imgId = getAdapterPosition();
-                        Intent intent = new Intent("custom-message");
-                        intent.putExtra("image_id",id);
-                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                        im_id.setImageId(id);
                     }
                 }
             });

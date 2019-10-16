@@ -2,9 +2,11 @@ package com.example.shushmita.apit.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +28,14 @@ public class PaddyImagesAdapter2 extends RecyclerView.Adapter<PaddyImagesAdapter
     private LayoutInflater inflater;
     private ArrayList<Images> imgList;
     private int checkedPosition = 1;
-   // List<Images> data= Collections.emptyList();
-   private OnImageClickListener onImageClickListener;
+    // List<Images> data= Collections.emptyList();
+    private OnImageClickListener onImageClickListener;
+    ImageId im_id;
 
-    public PaddyImagesAdapter2(Context context, ArrayList<Images> imgs_list) {
+    public PaddyImagesAdapter2(Context context, ArrayList<Images> imgs_list,ImageId img_id) {
         this.context = context;
         this.imgList = imgs_list;
+        this.im_id = img_id;
     }
 
     public void setEmployees(ArrayList<Images> images) {
@@ -93,11 +97,14 @@ public class PaddyImagesAdapter2 extends RecyclerView.Adapter<PaddyImagesAdapter
                     if (checkedPosition != getAdapterPosition()) {
                         notifyItemChanged(checkedPosition);
                         checkedPosition = getAdapterPosition();
+
+                        im_id.setImageId(id);
+
                         //send selected image id to fragment
-                        int imgId = getAdapterPosition();
+                      /*  int imgId = getAdapterPosition();
                         Intent intent = new Intent("custom-message");
                         intent.putExtra("process_image_id",id);
-                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);*/
                     }
                 }
             });
@@ -106,7 +113,7 @@ public class PaddyImagesAdapter2 extends RecyclerView.Adapter<PaddyImagesAdapter
 
     public Images getSelected() {
         if (checkedPosition != 1) {
-            session  = new SessionManager(context);
+            session = new SessionManager(context);
             return imgList.get(checkedPosition);
         }
         return null;

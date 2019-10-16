@@ -3,6 +3,8 @@ package com.example.shushmita.apit.retrofit_models;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 public class PostEnquiryDataModel {

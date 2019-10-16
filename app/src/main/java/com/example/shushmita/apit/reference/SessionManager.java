@@ -217,4 +217,25 @@ public class SessionManager {
     }
 
 
+   /* public void clearEnquiryForm()
+    {
+        editor.putBoolean(IS_REG, true);
+        editor.putString(KEY_IMG_ID, "");
+        editor.putString(KEY_FNAME, "");
+        editor.putString(KEY_CONTCT, "");
+        editor.putString(KEY_MOBILE_NO, "");
+        editor.putString(KEY_COUNTRY_ID, "");
+        editor.putString(KEY_PINCODE, "");
+        editor.putString(KEY_STATE_ID, "");
+        editor.putString(KEY_DIST_ID, "");
+        editor.putString(KEY_TALUK_ID, "");
+        editor.putString(KEY_VLLG_ID, "");
+        editor.putString(KEY_GST_NO, "");
+        editor.putString(KEY_SOIL, "");
+        editor.putString(KEY_WIND_SPEED, "");
+        editor.putString(KEY_AVG_RAINFALL, "");
+        editor.putString(KEY_PADDY_AGE, "");
+        editor.putString(KEY_PADDY_DENSITY, "");
+        editor.commit();
+    }*/
 }

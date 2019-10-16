@@ -1,5 +1,6 @@
 package com.example.shushmita.apit.fragment_activities;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +35,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.example.shushmita.apit.activities.Login_Act;
+import com.example.shushmita.apit.adapters.ImageId;
 import com.example.shushmita.apit.adapters.Images;
 import com.example.shushmita.apit.adapters.PaddyImagesAdapter;
 import com.example.shushmita.apit.adapters.SpinnerAdapter;
@@ -45,6 +49,7 @@ import com.example.shushmita.apit.adapters.Utils;
 import com.example.shushmita.apit.intrfaces.SelectImage_Intfc;
 import com.example.shushmita.apit.models.PaddyColorsModels;
 import com.example.shushmita.apit.models.RemoveGrnVarty_Models;
+import com.example.shushmita.apit.reference.GrainsParcelable;
 import com.example.shushmita.apit.reference.SessionManager;
 import com.example.shushmita.apit.retrofit_models.APIClient;
 import com.example.shushmita.apit.retrofit_models.APIInterface;
@@ -56,6 +61,8 @@ import com.example.shushmita.apit.retrofit_models.POSTALInterface;
 import com.example.shushmita.apit.retrofit_models.PaddysAgeListModel;
 import com.example.shushmita.apit.retrofit_models.PincodeModel;
 import com.example.shushmita.apit.retrofit_models.PostEnquiryDataModel;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mindorks.placeholderview.PlaceHolderView;
@@ -91,17 +98,21 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     private LinearLayout llProcess;
 
     private EditText etFName, etContctPersn, etPhnNo, etState, etDistrict, etTaluk, etTown, etGstNo;
+    private TextView tvCountry, tvPaddysAge;
     private EditText etAvgRainFall, etMaxWindSpeed, etGrainVarities;
+    private String grains1;
     private String str_fname, str_contct_person, str_phn_no;
     private String str_state, str_district, str_taluk, str_town, str_gst_no;
     private String str_avg_rainfall, str_max_wind_speed, str_grain_varts;
     private String str_soil_brearing_cap, str_avg_density;
     private String str_country, str_pincode, str_age_paddy, str_procs_id, str_procs_img_id;
 
+    private String str1_process_id;
     private String str1_first_name, str1_contact_person, str1_mobileno, str1_country_id, str1_pincode, str1_state_id;
     private String str1_district_id, str1_taluk_id, str1_village_id, str1_gst_no, str1_soil_bearing, str1_wind_speed;
     private String str1_avg_rainfall, str1_paddy_age, str1_paddy_density;
 
+    ProgressDialog progressdialog;
     public static EditText strGrainsVariety;
 
 
@@ -114,9 +125,12 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     public static ArrayList<String> arrayListSelctedImg;
     private PaddyImagesAdapter adapter;
     ArrayList<Images> imgList;
+    ImageId img_id;
     private int imgId;
     private String grainsVarityName;
     private ArrayList<String> grainsVartyArr = new ArrayList<>();
+    private ArrayList<String> sampleArr = new ArrayList<>();
+    private ArrayList<Integer> grainsVartyIdArr = new ArrayList<>();
     int countRow = 0;
 
     public DashBoardFragmentGetaQuote() {
@@ -128,6 +142,9 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.get_a_quote_frag, container, false);
+
+        progressdialog = new ProgressDialog(getActivity());
+        progressdialog.setMessage("Please Wait....");
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
         postalInterface = POSTALClient.getClient().create(POSTALInterface.class);
@@ -159,6 +176,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etGrainVarities = view.findViewById(R.id.etGrainVarities);
         llProcess = view.findViewById(R.id.llProcess);
 
+
         phvGrains = view.findViewById(R.id.phvGrains);
 
         llAddGrainVarities = view.findViewById(R.id.llAddGrainVarities);
@@ -167,18 +185,27 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         llAddGrainVarities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phvGrains.addView(new RemoveGrnVarty_Models(view.getContext()));
+                if(countRow < 9) {
+                    phvGrains.addView(new RemoveGrnVarty_Models(view.getContext(), grainsVartyArr, countRow));
+                }else
+                {
+                    Toast.makeText(getActivity(),"Limit Exceeded",Toast.LENGTH_SHORT).show();
+                }
                 //add object into array
                 countRow = countRow + 1;
 
-                Log.e("-------datas length---", String.valueOf(datas.size()));
             }
         });
 
-
         //-------------------spinners--------------------------------------------------------------------------------------
         spnr_country = view.findViewById(R.id.spnrCountry);
+        spnr_country.setVisibility(View.VISIBLE);
+        tvCountry = view.findViewById(R.id.tvCountry);
+        tvCountry.setVisibility(View.GONE);
         spnrPaddyAge = view.findViewById(R.id.spnrPaddyAge);
+        spnrPaddyAge.setVisibility(View.VISIBLE);
+        tvPaddysAge = view.findViewById(R.id.tvPaddysAge);
+        tvPaddysAge.setVisibility(View.GONE);
         //---------------address details that will be visible for indian people only----------------------------------------
         llAddressDetails = view.findViewById(R.id.llAddressDetails);
         etPincode = view.findViewById(R.id.etPincode);
@@ -223,9 +250,45 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         onRadioButtonClicked(view);
         //----------------------------------------call new fragment------------------------------------------------------------
         btnSubmit = view.findViewById(R.id.btnSubmit);
+
+
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                View current = getActivity().getCurrentFocus();
+                if (current != null) current.clearFocus();
+
+                grains1 = etGrainVarities.getText().toString();
+
+                if(grains1 == null || grains1.isEmpty() || grains1.equals("null"))
+                {
+                        grainsVartyArr.add(0,grains1);
+                        Log.e("---grainsVartyArr---", String.valueOf(grainsVartyArr));
+
+                }
+                else
+                {
+
+                    grainsVartyArr.add(0,grains1);
+                    Log.e("---grainsVartyArr---", String.valueOf(grainsVartyArr));
+                }
+
+
+                for(int i = 0; i< grainsVartyArr.size(); i++)
+                {
+
+                    JsonObject object = new JsonObject();
+                        object.addProperty("verity",grainsVartyArr.get(i));
+                        Log.e("----items----",grainsVartyArr.get(i));
+
+                    datas.add(object);
+                }
+
+
+
+
+
                 str_fname = etFName.getText().toString().trim();
                 str_contct_person = etContctPersn.getText().toString().trim();
                 str_phn_no = etPhnNo.getText().toString().trim();
@@ -236,20 +299,14 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                 str_gst_no = etGstNo.getText().toString().trim();
                 str_avg_rainfall = etAvgRainFall.getText().toString().trim();
                 str_max_wind_speed = etMaxWindSpeed.getText().toString().trim();
-                //str_grain_varts = etGrainVarities.getText().toString();
+                str_grain_varts = etGrainVarities.getText().toString();
                 str_soil_brearing_cap = etSoilBearingCapacity.getText().toString().trim();
                 str_avg_density = etAvgDensity.getText().toString().trim();
                 str_country = String.valueOf(strCountryId).trim();
                 str_age_paddy = String.valueOf(strPaddyId).trim();
                 str_pincode = etPincode.getText().toString().trim();
                 str_procs_id = strProcessId;
-                str_procs_img_id = String.valueOf(imgId).trim();
-
-               /* grainsVartyArr = new ArrayList<>();
-                grainsVartyArr.add(grainsVarityName);*/
-                JsonObject object = new JsonObject();
-                object.addProperty("verity", "a_grains1");
-                datas.add(object);
+                str_procs_img_id = img_id.getImagId().toString();
 
                 if (validateFormData(str_procs_id, str_fname, str_contct_person, str_phn_no, strCountryId,
                         str_pincode, str_gst_no)) {
@@ -286,7 +343,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                     if (str_avg_density == null || str_avg_density.isEmpty() || str_avg_density.equals("null")) {
                         str_avg_density = "NA";
                     }
-                    if (datas == null || datas.equals("null") || datas.size() < 1) {
+                    if (datas == null || datas.equals("null")) {
                         datas = null;
                     }
 
@@ -297,47 +354,24 @@ public class DashBoardFragmentGetaQuote extends Fragment {
 
 
                 }
+
             }
         });
-        //------------------------------get image id from adapter----------------------------------------
-        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver, new IntentFilter("custom-message"));
-        // LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver1, new IntentFilter("custom-message"));
-        return view;
+         return view;
 
     }
 
-    //getting image id from adapter
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
-            imgId = intent.getIntExtra("image_id", 0);
-        }
-    };
-
-    /*  //getting grains list from adapter
-      public BroadcastReceiver mMessageReceiver1 = new BroadcastReceiver() {
-          @Override
-          public void onReceive(Context context, Intent intent) {
-              // Get extra data included in the Intent
-
-
-              final Bundle stringArrayList = intent.getBundleExtra("BUNDLE");
-              ArrayList<Object> object = (ArrayList<Object>) stringArrayList.getSerializable("verity");
-              //grainsVarietyList.addAll(grainsVartyArr);
-              for (int i = 0; i < object.size(); i++) {
-                  JsonObject object1 = new JsonObject();
-                  object1.addProperty("verity", (String) object.get(i));
-                  datas.add(object1);
-              }
-              Toast.makeText(getActivity(), grainsVarityName + " ", Toast.LENGTH_SHORT).show();
-          }
-      };
-  */
     public void callEnqFormAPI(String usrId, String procsId, String procsImgId, String fName, String contctPerson, String phn,
                                String country, String pincode, final String state, String district, String taluk, String village,
                                String gstNo, String soilCap, String windSpeed, String rainFall, String agePaddy, String avgDensity,
                                JsonArray grainDetails) {
+
+        try {
+            progressdialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         final PostEnquiryDataModel pedm = new PostEnquiryDataModel(usrId, procsId, procsImgId, fName, contctPerson, phn, country, pincode,
                 state, district, taluk, village, gstNo, soilCap, windSpeed, rainFall, agePaddy, avgDensity, grainDetails);
         Call<PostEnquiryDataModel> pedmCall = apiInterface.submitEnquiryData(pedm);
@@ -364,6 +398,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), pedmResources.message, Toast.LENGTH_SHORT).show();
                 }
+                progressdialog.dismiss();
             }
 
             @Override
@@ -421,8 +456,10 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                         makeFormDisable();
                     } else if (formStatusList.status.equals("2")) {
                         releaseForm();
+                      //  session.clearEnquiryForm();
                     } else {
                         //do nothing
+                        //session.clearEnquiryForm();
                     }
                 }
             }
@@ -432,34 +469,44 @@ public class DashBoardFragmentGetaQuote extends Fragment {
 
             }
         });
-
-
     }
 
     public void makeFormDisable() {
-        str1_first_name = session.getEnqFName().trim();
-        str1_contact_person = session.getEnqContact().trim();
-        str1_mobileno = session.getEnqMobile().trim();
+        str1_process_id = session.getEnqPrcsId();
+        str1_first_name = session.getEnqFName();
+        str1_contact_person = session.getEnqContact();
+        str1_mobileno = session.getEnqMobile();
         str1_country_id = session.getEnqCountry();
-        str1_pincode = session.getEnqPincode().trim();
-        str1_state_id = session.getEnqState().trim();
+        str1_pincode = session.getEnqPincode();
+        str1_state_id = session.getEnqState();
 
-        str1_district_id = session.getEnqDistrict().trim();
-        str1_taluk_id = session.getEnqTaluk().trim();
-        str1_village_id = session.getEnqVillageId().trim();
-        str1_gst_no = session.getGstNo().trim();
-        str1_soil_bearing = session.getEnqSoil().trim();
-        str1_wind_speed = session.getEnqWindSpeed().trim();
+        str1_district_id = session.getEnqDistrict();
+        str1_taluk_id = session.getEnqTaluk();
+        str1_village_id = session.getEnqVillageId();
+        str1_gst_no = session.getGstNo();
+        str1_soil_bearing = session.getEnqSoil();
+        str1_wind_speed = session.getEnqWindSpeed();
 
-        str1_avg_rainfall = session.getEnqAvgRainFall().trim();
-        str1_paddy_age = session.getEnqPaddysAge().trim();
-        str1_paddy_density = session.getPaddyDensity().trim();
+        str1_avg_rainfall = session.getEnqAvgRainFall();
+        str1_paddy_age = session.getEnqPaddysAge();
+        str1_paddy_density = session.getPaddyDensity();
 
+        if(str1_process_id.equals("1"))
+        {
+            rdoBtnParboiling.setChecked(true);
+            rdoBtnSteamCuring.setChecked(false);
+        }
+        else
+        {
+            rdoBtnSteamCuring.setChecked(true);
+            rdoBtnParboiling.setChecked(false);
+        }
         etFName.setText(str1_first_name);
         etContctPersn.setText(str1_contact_person);
         etPhnNo.setText(str1_mobileno);
-       // spnr_country.setSelection(strCountryId);
-        //  spnr_country.setText(str1_first_name);
+        spnr_country.setVisibility(View.GONE);
+        tvCountry.setVisibility(View.VISIBLE);
+        tvCountry.setText(str1_country_id);
         etPincode.setText(str1_pincode);
         etState.setText(str1_state_id);
         etDistrict.setText(str1_district_id);
@@ -469,8 +516,9 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etSoilBearingCapacity.setText(str1_soil_bearing);
         etMaxWindSpeed.setText(str1_wind_speed);
         etAvgRainFall.setText(str1_avg_rainfall);
-      //  spnrPaddyAge.setSelection(strPaddyId);
-        // spnrPaddyAge.setText(str1_first_name);
+        spnrPaddyAge.setVisibility(View.GONE);
+        tvPaddysAge.setVisibility(View.VISIBLE);
+        tvPaddysAge.setText(str1_paddy_age);
         etAvgDensity.setText(str1_paddy_density);
         rdoBtnParboiling.setEnabled(false);
         rdoBtnSteamCuring.setEnabled(false);
@@ -479,7 +527,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         btnSubmit.setEnabled(false);
         btnSubmit.setBackgroundResource(R.drawable.disable_btn);
         GradientDrawable drawable = (GradientDrawable) btnSubmit.getBackground();
-        drawable.setColor(Color.parseColor("#F9CE18"));
+        drawable.setColor(Color.parseColor("#88F9CE18"));
 
         etFName.setEnabled(false);
         etContctPersn.setEnabled(false);
@@ -504,6 +552,8 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etContctPersn.setText("");
         etPhnNo.setText("");
         spnr_country.setEnabled(true);
+        spnr_country.setVisibility(View.VISIBLE);
+        tvCountry.setVisibility(View.GONE);
         etPincode.setText("");
         etState.setText("");
         etDistrict.setText("");
@@ -514,7 +564,20 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etMaxWindSpeed.setText("");
         etAvgRainFall.setText("");
         spnrPaddyAge.setEnabled(true);
+        spnrPaddyAge.setVisibility(View.VISIBLE);
+        tvPaddysAge.setVisibility(View.GONE);
         etAvgDensity.setText("");
+        rdoBtnParboiling.setEnabled(true);
+        rdoBtnSteamCuring.setEnabled(true);
+
+
+
+        btnSubmit.setText("Submit");
+        btnSubmit.setEnabled(true);
+        btnSubmit.setBackgroundResource(R.drawable.disable_btn);
+        GradientDrawable drawable = (GradientDrawable) btnSubmit.getBackground();
+        drawable.setColor(Color.parseColor("#F9CE18"));
+
 
         Fragment mFragment = new ModuleFragment();//background color should set on parent layout of new fragment
         android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -538,10 +601,11 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                         List<ImageListModel.ImageListDatum> imageListDatum = imageResources.response;
                         imgList = new ArrayList<Images>();
 
+                        img_id = new ImageId(0);
                         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
                         phvPaddyColor.setLayoutManager(mLayoutManager);
                         //phvPaddyColor.addItemDecoration(new DividerItemDecoration(getActivity(),0));//remove divider
-                        adapter = new PaddyImagesAdapter(getActivity(), imgList);
+                        adapter = new PaddyImagesAdapter(getActivity(), imgList, img_id);
                         phvPaddyColor.setAdapter(adapter);
 
                         for (ImageListModel.ImageListDatum imageCount : imageListDatum) {
@@ -763,8 +827,7 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         setRetainInstance(true);
         getEnquiryFormStatus(session.getUsrId());

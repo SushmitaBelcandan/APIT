@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.example.shushmita.apit.R;
+import com.example.shushmita.apit.reference.GrainsParcelable;
 import com.example.shushmita.apit.reference.SessionManager;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
@@ -34,17 +35,25 @@ public class RemoveGrnVarty_Models {
     public EditText etGrainVarities;
 
     SessionManager session;
+    GrainsParcelable grainsParcelable;
     public Context mContext;
     public String strVariety;
-    public ArrayList<String> grainsList = new ArrayList<>();
+    public ArrayList<GrainsParcelable> grainsList = new ArrayList<GrainsParcelable>();
 
-    public RemoveGrnVarty_Models(Context contxt) {
+    public ArrayList<String> grains_val = new ArrayList<>();
+    public ArrayList<Integer> grains_val_id = new ArrayList<>();
+    int count = 1;
+
+    public RemoveGrnVarty_Models(Context contxt,ArrayList grains_val, int grains_id) {
         this.mContext = contxt;
-
+        this.grains_val = grains_val;
+        this.count = grains_id;
+        count = count+1;
     }
+
     @Resolve
     public void onResolved() {
-        session  = new SessionManager(mContext);
+        session = new SessionManager(mContext);
 
         etGrainVarities.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
 
@@ -53,18 +62,11 @@ public class RemoveGrnVarty_Models {
                 if (!hasFocus) {
 
                     strVariety = etGrainVarities.getText().toString();
-                    if(!strVariety.equals("null") && !strVariety.equals(null) && !strVariety.isEmpty()) {
-                        grainsList.add(strVariety);
-                        ArrayList<Object> object = new ArrayList<Object>();
-                        object.add(strVariety);
-                        Intent intent = new Intent("custom-message");
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("verity",(Serializable)object);
-                        intent.putExtra("BUNDLE",bundle);
-                        LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-                    }
-                    else
-                    {
+                    if (!strVariety.equals("null") && !strVariety.equals(null) && !strVariety.isEmpty()) {
+
+                        grains_val.add(strVariety);
+                        //grains_val_id.add(count);
+                    } else {
                         //nothing
                     }
                 }

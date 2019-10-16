@@ -42,7 +42,8 @@
                         style="@style/EnqFormTxtViewStyle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="which process" />
+                        android:text="which process"
+                        android:textAllCaps="true"/>
 
                     <RadioGroup
                         android:id="@+id/rdoGrpProcess"
@@ -128,6 +129,7 @@
                         android:hint="Enter Phone Number"
                         android:inputType="number" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,17 +142,31 @@
                         android:layout_height="match_parent"
                         android:text="Country *" />
 
-                    <Spinner
-                        android:id="@+id/spnrCountry"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/spnr_bg_gray"
-                        android:dropDownWidth="match_parent"
-                        android:dropDownVerticalOffset="40dp"
-                        android:paddingLeft="0dp"
-                        android:paddingRight="0dp"
-                        android:popupBackground="@drawable/popup_bg"
-                        android:spinnerMode="dropdown" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvCountry"
+                            style="@style/EnqFormEditTxtStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/spnr_bg_gray"
+                            android:visibility="gone" />
+
+                        <Spinner
+                            android:id="@+id/spnrCountry"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/spnr_bg_gray"
+                            android:dropDownWidth="match_parent"
+                            android:dropDownVerticalOffset="40dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp"
+                            android:popupBackground="@drawable/popup_bg"
+                            android:spinnerMode="dropdown"
+                            android:visibility="visible" />
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -251,8 +267,8 @@
                         <EditText
                             android:id="@+id/etTown"
                             style="@style/EnqFormEditTxtStyle"
-                            android:inputType="text"
-                            android:hint="Enter Town or Village Name"/>
+                            android:hint="Enter Town or Village Name"
+                            android:inputType="text" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -369,7 +385,7 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:background="@drawable/plus"
-                                android:padding="8dp" />
+                                android:padding="10dp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -392,6 +408,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Age of Paddy" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvPaddysAge"
+                        style="@style/EnqFormEditTxtStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spnr_bg_gray"
+                        android:visibility="gone" />
 
                     <Spinner
                         android:id="@+id/spnrPaddyAge"
@@ -404,6 +431,7 @@
                         android:paddingRight="0dp"
                         android:popupBackground="@drawable/popup_bg"
                         android:spinnerMode="dropdown" />
+                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -443,13 +471,12 @@
                     android:text="@string/color_of_rice" />
 
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/phvPaddyColor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="35dp"
-                        android:paddingRight="35dp">
-                    </android.support.v7.widget.RecyclerView>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/phvPaddyColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="35dp"
+                    android:paddingRight="35dp"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
 
             <LinearLayout
@@ -468,6 +495,7 @@
                     android:background="@drawable/yellow_roundcrnr"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Submit"
+                    android:onClick="btnsubmit"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
