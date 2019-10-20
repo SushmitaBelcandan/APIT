@@ -29,6 +29,7 @@ public class DashBoard_Act extends AppCompatActivity {
     SessionManager sessionManager;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +45,8 @@ public class DashBoard_Act extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("E-Process"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         //---add margins between tab items-------
-        for(int i=0; i < tabLayout.getTabCount(); i++) {
-            if(i !=2) {
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            if (i != 2) {
                 View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
                 ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
                 p.setMargins(0, 0, 1, 0);
@@ -54,7 +55,7 @@ public class DashBoard_Act extends AppCompatActivity {
         }
         getEnquiryFormStatus(sessionManager.getUsrId());
         //----------------------
-        DashBoardAdpaters dbAdapters = new DashBoardAdpaters(this,getSupportFragmentManager(),tabLayout.getTabCount());
+        DashBoardAdpaters dbAdapters = new DashBoardAdpaters(this, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(dbAdapters);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -88,12 +89,12 @@ public class DashBoard_Act extends AppCompatActivity {
                 List<EnqFormStatusModel.EnqFormRespDatum> formStatus = enqFormStatusResources.response;
                 for (EnqFormStatusModel.EnqFormRespDatum formStatusList : formStatus) {
                     if (formStatusList.status.equals("1")) {
-                        Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
+                        //  Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
                     } else if (formStatusList.status.equals("2")) {
-                       Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(DashBoard_Act.this, formStatusList.status, Toast.LENGTH_SHORT).show();
                     } else {
                         //do nothing
-                       // sessionManager.clearEnquiryForm();
+                        // sessionManager.clearEnquiryForm();
                     }
                 }
             }

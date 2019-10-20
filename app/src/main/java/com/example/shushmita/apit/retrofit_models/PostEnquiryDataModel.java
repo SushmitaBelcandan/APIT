@@ -64,12 +64,12 @@ public class PostEnquiryDataModel {
     public String ave_density ;
 
     @SerializedName("graindetails")
-    public JsonArray graindetails;
+    public Object graindetails;
 
     public PostEnquiryDataModel(String usrId, String procsId, String procsImgId, String fName,String contctPerson,String phn,
                                 String country, String pincode, String state, String district, String taluk, String village,
                                 String gstNo, String soilCap, String windSpeed, String rainFall, String agePaddy, String avgDensity,
-                                JsonArray grainDetails)
+                                Object grainDetails)
     {
         this.user_id = usrId;
         this.process_id = procsId;

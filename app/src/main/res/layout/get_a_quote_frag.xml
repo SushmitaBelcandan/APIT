@@ -385,7 +385,8 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:background="@drawable/plus"
-                                android:padding="10dp" />
+                                android:padding="10dp"
+                                android:duplicateParentState="true"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -499,6 +500,22 @@
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#880c53a0"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/tvMsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/waiting_form_approval_msg"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:padding="15dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

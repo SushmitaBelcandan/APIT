@@ -44,6 +44,7 @@ public class SessionManager {
     private static final String KEY_AVG_RAINFALL = "avg_rainfall";
     private static final String KEY_PADDY_AGE = "paddy_age";
     private static final String KEY_PADDY_DENSITY = "paddy_density";
+    private static final String KEY_CHECKED_POSITION = "chked_pos";
 
 
 
@@ -65,6 +66,19 @@ public class SessionManager {
         editor.putString(KEY_PROF_PIC, profile_pic);
         editor.commit();
     }
+
+
+    public void saveCHeckPosition(int pos)
+    {
+        editor.putInt(KEY_CHECKED_POSITION, pos);
+        editor.commit();
+    }
+
+
+    public int getCHeckPosition() {
+        return shref.getInt(KEY_CHECKED_POSITION, 0);
+    }
+
 
     public String getUsrId() {
         return shref.getString(KEY_UID, null);

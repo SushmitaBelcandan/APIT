@@ -234,8 +234,8 @@ public class SteamCuringFragment extends Fragment {
                             str_ageing_capcty_2);
 
                 }
-              /*  Intent intentAfterProcess = new Intent(getActivity(), AfterProcess_Act.class);
-                startActivity(intentAfterProcess);*/
+                Intent intentAfterProcess = new Intent(getActivity(), AfterProcess_Act.class);
+                startActivity(intentAfterProcess);
             }
         });
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver3, new IntentFilter("custom-message"));
@@ -479,7 +479,7 @@ public class SteamCuringFragment extends Fragment {
             public void onResponse(Call<EProcessSubmitFormModel> call, Response<EProcessSubmitFormModel> response) {
                 EProcessSubmitFormModel formResources = response.body();
                 if (formResources.status.equals("success")) {
-                    Toast.makeText(getActivity(), "Thank you for Your Request.....", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Your Request has Received.....", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "Request Failed", Toast.LENGTH_SHORT).show();
                 }

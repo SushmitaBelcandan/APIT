@@ -2,7 +2,7 @@ package com.example.shushmita.apit.adapters;
 
 public class ImageId {
 
-    private int img_id;
+    private int img_id = 0;
 
    public ImageId(int imgId)
    {

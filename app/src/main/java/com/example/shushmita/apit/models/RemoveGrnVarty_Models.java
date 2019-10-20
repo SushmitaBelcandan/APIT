@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.reference.GrainsParcelable;
 import com.example.shushmita.apit.reference.SessionManager;
+import com.mindorks.placeholderview.PlaceHolderView;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.NonReusable;
@@ -39,48 +40,41 @@ public class RemoveGrnVarty_Models {
     public Context mContext;
     public String strVariety;
     public ArrayList<GrainsParcelable> grainsList = new ArrayList<GrainsParcelable>();
+    PlaceHolderView mphvGrains;
+    public String values;
 
-    public ArrayList<String> grains_val = new ArrayList<>();
-    public ArrayList<Integer> grains_val_id = new ArrayList<>();
-    int count = 1;
-
-    public RemoveGrnVarty_Models(Context contxt,ArrayList grains_val, int grains_id) {
+    public RemoveGrnVarty_Models(Context contxt,PlaceHolderView phvGrains) {
         this.mContext = contxt;
-        this.grains_val = grains_val;
-        this.count = grains_id;
-        count = count+1;
+        this.mphvGrains = phvGrains;
+
+    }
+    public RemoveGrnVarty_Models(Context contxt,PlaceHolderView phvGrains, String val) {
+        this.mContext = contxt;
+        this.mphvGrains = phvGrains;
+        this.values = val;
+
     }
 
     @Resolve
     public void onResolved() {
         session = new SessionManager(mContext);
 
-        etGrainVarities.setOnFocusChangeListener(new android.view.View.OnFocusChangeListener() {
+        etGrainVarities.setText("");
 
-            @Override
-            public void onFocusChange(android.view.View v, boolean hasFocus) {
-                if (!hasFocus) {
-
-                    strVariety = etGrainVarities.getText().toString();
-                    if (!strVariety.equals("null") && !strVariety.equals(null) && !strVariety.isEmpty()) {
-
-                        grains_val.add(strVariety);
-                        //grains_val_id.add(count);
-                    } else {
-                        //nothing
-                    }
-                }
-            }
-        });
-
+        if(!values.equals("") && !values.equals(null) && !values.equals("null"))
+        {
+            etGrainVarities.setText(values);
+        }
+        else
+        {
+            etGrainVarities.setText("");
+        }
     }
 
     @Click(R.id.llRemoveGrains)
     public void removeRows() {
-        //removing row
-        ViewGroup.LayoutParams params = llGrainContainer.getLayoutParams();
-        params.height = 0;
-        llGrainContainer.setLayoutParams(params);
+
+        mphvGrains.removeView(mphvGrains.getChildLayoutPosition(llGrainContainer));
     }
 
 }

@@ -94,4 +94,6 @@
     <string name="model_5">Model 5</string>
     <string name="batch_wise">Batch Wise LSU Layer</string>
     <string name="mixed_wise">Mixed Wise Continuous Dryer</string>
+
+    <string name="waiting_form_approval_msg">Waiting for Admin\'s Approval....</string>
 </resources>

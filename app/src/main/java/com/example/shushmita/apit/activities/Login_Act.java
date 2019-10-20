@@ -157,6 +157,7 @@ public class Login_Act extends AppCompatActivity {
 
     }
 
+
     private void saveLoginData(String sEmail, String sPassword) {
         try {
             progressdialog.show();
@@ -176,8 +177,11 @@ public class Login_Act extends AppCompatActivity {
                         sessionManager.saveLoginData(datum.user_id, datum.user_name,
                                 datum.email, datum.customer_type_id, datum.mobileno, datum.profilepic);
                         Intent intentDashBoard = new Intent(Login_Act.this, DashBoard_Act.class);
-                        intentDashBoard.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intentDashBoard.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intentDashBoard.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intentDashBoard);
+                        finish();
+
                     }
 
                 } else if (resource.status.equals("failure")) {

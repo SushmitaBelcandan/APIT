@@ -219,9 +219,10 @@ public class SignUp_Act extends AppCompatActivity {
                             SignUpResendOtp resourceSgnUpVerfy = response.body();
                             if (resourceSgnUpVerfy.status.equals("success")) {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
+                               /* Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
                                 Intent intentLogin = new Intent(SignUp_Act.this, Login_Act.class);
                                 intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intentLogin);
+                                startActivity(intentLogin);*/
                             } else {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
                             }

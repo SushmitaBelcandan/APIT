@@ -17,8 +17,8 @@ import com.example.shushmita.apit.R;
 import com.example.shushmita.apit.reference.SessionManager;
 
 import java.util.ArrayList;
-public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.SingleViewHolder> {
 
+public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.SingleViewHolder> {
 
     SessionManager session;
     private Context context;
@@ -26,7 +26,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
     private ArrayList<Images> imgList;
     private int checkedPosition = 1;
     ImageId im_id;
-   // List<Images> data= Collections.emptyList();
+    // List<Images> data= Collections.emptyList();
 
     public PaddyImagesAdapter(Context context, ArrayList<Images> imgs_list, ImageId img_id) {
         this.context = context;
@@ -44,13 +44,16 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
     @Override
     public SingleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.paddy_colors_model, viewGroup, false);
+        session = new SessionManager(context);
         return new SingleViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PaddyImagesAdapter.SingleViewHolder singleViewHolder, int i) {
         singleViewHolder.bind(imgList.get(i));
+        //singleViewHolder.cbView.setClickable(false);
     }
+
 
     @Override
     public int getItemCount() {
@@ -62,7 +65,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
         private TextView textView;
         private ImageView imageView;
         private CheckBox cbView;
-        private int id;
+        private int id = 0;
 
         SingleViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,8 +75,13 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
         }
 
         void bind(final Images employee) {
+
+            checkedPosition = session.getCHeckPosition();
+            cbView.setChecked(true);
+
             if (checkedPosition == 1) {
                 cbView.setChecked(false);
+
             } else {
                 if (checkedPosition == getAdapterPosition()) {
                     cbView.setChecked(true);
@@ -81,6 +89,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
                     cbView.setChecked(false);
                 }
             }
+
             textView.setText(employee.getImageName());
             Glide.with(context).load(employee.getImgUrl()).into(imageView);
             id = employee.getImagId();
@@ -93,6 +102,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
                         notifyItemChanged(checkedPosition);
                         checkedPosition = getAdapterPosition();
                         //send selected image id to fragment
+                        session.saveCHeckPosition(checkedPosition);
                         im_id.setImageId(id);
                     }
                 }
@@ -102,7 +112,7 @@ public class PaddyImagesAdapter extends RecyclerView.Adapter<PaddyImagesAdapter.
 
     public Images getSelected() {
         if (checkedPosition != 1) {
-            session  = new SessionManager(context);
+            session = new SessionManager(context);
             return imgList.get(checkedPosition);
         }
         return null;

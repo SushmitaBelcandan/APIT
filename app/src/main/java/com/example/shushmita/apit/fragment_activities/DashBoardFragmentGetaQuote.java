@@ -5,9 +5,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -28,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -61,16 +64,19 @@ import com.example.shushmita.apit.retrofit_models.POSTALInterface;
 import com.example.shushmita.apit.retrofit_models.PaddysAgeListModel;
 import com.example.shushmita.apit.retrofit_models.PincodeModel;
 import com.example.shushmita.apit.retrofit_models.PostEnquiryDataModel;
+import com.example.shushmita.apit.tinydb.TinyDB;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import com.mindorks.placeholderview.PlaceHolderView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,18 +102,20 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     private Button btnSubmit;
     private Spinner spnr_country, spnrPaddyAge;
     private LinearLayout llProcess;
+    private LinearLayout llMsg;
 
     private EditText etFName, etContctPersn, etPhnNo, etState, etDistrict, etTaluk, etTown, etGstNo;
     private TextView tvCountry, tvPaddysAge;
+    private TextView tvMsg;
     private EditText etAvgRainFall, etMaxWindSpeed, etGrainVarities;
-    private String grains1;
+    private String str_grains1, str_row_grains1;
     private String str_fname, str_contct_person, str_phn_no;
     private String str_state, str_district, str_taluk, str_town, str_gst_no;
     private String str_avg_rainfall, str_max_wind_speed, str_grain_varts;
     private String str_soil_brearing_cap, str_avg_density;
     private String str_country, str_pincode, str_age_paddy, str_procs_id, str_procs_img_id;
 
-    private String str1_process_id;
+    private String str1_process_id, str1_img_id;
     private String str1_first_name, str1_contact_person, str1_mobileno, str1_country_id, str1_pincode, str1_state_id;
     private String str1_district_id, str1_taluk_id, str1_village_id, str1_gst_no, str1_soil_bearing, str1_wind_speed;
     private String str1_avg_rainfall, str1_paddy_age, str1_paddy_density;
@@ -121,17 +129,21 @@ public class DashBoardFragmentGetaQuote extends Fragment {
     int hidingItemIndex = 0;
     private String strProcessId;
 
-    JsonArray datas = new JsonArray();
+    JsonArray datas = null;
     public static ArrayList<String> arrayListSelctedImg;
     private PaddyImagesAdapter adapter;
     ArrayList<Images> imgList;
     ImageId img_id;
     private int imgId;
+    private int chk_pos;
     private String grainsVarityName;
-    private ArrayList<String> grainsVartyArr = new ArrayList<>();
+    private ArrayList<String> grainsVartyArr;
     private ArrayList<String> sampleArr = new ArrayList<>();
     private ArrayList<Integer> grainsVartyIdArr = new ArrayList<>();
     int countRow = 0;
+    TinyDB tinydb;
+    ArrayList<String> db_arr_grains = new ArrayList<>();
+    public boolean isClickable = true;
 
     public DashBoardFragmentGetaQuote() {
         //required public constructor
@@ -176,6 +188,10 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         etGrainVarities = view.findViewById(R.id.etGrainVarities);
         llProcess = view.findViewById(R.id.llProcess);
 
+        tvMsg = view.findViewById(R.id.tvMsg);
+        llMsg = view.findViewById(R.id.llMsg);
+
+        tinydb = new TinyDB(getActivity());
 
         phvGrains = view.findViewById(R.id.phvGrains);
 
@@ -185,14 +201,12 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         llAddGrainVarities.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(countRow < 9) {
-                    phvGrains.addView(new RemoveGrnVarty_Models(view.getContext(), grainsVartyArr, countRow));
-                }else
-                {
-                    Toast.makeText(getActivity(),"Limit Exceeded",Toast.LENGTH_SHORT).show();
+                if (phvGrains.getChildCount() < 10) {
+                    phvGrains.addView(new RemoveGrnVarty_Models(getActivity(), phvGrains));
+                } else {
+                    Toast.makeText(getActivity(), "Limit Exceeded", Toast.LENGTH_SHORT).show();
                 }
-                //add object into array
-                countRow = countRow + 1;
+
 
             }
         });
@@ -255,39 +269,55 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                grainsVartyArr = new ArrayList<>();
+                str_grains1 = etGrainVarities.getText().toString();
 
-                View current = getActivity().getCurrentFocus();
-                if (current != null) current.clearFocus();
+                phvPaddyColor.findViewHolderForAdapterPosition(session.getCHeckPosition());
+                Log.e("------paddycolorPos----", String.valueOf(session.getCHeckPosition()));
 
-                grains1 = etGrainVarities.getText().toString();
 
-                if(grains1 == null || grains1.isEmpty() || grains1.equals("null"))
-                {
-                        grainsVartyArr.add(0,grains1);
-                        Log.e("---grainsVartyArr---", String.valueOf(grainsVartyArr));
+                if (str_grains1 == null || str_grains1.isEmpty() || str_grains1.equals("null")) {
+                    //do nothing
+                } else {
 
-                }
-                else
-                {
-
-                    grainsVartyArr.add(0,grains1);
+                    grainsVartyArr.add(0, str_grains1);
                     Log.e("---grainsVartyArr---", String.valueOf(grainsVartyArr));
                 }
 
 
-                for(int i = 0; i< grainsVartyArr.size(); i++)
-                {
+                View child;
+                for (int i = 0; i < phvGrains.getChildCount(); i++) {
+                    child = phvGrains.getChildAt(i);
+                    //In case you need to access ViewHolder:
+                    phvGrains.getChildViewHolder(child);
 
-                    JsonObject object = new JsonObject();
-                        object.addProperty("verity",grainsVartyArr.get(i));
-                        Log.e("----items----",grainsVartyArr.get(i));
+                    EditText edt = phvGrains.getChildViewHolder(child).itemView.findViewById(R.id.etGrainVarities);
+                    grainsVartyArr.add(edt.getText().toString());
 
-                    datas.add(object);
+                    Log.d("veveve", String.valueOf(grainsVartyArr.get(i)));
                 }
 
 
+                datas = new JsonArray();
 
 
+                for (int i = 0; i < grainsVartyArr.size(); i++) {
+
+                    if (!grainsVartyArr.get(i).equals("")) {
+                        JsonObject object = new JsonObject();
+                        object.addProperty("verity", grainsVartyArr.get(i));
+                        datas.add(object);
+                        db_arr_grains.add(grainsVartyArr.get(i));
+                    }
+
+                    Log.e("----items----", grainsVartyArr.get(i));
+
+                }
+
+                tinydb.putListString("db_arr_grains", db_arr_grains);
+
+
+                Log.d("datas123", String.valueOf(datas));
 
                 str_fname = etFName.getText().toString().trim();
                 str_contct_person = etContctPersn.getText().toString().trim();
@@ -306,13 +336,11 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                 str_age_paddy = String.valueOf(strPaddyId).trim();
                 str_pincode = etPincode.getText().toString().trim();
                 str_procs_id = strProcessId;
-                str_procs_img_id = img_id.getImagId().toString();
+
 
                 if (validateFormData(str_procs_id, str_fname, str_contct_person, str_phn_no, strCountryId,
                         str_pincode, str_gst_no)) {
-                    if (str_procs_img_id == null || str_procs_img_id.isEmpty() || str_procs_img_id.equals("0")) {
-                        str_procs_img_id = "NA";
-                    }
+
                     if (str_state == null || str_state.isEmpty() || str_state.equals("null")) {
                         str_state = "NA";
                     }
@@ -343,28 +371,44 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                     if (str_avg_density == null || str_avg_density.isEmpty() || str_avg_density.equals("null")) {
                         str_avg_density = "NA";
                     }
-                    if (datas == null || datas.equals("null")) {
+                  /*  if (datas == null || datas.equals("null") || datas.size() == 0) {
+                       // Object dataObj = "null";
                         datas = null;
+                    }*/
+                    str_procs_img_id = img_id.getImagId().toString();
+                    if (str_procs_img_id == null || str_procs_img_id.isEmpty() || str_procs_img_id.equals("0")) {
+                        str_procs_img_id = "NA";
                     }
 
-                    callEnqFormAPI(session.getUsrId(), str_procs_id, str_procs_img_id, str_fname, str_contct_person, str_phn_no,
-                            str_country, str_pincode, str_state, str_district, str_taluk, str_town, str_gst_no,
-                            str_soil_brearing_cap, str_max_wind_speed, str_avg_rainfall, str_age_paddy,
-                            str_avg_density, datas);
+                    if(datas.size() == 0)
+                    {
+                        callEnqFormAPI(session.getUsrId(), str_procs_id, str_procs_img_id, str_fname, str_contct_person, str_phn_no,
+                                str_country, str_pincode, str_state, str_district, str_taluk, str_town, str_gst_no,
+                                str_soil_brearing_cap, str_max_wind_speed, str_avg_rainfall, str_age_paddy,
+                                str_avg_density, "");
+                    }
+                    else
+                    {
+                        callEnqFormAPI(session.getUsrId(), str_procs_id, str_procs_img_id, str_fname, str_contct_person, str_phn_no,
+                                str_country, str_pincode, str_state, str_district, str_taluk, str_town, str_gst_no,
+                                str_soil_brearing_cap, str_max_wind_speed, str_avg_rainfall, str_age_paddy,
+                                str_avg_density, datas);
+                    }
 
-
+                } else {
+                    Toast.makeText(getActivity(), "Invalid Data", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
-         return view;
+        return view;
 
     }
 
     public void callEnqFormAPI(String usrId, String procsId, String procsImgId, String fName, String contctPerson, String phn,
                                String country, String pincode, final String state, String district, String taluk, String village,
                                String gstNo, String soilCap, String windSpeed, String rainFall, String agePaddy, String avgDensity,
-                               JsonArray grainDetails) {
+                               Object grainDetails) {
 
         try {
             progressdialog.show();
@@ -382,7 +426,8 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                 if (pedmResources.status.equals("success")) {
 
                     Toast.makeText(getActivity(), pedmResources.message, Toast.LENGTH_SHORT).show();
-
+                    llMsg.setVisibility(View.VISIBLE);
+                    tvMsg.setText(pedmResources.message);
                     List<PostEnquiryDataModel.EnquiryDatum> enquiryDatum = pedmResources.response;
                     for (PostEnquiryDataModel.EnquiryDatum enqDatumList : enquiryDatum) {
 
@@ -394,8 +439,30 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                                 enqDatumList.paddy_age, enqDatumList.paddy_density);
                         getEnquiryFormStatus(enqDatumList.user_id);
 
+                          List<PostEnquiryDataModel.EnquiryDatum.VarietyDatum> varietyDatum = enqDatumList.varity_id;
+                            ArrayList<String> arrVariety = new ArrayList<>();
+                            if(enqDatumList.varity_id.equals("null"))
+                            {
+                                arrVariety.add("null");
+                            }
+                            else {
+                                for (PostEnquiryDataModel.EnquiryDatum.VarietyDatum vartyDatum : varietyDatum) {
+                                    arrVariety.add(vartyDatum.varity_id);
+                                    Log.e("----variety id----", vartyDatum.varity_id);
+                                }
+                            }
+                            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            SharedPreferences.Editor editor = sharedPrefs.edit();
+                            Gson gson = new Gson();
+
+                            String json = gson.toJson(arrVariety);
+                            editor.putString("varity_id", json);
+                            editor.commit();
                     }
+
+
                 } else {
+                    llMsg.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), pedmResources.message, Toast.LENGTH_SHORT).show();
                 }
                 progressdialog.dismiss();
@@ -454,12 +521,15 @@ public class DashBoardFragmentGetaQuote extends Fragment {
                 for (EnqFormStatusModel.EnqFormRespDatum formStatusList : formStatus) {
                     if (formStatusList.status.equals("1")) {
                         makeFormDisable();
+                        llMsg.setVisibility(View.VISIBLE);
                     } else if (formStatusList.status.equals("2")) {
                         releaseForm();
-                      //  session.clearEnquiryForm();
+                        llMsg.setVisibility(View.GONE);
+                        // session.clearEnquiryForm();
                     } else {
                         //do nothing
                         //session.clearEnquiryForm();
+                        llMsg.setVisibility(View.GONE);
                     }
                 }
             }
@@ -490,14 +560,27 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         str1_avg_rainfall = session.getEnqAvgRainFall();
         str1_paddy_age = session.getEnqPaddysAge();
         str1_paddy_density = session.getPaddyDensity();
+        str1_img_id = session.getEnqImgId();
 
-        if(str1_process_id.equals("1"))
-        {
+      /*  SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Gson gson = new Gson();
+        String json = sharedPrefs.getString("varity_id", "");
+
+        Type type = (Type) new TypeToken<ArrayList<String>>() {}.getType();
+        ArrayList<String> inpList = new Gson().fromJson(json, (java.lang.reflect.Type) type);
+        Log.e("----inpList----",String.valueOf(inpList.size()));*/
+       /* if(inpList.isEmpty()) {
+            etGrainVarities.setText("");
+        }else {
+            etGrainVarities.setText(inpList.get(0));
+            for (int i = 1; i < inpList.size(); i++) {
+                phvGrains.addView(new RemoveGrnVarty_Models(getActivity(), phvGrains, inpList.get(i)));
+            }
+        }*/
+        if (str1_process_id.equals("1")) {
             rdoBtnParboiling.setChecked(true);
             rdoBtnSteamCuring.setChecked(false);
-        }
-        else
-        {
+        } else {
             rdoBtnSteamCuring.setChecked(true);
             rdoBtnParboiling.setChecked(false);
         }
@@ -570,7 +653,20 @@ public class DashBoardFragmentGetaQuote extends Fragment {
         rdoBtnParboiling.setEnabled(true);
         rdoBtnSteamCuring.setEnabled(true);
 
-
+        etFName.setEnabled(true);
+        etContctPersn.setEnabled(true);
+        etPhnNo.setEnabled(true);
+        etPincode.setEnabled(true);
+        etState.setEnabled(false);
+        etDistrict.setEnabled(false);
+        etTaluk.setEnabled(false);
+        etTown.setEnabled(true);
+        etGstNo.setEnabled(true);
+        etSoilBearingCapacity.setEnabled(true);
+        etMaxWindSpeed.setEnabled(true);
+        etAvgRainFall.setEnabled(true);
+        etAvgDensity.setEnabled(true);
+        llAddGrainVarities.setClickable(true);
 
         btnSubmit.setText("Submit");
         btnSubmit.setEnabled(true);
@@ -616,6 +712,8 @@ public class DashBoardFragmentGetaQuote extends Fragment {
 
                     } else {
                         llPaddyImages.setVisibility(View.GONE);
+                        img_id.setImageId(0);
+
                     }
 
                 }
