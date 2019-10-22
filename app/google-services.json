@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "510107007205",
+    "firebase_url": "https://spatial-victory-254610.firebaseio.com",
+    "project_id": "spatial-victory-254610",
+    "storage_bucket": "spatial-victory-254610.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510107007205:android:6df351aac55be095b7bc0c",
+        "android_client_info": {
+          "package_name": "com.apinnovations.apit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510107007205-vlfevvthh4v910v1sjueqe1bcf5t2bqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apinnovations.apit",
+            "certificate_hash": "97626c123f4ba722b4ec07a9ffec087bea1bdf26"
+          }
+        },
+        {
+          "client_id": "510107007205-h0d2kpbvhmeao9hrsnur9u59i41scm6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKeMBH6-cZTQsSIygvzTEMpVMP3e6KmgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510107007205-h0d2kpbvhmeao9hrsnur9u59i41scm6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

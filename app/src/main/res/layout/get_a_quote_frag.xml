@@ -43,7 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="which process"
-                        android:textAllCaps="true"/>
+                        android:textAllCaps="true" />
 
                     <RadioGroup
                         android:id="@+id/rdoGrpProcess"
@@ -168,6 +168,19 @@
                             android:visibility="visible" />
                     </RelativeLayout>
                 </LinearLayout>
+
+               <!-- <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/margin_top"
+                    android:orientation="vertical">
+
+                    <fragment
+                        android:id="@+id/place_autocomplete_fragment"
+                        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -385,8 +398,8 @@
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
                                 android:background="@drawable/plus"
-                                android:padding="10dp"
-                                android:duplicateParentState="true"/>
+                                android:duplicateParentState="true"
+                                android:padding="10dp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -409,29 +422,30 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Age of Paddy" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tvPaddysAge"
-                        style="@style/EnqFormEditTxtStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/spnr_bg_gray"
-                        android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/tvPaddysAge"
+                            style="@style/EnqFormEditTxtStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/spnr_bg_gray"
+                            android:visibility="gone" />
 
-                    <Spinner
-                        android:id="@+id/spnrPaddyAge"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/spnr_bg_gray"
-                        android:dropDownWidth="match_parent"
-                        android:dropDownVerticalOffset="40dp"
-                        android:paddingLeft="0dp"
-                        android:paddingRight="0dp"
-                        android:popupBackground="@drawable/popup_bg"
-                        android:spinnerMode="dropdown" />
+                        <Spinner
+                            android:id="@+id/spnrPaddyAge"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/spnr_bg_gray"
+                            android:dropDownWidth="match_parent"
+                            android:dropDownVerticalOffset="40dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp"
+                            android:popupBackground="@drawable/popup_bg"
+                            android:spinnerMode="dropdown" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -495,27 +509,29 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/yellow_roundcrnr"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="Submit"
                     android:onClick="btnsubmit"
+                    android:text="Submit"
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/llMsg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#880c53a0"
                 android:visibility="gone">
+
                 <TextView
                     android:id="@+id/tvMsg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="15dp"
                     android:text="@string/waiting_form_approval_msg"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:padding="15dp"/>
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

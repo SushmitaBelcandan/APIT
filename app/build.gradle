@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.shushmita.apit"
+        applicationId "com.apinnovations.apit"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 
 }
 
@@ -60,4 +61,10 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    //-----------------Google Places---------------------
+    implementation 'com.google.android.libraries.places:places:1.1.0'
+
+
+
 }
