@@ -185,6 +185,11 @@ public class DashBoardFragmentEProcess extends Fragment {
                     str_model_id = "4";
                     return;
 
+                }  else if (checkedId == R.id.rdoBtnPModel5) {
+
+                    str_model_id = "5";
+                    return;
+
                 } else {
 
                     str_model_id = "0";

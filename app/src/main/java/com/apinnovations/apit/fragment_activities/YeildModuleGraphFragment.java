@@ -1,4 +1,5 @@
 package com.apinnovations.apit.fragment_activities;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

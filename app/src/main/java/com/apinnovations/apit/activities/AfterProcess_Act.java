@@ -33,6 +33,8 @@ import com.apinnovations.apit.adapters.ProcessList;
 import com.apinnovations.apit.fragment_activities.AfterProcessFragment;
 import com.apinnovations.apit.fragment_activities.DashBoardFragmentAbtUs;
 import com.apinnovations.apit.fragment_activities.DashBoardFragmentGetaQuote;
+import com.apinnovations.apit.fragment_activities.NotificationDetailFragment;
+import com.apinnovations.apit.fragment_activities.NotificationListFragment;
 import com.apinnovations.apit.fragment_activities.YeildModuleFragment;
 import com.apinnovations.apit.R;
 
@@ -53,9 +55,11 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
     CircleImageView ivProfilePic;
     List<String> processList;
     Toolbar toolbarAfterProcess;
+
     private Spinner spnrAPProcessType;
     private LinearLayout llSelectDate, llBatchNo, llDate, llProfileDesc, llEditProfile;
     private TextView tvBatchNum, tvSelectDate, tvName, tvEmail, tvMobileNo, tvtoolbarTitle1;
+    private LinearLayout llHeader1, llHeader2, llHeader3;
     private EditText etUserId;
     private String strBatchNum, strProcessName, strDate;
     private Button btnSubmit;
@@ -85,6 +89,10 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
         btnSubmit = findViewById(R.id.btnSubmit);
         tvtoolbarTitle1 = findViewById(R.id.tvtoolbarTitle1);
         // etAPMoisture = findViewById(R.id.etAPMoisture);
+        //-------------------Header Layout----------------------
+        llHeader1 = findViewById(R.id.llHeader1);
+        llHeader2 = findViewById(R.id.llHeader2);
+        llHeader3 = findViewById(R.id.llHeader3);
         //-----------------------left nav----------
         nav_viewProfile = (NavigationView) findViewById(R.id.nav_viewProfile);
         nav_viewProfile.setNavigationItemSelectedListener(this);
@@ -181,20 +189,38 @@ public class AfterProcess_Act extends AppCompatActivity implements NavigationVie
             case R.id.menuleft_after_process:
                 fragment = new AfterProcessFragment();
                 tvtoolbarTitle1.setText("After Process / Output");
+                llHeader1.setVisibility(View.VISIBLE);
+                llHeader2.setVisibility(View.VISIBLE);
+                llHeader3.setVisibility(View.VISIBLE);
                 break;
             case R.id.menuleft_yeild_mod:
                 fragment = new YeildModuleFragment();
                 tvtoolbarTitle1.setText("Yeild Module");
+                llHeader1.setVisibility(View.VISIBLE);
+                llHeader2.setVisibility(View.VISIBLE);
+                llHeader3.setVisibility(View.VISIBLE);
 
                 break;
             case R.id.menuleft_mass_blnc:
                 fragment = new DashBoardFragmentGetaQuote();
+                tvtoolbarTitle1.setText("Mass Balance Module");
+                llHeader1.setVisibility(View.VISIBLE);
+                llHeader2.setVisibility(View.VISIBLE);
+                llHeader3.setVisibility(View.VISIBLE);
                 break;
             case R.id.menuleft_process_batch:
                 fragment = new DashBoardFragmentAbtUs();
+                tvtoolbarTitle1.setText("View Past Process Batch Data");
+                llHeader1.setVisibility(View.VISIBLE);
+                llHeader2.setVisibility(View.VISIBLE);
+                llHeader3.setVisibility(View.VISIBLE);
                 break;
             case R.id.menuleft_notifi:
-                fragment = new AfterProcessFragment();
+                fragment = new NotificationListFragment();
+                tvtoolbarTitle1.setText("Notification");
+                llHeader1.setVisibility(View.GONE);
+                llHeader2.setVisibility(View.GONE);
+                llHeader3.setVisibility(View.GONE);
                 break;
             case R.id.menuleft_logout:
                 fragment = new AfterProcessFragment();

@@ -98,4 +98,7 @@
     <string name="waiting_form_approval_msg">Waiting for Admin\'s Approval....</string>
 
     <string name="api_key">AIzaSyAwLNcqrIq_j8UxCto0Y1Wpkat83zXLFC0</string>
+
+    <string name="thank_u_for_ur_interest">Thank you for your interest</string>
+    <string name="pls_contct_our_sales_team">Please contact our sales team</string>
 </resources>

@@ -3,7 +3,9 @@ package com.apinnovations.apit.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,7 @@ import android.text.SpannableString;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,13 @@ import com.apinnovations.apit.retrofit_models.SignUpModel;
 import com.apinnovations.apit.retrofit_models.SignUpResendOtp;
 import com.apinnovations.apit.retrofit_models.SignUpVerifyModel;
 import com.apinnovations.apit.R;
+import com.apinnovations.apit.sms.AppSignatureHashHelper;
+import com.apinnovations.apit.sms.MySMSBroadcastReceiver;
+import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +52,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SignUp_Act extends AppCompatActivity {
+public class SignUp_Act extends AppCompatActivity implements  MySMSBroadcastReceiver.OTPReceiveListener{
 
     SessionManager session;
     ProgressDialog progressdialog;
@@ -62,11 +72,20 @@ public class SignUp_Act extends AppCompatActivity {
     Intent intent = getIntent();
     private String address = "null";
 
+    private MySMSBroadcastReceiver smsReceiver;
+    EditText etOtp1, etOtp2, etOtp3, etOtp4;
+    private String str_otp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        AppSignatureHashHelper appSignatureHashHelper = new AppSignatureHashHelper(this);
+        // This code requires one time to get Hash keys do comment and share key
+       // Log.i("HashKey", "HashKey: " + appSignatureHashHelper.getAppSignatures().get(0));
+
+        startSMSListener();
         session = new SessionManager(getApplicationContext());
         progressdialog = new ProgressDialog(SignUp_Act.this);
         progressdialog.setMessage("Please Wait....");
@@ -146,29 +165,28 @@ public class SignUp_Act extends AppCompatActivity {
         });
 
         //----------------------------------Google Places AutoCompleteLocation----------------------
-     etGeoDetails.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             Intent intentLocation = new Intent(SignUp_Act.this, LocationSearch.class);
-             intentLocation.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-             startActivity(intentLocation);
-         }
-     });
+        etGeoDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLocation = new Intent(SignUp_Act.this, LocationSearch.class);
+                intentLocation.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentLocation);
+            }
+        });
         //------------------------------------------------------------------------------------------
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 address = data.getStringExtra("Address");
 
-                if(getIntent().getExtras() != null)
-                {
+                if (getIntent().getExtras() != null) {
                     etGeoDetails.setText(address);
-                }
-                else {
+                } else {
                     etGeoDetails.setText("  ");
                 }
             }
@@ -177,6 +195,7 @@ public class SignUp_Act extends AppCompatActivity {
             }
         }
     }//onActivityResult
+
     public void signUpOTPAlert(final String str_usr_name, final String str_mobile_number, final String str_email_id,
                                final String cust_type_id, final String str_geo_details,
                                final String str_gst_no, final String str_pass, final String profile_pic) {
@@ -185,10 +204,10 @@ public class SignUp_Act extends AppCompatActivity {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SignUp_Act.this, R.style.AlertDialogStyle);
         alertBuilder.setView(promptsView);
 
-        final EditText etOtp1 = promptsView.findViewById(R.id.etOtp1);
-        final EditText etOtp2 = promptsView.findViewById(R.id.etOtp2);
-        final EditText etOtp3 = promptsView.findViewById(R.id.etOtp3);
-        final EditText etOtp4 = promptsView.findViewById(R.id.etOtp4);
+        etOtp1 = promptsView.findViewById(R.id.etOtp1);
+        etOtp2 = promptsView.findViewById(R.id.etOtp2);
+        etOtp3 = promptsView.findViewById(R.id.etOtp3);
+        etOtp4 = promptsView.findViewById(R.id.etOtp4);
         Button btnSubmitOtp = promptsView.findViewById(R.id.btnSubmitOtp);
         final TextView tvResendOtp = promptsView.findViewById(R.id.tvResendOtp);
         SpannableString spannable = new SpannableString("Re-Send OTP");
@@ -216,12 +235,13 @@ public class SignUp_Act extends AppCompatActivity {
 
                             SignUpVerifyModel resourceSgnUpVerfy = response.body();
                             if (resourceSgnUpVerfy.status.equals("success")) {
-                                Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUp_Act.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
                                 Intent intentLogin = new Intent(SignUp_Act.this, DashBoard_Act.class);
                                 intentLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 intentLogin.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intentLogin);
+                                finish();
                             } else {
                                 Toast.makeText(SignUp_Act.this, resourceSgnUpVerfy.message, Toast.LENGTH_SHORT).show();
                             }
@@ -243,6 +263,7 @@ public class SignUp_Act extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (Utils.CheckInternetConnection(getApplicationContext())) {
+                    startSMSListener();
                     SignUpResendOtp signUpResendOtp = new SignUpResendOtp(str_mobile_number);
                     Call<SignUpResendOtp> signUpResendOtpCall = apiInterface.getOtp(signUpResendOtp);
                     signUpResendOtpCall.enqueue(new Callback<SignUpResendOtp>() {
@@ -512,10 +533,108 @@ public class SignUp_Act extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (smsReceiver != null) {
+            unregisterReceiver(smsReceiver);
+        }
+    }
+
+
+    /**
+     * Starts SmsRetriever, which waits for ONE matching SMS message until timeout
+     * (5 minutes). The matching SMS message will be sent via a Broadcast Intent with
+     * action SmsRetriever#SMS_RETRIEVED_ACTION.
+     */
+    private void startSMSListener() {
+        try {
+            smsReceiver = new MySMSBroadcastReceiver();
+            smsReceiver.setOTPListener(this);
+
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
+            this.registerReceiver(smsReceiver, intentFilter);
+
+            SmsRetrieverClient client = SmsRetriever.getClient(this);
+
+            Task<Void> task = client.startSmsRetriever();
+            task.addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // API successfully started
+                    //  Log.d("otp", String.valueOf(otp));
+                }
+            });
+
+            task.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Fail to start API
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void onOTPReceived(String otp) {
+        showToast("OTP Received: " + otp);
+        etOtp1.setText("");
+        etOtp2.setText("");
+        etOtp3.setText("");
+        etOtp4.setText("");
+        String otp_arr[] = otp.split(" ");
+        str_otp = otp_arr[otp_arr.length - 2];
+        if (str_otp != null) {
+            int int_otp = Integer.parseInt(str_otp);
+            int n = 0;
+            for (int i = 0; i < str_otp.length(); i++) {
+                n = int_otp % 10;
+                Log.e("---n---",String.valueOf(n));
+                int_otp = int_otp / 10;
+
+                if (i == 0) {
+                    etOtp4.setText(String.valueOf(n));
+                } else if (i == 1) {
+                    etOtp3.setText(String.valueOf(n));
+                } else if (i == 2) {
+                    etOtp2.setText(String.valueOf(n));
+                } else {
+                    etOtp1.setText(String.valueOf(n));
+                }
+
+            }
+
+        }
+        if (smsReceiver != null) {
+            unregisterReceiver(smsReceiver);
+            smsReceiver = null;
+        }
+    }
+
+    @Override
+    public void onOTPTimeOut() {
+        showToast("OTP Time out");
+    }
+
+    @Override
+    public void onOTPReceivedError(String error) {
+        showToast(error);
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
 
 }

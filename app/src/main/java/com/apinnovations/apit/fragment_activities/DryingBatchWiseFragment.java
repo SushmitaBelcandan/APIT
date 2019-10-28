@@ -60,6 +60,7 @@ public class DryingBatchWiseFragment extends Fragment {
     private String strPaddyAge;
     private int strPaddyId;
     int hidingItemIndex = 0;
+    private String str_procs_img_id;
     private String id, title1, title2, title3, title4;
     ProgressDialog progressdialog;
 
@@ -127,21 +128,23 @@ public class DryingBatchWiseFragment extends Fragment {
                 str_paddy_moisture = etPaddyMoisture.getText().toString().trim();
 
                 if (id.equals("p3d1")) {
+
+
                     sendData(str_usr_id, "3", "NA", "1", "", "",
-                            str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
+                            str_batch_capcty, str_num_dryers, str_paddy_variety, String.valueOf(strPaddyId).trim(), str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", "", "", "",
                             "", "", "", "", "",
-                            "");
+                            "","NA");
                 }
                 else {
 
                     sendData(str_usr_id, "3", "NA", "2", "", "",
-                            "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
+                            "", str_num_dryers, str_paddy_variety, String.valueOf(strPaddyId).trim(), str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", str_mixed_capcty, "", "",
                             "", "", "", "", "",
-                            "");
+                            "","NA");
                 }
 
                 Intent intentAfterProcess = new Intent(getActivity(), AfterProcess_Act.class);
@@ -165,8 +168,18 @@ public class DryingBatchWiseFragment extends Fragment {
 
                         List<EProcessImagesModel.ImagesEProcessDatum1> datumList = eProcsImgesResources.data1;
 
-                        Glide.with(getActivity()).load(datumList.get(0).image).into(ivDryerMethodName);
-                        Glide.with(getActivity()).load(datumList.get(1).image).into(ivDryerMethodName1);
+
+                        if (datumList.get(1).image.equals("NA")) {
+                            Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivDryerMethodName);
+                        }else {
+                            Glide.with(getActivity()).load(datumList.get(0).image).into(ivDryerMethodName);
+
+                        }if (datumList.get(1).image.equals("NA")) {
+                            Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivDryerMethodName1);
+                        }else {
+                            Glide.with(getActivity()).load(datumList.get(1).image).into(ivDryerMethodName1);
+
+                        }
 
                     } else {
                         Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivDryerMethodName);
@@ -243,7 +256,7 @@ public class DryingBatchWiseFragment extends Fragment {
                          String preStmngCapcty, String noCookers, String cookerCapcty,
                          String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                          String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
-                         String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+                         String stmngTnkCapcty, String agingTanks, String agingTnkCapcty, String imagesId) {
 
         if (procsId == null || procsId.isEmpty() || procsId.equals("null")  || modelId.equals("0")) {
             procsId = "NA";
@@ -269,7 +282,7 @@ public class DryingBatchWiseFragment extends Fragment {
         if (vrtyPaddy == null || vrtyPaddy.isEmpty() || vrtyPaddy.equals("null")) {
             vrtyPaddy = "NA";
         }
-        if (agePaddy == null || agePaddy.isEmpty() || agePaddy.equals("null")) {
+        if (agePaddy == null || agePaddy.isEmpty() || agePaddy.equals("null") || agePaddy.equals("0")) {
             agePaddy = "NA";
         }
         if (pincode == null || pincode.isEmpty() || pincode.equals("null")) {
@@ -324,7 +337,7 @@ public class DryingBatchWiseFragment extends Fragment {
         postForms(usrId, procsId, modelId, dryerId, noHydn, hydrnTnkCapcty, batchDryerCapcty,
                 noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations, paddyMoisture, noPreStmngTnk,
                 preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk, finalStmngCapcty,
-                noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty);
+                noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty, imagesId);
 
 
     }
@@ -336,7 +349,7 @@ public class DryingBatchWiseFragment extends Fragment {
                           String preStmngCapcty, String noCookers, String cookerCapcty,
                           String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                           String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
-                          String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+                          String stmngTnkCapcty, String agingTanks, String agingTnkCapcty, String imgId) {
 
         try {
             progressdialog.show();
@@ -347,7 +360,7 @@ public class DryingBatchWiseFragment extends Fragment {
         EProcessSubmitFormModel epSubmitFormModel = new EProcessSubmitFormModel(usrId, procsId, modelId, dryerId,
                 noHydn, hydrnTnkCapcty, batchDryerCapcty, noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations,
                 paddyMoisture, noPreStmngTnk, preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk,
-                finalStmngCapcty, noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty);
+                finalStmngCapcty, noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty, imgId);
 
         Call<EProcessSubmitFormModel> epSubmitFormCall = apiInterface.postForm(epSubmitFormModel);
         epSubmitFormCall.enqueue(new Callback<EProcessSubmitFormModel>() {

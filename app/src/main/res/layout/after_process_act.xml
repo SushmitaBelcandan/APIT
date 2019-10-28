@@ -49,6 +49,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/llHeader1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/padding_lr2"
@@ -67,6 +68,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llHeader2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
@@ -194,6 +196,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/llHeader3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

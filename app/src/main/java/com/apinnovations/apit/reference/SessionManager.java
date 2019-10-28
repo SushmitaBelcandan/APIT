@@ -75,6 +75,10 @@ public class SessionManager {
     {
         editor.putInt(KEY_CHECKED_POSITION, pos);
         editor.commit();
+    } public void saveCHeckPositionEP(int pos)
+    {
+        editor.putInt(KEY_CHECKED_POSITION, pos);
+        editor.commit();
     }
     public void setChkBxStatus(boolean status)
     {
@@ -90,6 +94,9 @@ public class SessionManager {
         return shref.getInt(KEY_CHECKED_POSITION, 0);
     }
 
+    public int getCHeckPositionEP() {
+        return shref.getInt(KEY_CHECKED_POSITION, 0);
+    }
 
     public String getUsrId() {
         return shref.getString(KEY_UID, null);

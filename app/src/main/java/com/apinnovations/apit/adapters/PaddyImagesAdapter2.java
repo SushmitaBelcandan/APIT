@@ -44,6 +44,7 @@ public class PaddyImagesAdapter2 extends RecyclerView.Adapter<PaddyImagesAdapter
     @Override
     public SingleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.paddy_colors_model, viewGroup, false);
+        session = new SessionManager(context);
         return new SingleViewHolder(view);
     }
 
@@ -95,7 +96,7 @@ public class PaddyImagesAdapter2 extends RecyclerView.Adapter<PaddyImagesAdapter
                         checkedPosition = getAdapterPosition();
 
                         im_id.setImageId(id);
-
+                        session.saveCHeckPositionEP(id);
                         //send selected image id to fragment
                       /*  int imgId = getAdapterPosition();
                         Intent intent = new Intent("custom-message");

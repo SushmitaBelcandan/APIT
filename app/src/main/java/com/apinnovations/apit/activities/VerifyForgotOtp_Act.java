@@ -2,7 +2,9 @@ package com.apinnovations.apit.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import android.text.Editable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +27,13 @@ import com.apinnovations.apit.retrofit_models.APIInterface;
 import com.apinnovations.apit.retrofit_models.ForgotPassModel;
 import com.apinnovations.apit.retrofit_models.VerifyForgotOtpModel;
 import com.apinnovations.apit.R;
+import com.apinnovations.apit.sms.AppSignatureHashHelper;
+import com.apinnovations.apit.sms.MySMSBroadcastReceiver;
+import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
@@ -31,7 +41,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatcher, View.OnKeyListener, View.OnFocusChangeListener{
+public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatcher, View.OnKeyListener,
+        View.OnFocusChangeListener,
+        MySMSBroadcastReceiver.OTPReceiveListener {
 
     ProgressDialog progressdialog;
     APIInterface apiInterface;
@@ -43,16 +55,23 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
     private EditText etOtp1, etOtp2, etOtp3, etOtp4;
     private String strOtp1, strOtp2, strOtp3, strOtp4;
     private LinearLayout llResendOtp;
-    private  String finalOtp;
+    private String finalOtp;
     private int whoHasFocus;
     private String str_mobile, str_email;
     char[] code = new char[4];//Store the digits in charArray.
-
+    private MySMSBroadcastReceiver smsReceiver;
+    private String str_otp;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.verify_forgot_otp);
+
+
+        AppSignatureHashHelper appSignatureHashHelper = new AppSignatureHashHelper(this);
+        // This code requires one time to get Hash keys do comment and share key
+        //  Log.i("HashKey", "HashKey: " + appSignatureHashHelper.getAppSignatures().get(0));
+
 
         progressdialog = new ProgressDialog(VerifyForgotOtp_Act.this);
         progressdialog.setMessage("Please Wait....");
@@ -72,6 +91,7 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
                 onBackPressed();
             }
         });
+        startSMSListener();
         etOtp1 = findViewById(R.id.etOtp1);
         etOtp2 = findViewById(R.id.etOtp2);
         etOtp3 = findViewById(R.id.etOtp3);
@@ -79,31 +99,7 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
         etOtp1.requestFocus();//Left digit gets focus after adding of fragment in Container
 
         btnVerifyOtp = findViewById(R.id.btnVerifyOtp);
-        btnVerifyOtp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mobile = getIntent().getExtras().getString("Mobile_1", "defaultKey");
-                email = getIntent().getExtras().getString("Email_1", "defaultKey");
 
-                strOtp1 = etOtp1.getText().toString().trim();
-                strOtp2 = etOtp2.getText().toString().trim();
-                strOtp3 = etOtp3.getText().toString().trim();
-                strOtp4 = etOtp4.getText().toString().trim();
-
-                finalOtp = strOtp1 + strOtp2 + strOtp3 + strOtp4;
-
-                if (Utils.CheckInternetConnection(VerifyForgotOtp_Act.this)) {
-                    if(!mobile.equals(null)) {
-                        otpVerify(finalOtp, mobile);
-                    }else
-                    {
-                        otpVerify(finalOtp, email);
-                    }
-                } else {
-                    Toast.makeText(VerifyForgotOtp_Act.this, "Please check internet connection", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         llResendOtp = findViewById(R.id.llResendOtp);
         tvResendOtp = findViewById(R.id.tvResendOtp);
@@ -117,10 +113,10 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
                 email = getIntent().getExtras().getString("Email_1", "defaultKey");
 
                 if (Utils.CheckInternetConnection(VerifyForgotOtp_Act.this)) {
-                    if(!mobile.equals(null)) {
-                       forgetPassword(mobile);
-                    }else
-                    {
+                    if (!mobile.equals(null)) {
+                        forgetPassword(mobile);
+                        startSMSListener();
+                    } else {
                         forgetPassword(email);
                     }
                 } else {
@@ -149,7 +145,7 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
                     if (loginid.matches("[0-9]+")) {
                         str_mobile = loginid;
                         str_email = null;
-                       intentResetPassword.putExtra("Mobile1", loginid);
+                        intentResetPassword.putExtra("Mobile1", loginid);
                     } else {
                         if (android.util.Patterns.EMAIL_ADDRESS.matcher(loginid).matches()) {
                             str_email = loginid;
@@ -172,6 +168,7 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
             }
         });
     }
+
     private void forgetPassword(final String strInput) {
         try {
             progressdialog.show();
@@ -308,4 +305,124 @@ public class VerifyForgotOtp_Act extends AppCompatActivity implements TextWatche
         }
         return false;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (smsReceiver != null) {
+            unregisterReceiver(smsReceiver);
+        }
+    }
+
+
+    /**
+     * Starts SmsRetriever, which waits for ONE matching SMS message until timeout
+     * (5 minutes). The matching SMS message will be sent via a Broadcast Intent with
+     * action SmsRetriever#SMS_RETRIEVED_ACTION.
+     */
+    private void startSMSListener() {
+        try {
+            smsReceiver = new MySMSBroadcastReceiver();
+            smsReceiver.setOTPListener(this);
+
+            IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
+            this.registerReceiver(smsReceiver, intentFilter);
+
+            SmsRetrieverClient client = SmsRetriever.getClient(this);
+
+            Task<Void> task = client.startSmsRetriever();
+            task.addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // API successfully started
+                    //  Log.d("otp", String.valueOf(otp));
+                }
+            });
+
+            task.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Fail to start API
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void onOTPReceived(String otp) {
+        showToast("OTP Received: " + otp);
+        String otp_arr[] = otp.split(" ");
+        str_otp = otp_arr[otp_arr.length - 2];
+        if (str_otp != null) {
+            int int_otp = Integer.parseInt(str_otp);
+            int n = 0;
+            for (int i = 0; i < str_otp.length(); i++) {
+                n = int_otp % 10;
+                Log.e("---n---", String.valueOf(n));
+                int_otp = int_otp / 10;
+
+                if (i == 0) {
+                    etOtp4.setText(String.valueOf(n));
+                } else if (i == 1) {
+                    etOtp3.setText(String.valueOf(n));
+                } else if (i == 2) {
+                    etOtp2.setText(String.valueOf(n));
+                } else {
+                    etOtp1.setText(String.valueOf(n));
+                }
+
+            }
+
+            btnVerifyOtp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mobile = getIntent().getExtras().getString("Mobile_1", "defaultKey");
+                    email = getIntent().getExtras().getString("Email_1", "defaultKey");
+
+                    strOtp1 = etOtp1.getText().toString().trim();
+                    strOtp2 = etOtp2.getText().toString().trim();
+                    strOtp3 = etOtp3.getText().toString().trim();
+                    strOtp4 = etOtp4.getText().toString().trim();
+
+                    finalOtp = strOtp1 + strOtp2 + strOtp3 + strOtp4;
+
+                    if (Utils.CheckInternetConnection(VerifyForgotOtp_Act.this)) {
+                        if (!mobile.equals(null)) {
+                            otpVerify(finalOtp, mobile);
+                        } else {
+                            otpVerify(finalOtp, email);
+                        }
+                    } else {
+                        Toast.makeText(VerifyForgotOtp_Act.this, "Please check internet connection", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(VerifyForgotOtp_Act.this, "Please enter valid OTP", Toast.LENGTH_SHORT).show();
+        }
+        if (smsReceiver != null) {
+            unregisterReceiver(smsReceiver);
+            smsReceiver = null;
+        }
+    }
+
+    @Override
+    public void onOTPTimeOut() {
+        showToast("OTP Time out");
+    }
+
+    @Override
+    public void onOTPReceivedError(String error) {
+        showToast(error);
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

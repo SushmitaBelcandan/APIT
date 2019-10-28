@@ -41,8 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ForgotPassword_Act extends AppCompatActivity implements  MySMSBroadcastReceiver.OTPReceiveListener  {
-
+public class ForgotPassword_Act extends AppCompatActivity {
 
 
     APIInterface apiInterface;
@@ -57,6 +56,7 @@ public class ForgotPassword_Act extends AppCompatActivity implements  MySMSBroad
     private LinearLayout llResenVerifyOtp;
     private TextView tvResendVerifyOtp;
     private EditText etOtp1, etOtp2, etOtp3, etOtp4;
+    private String str_otp;
 
     private MySMSBroadcastReceiver smsReceiver;
 
@@ -65,13 +65,6 @@ public class ForgotPassword_Act extends AppCompatActivity implements  MySMSBroad
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgot_password);
 
-
-        AppSignatureHashHelper appSignatureHashHelper = new AppSignatureHashHelper(this);
-
-        // This code requires one time to get Hash keys do comment and share key
-       //Log.i("HashKey", "HashKey: " + appSignatureHashHelper.getAppSignatures().get(0));
-
-        startSMSListener();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,16 +83,15 @@ public class ForgotPassword_Act extends AppCompatActivity implements  MySMSBroad
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
 
-
         // get mobile number from phone
         llVerifyOtp = findViewById(R.id.llVerifyOtp);
         llRequestOtp = findViewById(R.id.llRequestOtp);
-        llResenVerifyOtp  = findViewById(R.id.llResendVerifyOtp);
+        llResenVerifyOtp = findViewById(R.id.llResendVerifyOtp);
         tvResendVerifyOtp = findViewById(R.id.tvResendVerifyOtp);
-        etOtp1  = findViewById(R.id.etOtp1);
-        etOtp2  = findViewById(R.id.etOtp2);
-        etOtp3  = findViewById(R.id.etOtp3);
-        etOtp4  = findViewById(R.id.etOtp4);
+        etOtp1 = findViewById(R.id.etOtp1);
+        etOtp2 = findViewById(R.id.etOtp2);
+        etOtp3 = findViewById(R.id.etOtp3);
+        etOtp4 = findViewById(R.id.etOtp4);
 
         progressdialog = new ProgressDialog(ForgotPassword_Act.this);
         progressdialog.setMessage("Please Wait....");
@@ -138,7 +130,6 @@ public class ForgotPassword_Act extends AppCompatActivity implements  MySMSBroad
                 }
             }
         });
-
         btnSubmit = findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,79 +229,5 @@ public class ForgotPassword_Act extends AppCompatActivity implements  MySMSBroad
         return true;
 
     }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (smsReceiver != null) {
-            unregisterReceiver(smsReceiver);
-        }
-    }
-
-
-
-    /**
-     * Starts SmsRetriever, which waits for ONE matching SMS message until timeout
-     * (5 minutes). The matching SMS message will be sent via a Broadcast Intent with
-     * action SmsRetriever#SMS_RETRIEVED_ACTION.
-     */
-    private void startSMSListener() {
-        try {
-            smsReceiver = new MySMSBroadcastReceiver();
-            smsReceiver.setOTPListener(this);
-
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION);
-            this.registerReceiver(smsReceiver, intentFilter);
-
-            SmsRetrieverClient client = SmsRetriever.getClient(this);
-
-            Task<Void> task = client.startSmsRetriever();
-            task.addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid)
-                {
-                    // API successfully started
-                  //  Log.d("otp", String.valueOf(otp));
-                }
-            });
-
-            task.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // Fail to start API
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Override
-    public void onOTPReceived(String otp) {
-        showToast("OTP Received: " + otp);
-
-        if (smsReceiver != null) {
-            unregisterReceiver(smsReceiver);
-            smsReceiver = null;
-        }
-    }
-
-    @Override
-    public void onOTPTimeOut() {
-        showToast("OTP Time out");
-    }
-
-    @Override
-    public void onOTPReceivedError(String error) {
-        showToast(error);
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
 
 }

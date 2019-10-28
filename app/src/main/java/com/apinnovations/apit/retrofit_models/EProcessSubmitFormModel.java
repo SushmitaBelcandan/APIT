@@ -82,6 +82,9 @@ public class EProcessSubmitFormModel {
     @SerializedName("aging_tanks_capacitys")
     public String  aging_tanks_capacitys;
 
+    @SerializedName("image_ids")
+    public String image_ids;
+
 
     public EProcessSubmitFormModel(String usrId, String procsId, String modelId, String dryerId,
                                    String noHydn, String hydrnTnkCapcty, String batchDryerCapcty,
@@ -90,7 +93,7 @@ public class EProcessSubmitFormModel {
                                    String preStmngCapcty, String noCookers, String cookerCapcty,
                                    String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                                    String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
-                                   String stmngTnkCapcty, String agingTanks, String agingTnkCapcty)
+                                   String stmngTnkCapcty, String agingTanks, String agingTnkCapcty, String img_id)
     {
                 this.user_ids = usrId;
                 this.process_processtype_ids = procsId;
@@ -118,6 +121,7 @@ public class EProcessSubmitFormModel {
                 this.no_of_streaming_tank_capacitys = stmngTnkCapcty;
                 this.aging_tankss  = agingTanks;
                 this.aging_tanks_capacitys = agingTnkCapcty;
+                this.image_ids = img_id;
     }
 
     @SerializedName("status")

@@ -16,13 +16,28 @@
                             <entry key="actionbar">
                               <value>
                                 <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="paddingPercent" value="10" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="F:\APIT Doc\Icons\APIT Assets\top_arrow_w.png" />
-                                      <entry key="outputName" value="arrow_white" />
+                                      <entry key="imageAsset" value="F:\APIT Doc\Icons\APIT Assets\notifi_item_blue.png" />
+                                      <entry key="outputName" value="notifi_gray" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="ffffff" />
+                                      <entry key="themeColor" value="4a4a4a" />
                                     </map>
                                   </option>
                                 </PersistentState>

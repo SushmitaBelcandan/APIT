@@ -43,6 +43,11 @@ import com.apinnovations.apit.retrofit_models.EProcessImagesModel;
 import com.apinnovations.apit.retrofit_models.EProcessSubmitFormModel;
 import com.apinnovations.apit.retrofit_models.PaddysAgeListModel;
 import com.apinnovations.apit.R;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +74,7 @@ public class SteamCuringFragment extends Fragment {
     private Spinner spnrDMPaddyAge;
     RecyclerView phvPaddyColor;
     private LinearLayout llPaddyImages;
+    private TextView tvPaddyColor;
 
     private String str_usr_id;
     private String str_num_stmng_1, str_stng_capcty_1;
@@ -76,6 +82,7 @@ public class SteamCuringFragment extends Fragment {
     private String str_num_stmng_2, str_capcty_stmng_2, str_num_ageing_2, str_ageing_capcty_2;
     private String id, title1, title2, title3, title4;
     private String process_id, model_id, dryer_id;
+    private String str_procs_img_id;
 
     private String strPaddyAge;
     private int strPaddyId;
@@ -141,6 +148,7 @@ public class SteamCuringFragment extends Fragment {
         etPaddyMoisture = view.findViewById(R.id.etPaddyMoisture);
         phvPaddyColor = view.findViewById(R.id.phvPaddyColor);
         llPaddyImages = view.findViewById(R.id.llPaddyImages);
+        tvPaddyColor = view.findViewById(R.id.tvPaddyColor);
 
         //-----------------------------------------------------------Parboiling/model1/mixed-wise---------------------
         tvProcessModelTitle2 = view.findViewById(R.id.tvProcessModelTitle2);
@@ -164,10 +172,6 @@ public class SteamCuringFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                Log.e("------imgid00000------",String.valueOf(img_id.getImagId()));
-
-
                 str_usr_id = session.getUsrId();
                 str_mixed_capcty = etDyerCapacity.getText().toString().trim();
                 str_batch_capcty = etDMCapacity.getText().toString().trim();
@@ -187,42 +191,56 @@ public class SteamCuringFragment extends Fragment {
                 str_ageing_capcty_2 = etAgeingCapctyModel2.getText().toString().trim();
 
 
-
-
-
-
                 if (id.equals("p2m1d1")) {
+
+                    str_procs_img_id = img_id.getImagId().toString();
+                    if (str_procs_img_id == null || str_procs_img_id.isEmpty() || str_procs_img_id.equals("0")) {
+                        str_procs_img_id = "NA";
+                    }
                     sendData(str_usr_id, "2", "6", "1", "", "",
-                            str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
+                            str_batch_capcty, str_num_dryers, str_paddy_variety, String.valueOf(strPaddyId).trim(), str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", "", "", "",
                             "", "", str_num_stmng_1, str_stng_capcty_1, "",
-                            "");
+                            "", str_procs_img_id);
                 } else if (id.equals("p2m1d2")) {
 
+                    str_procs_img_id = img_id.getImagId().toString();
+                    if (str_procs_img_id == null || str_procs_img_id.isEmpty() || str_procs_img_id.equals("0")) {
+                        str_procs_img_id = "NA";
+                    }
                     sendData(str_usr_id, "2", "6", "2", "", "",
-                            "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
+                            "", str_num_dryers, str_paddy_variety, String.valueOf(strPaddyId).trim(), str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", str_mixed_capcty, "", "",
-                            "", "", str_num_stmng_1, str_stng_capcty_1,"" ,
-                            "");
+                            "", "", str_num_stmng_1, str_stng_capcty_1, "",
+                            "", str_procs_img_id);
                 } else if (id.equals("p2m2d1")) {
+
+                    str_procs_img_id = img_id.getImagId().toString();
+                    if (str_procs_img_id == null || str_procs_img_id.isEmpty() || str_procs_img_id.equals("0")) {
+                        str_procs_img_id = "NA";
+                    }
                     sendData(str_usr_id, "2", "7", "1",
                             "", "",
-                            str_batch_capcty, str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
+                            str_batch_capcty, str_num_dryers, str_paddy_variety, String.valueOf(strPaddyId).trim(), str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", "", "", "",
                             "", "", str_num_stmng_2, str_capcty_stmng_2, str_num_ageing_2,
-                            str_ageing_capcty_2);
+                            str_ageing_capcty_2, str_procs_img_id);
 
-                } else{
+                } else {
+                    str_procs_img_id = img_id.getImagId().toString();
+                    if (str_procs_img_id == null || str_procs_img_id.isEmpty() || str_procs_img_id.equals("0")) {
+                        str_procs_img_id = "NA";
+                    }
                     sendData(str_usr_id, "2", "7", "2",
                             "", "",
-                            "", str_num_dryers, str_paddy_variety, strPaddyAge, str_pincode, str_prosc_loc,
+                            "", str_num_dryers, str_paddy_variety, String.valueOf(strPaddyId).trim(), str_pincode, str_prosc_loc,
                             str_paddy_moisture, "", "", "",
                             "", str_mixed_capcty, "", "",
                             "", "", str_num_stmng_2, str_capcty_stmng_2, str_num_ageing_2,
-                            str_ageing_capcty_2);
+                            str_ageing_capcty_2, str_procs_img_id);
 
                 }
                 Intent intentAfterProcess = new Intent(getActivity(), AfterProcess_Act.class);
@@ -259,30 +277,64 @@ public class SteamCuringFragment extends Fragment {
 
                         List<EProcessImagesModel.ImagesEProcessDatum1> datumList = eProcsImgesResources.data1;
 
-                        Glide.with(getActivity()).load(datumList.get(0).image).into(ivHydrTank);
-                        Glide.with(getActivity()).load(datumList.get(1).image).into(ivDryerMethodName);
+                        if (datumList.get(0).image.equals("NA")) {
+                            Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivHydrTank);
+                        }else
+                        {
+                            Glide.with(getActivity()).load(datumList.get(0).image).into(ivHydrTank);
 
-                        llPaddyImages.setVisibility(View.VISIBLE);
-                        List<EProcessImagesModel.ImagesEProcessDatum2> imageListDatum = eProcsImgesResources.data2;
-                        imgList = new ArrayList<Images>();
+                        }
+                        if (datumList.get(1).image.equals("NA")) {
+                            Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivDryerMethodName);
+                        }else {
+                            Glide.with(getActivity()).load(datumList.get(1).image).into(ivDryerMethodName);
 
+                        }
                         img_id = new ImageId(0);
 
-                        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
-                        phvPaddyColor.setLayoutManager(mLayoutManager);
-                        //phvPaddyColor.addItemDecoration(new DividerItemDecoration(getActivity(),0));//remove divider
-                        adapter = new PaddyImagesAdapter2(getActivity(), imgList, img_id);
-                        phvPaddyColor.setAdapter(adapter);
+                        if (eProcsImgesResources.data2 == null || eProcsImgesResources.data2.equals("null")
+                                || eProcsImgesResources.data2.equals("NA")) {
+                            llPaddyImages.setVisibility(GONE);
+                            tvPaddyColor.setVisibility(GONE);
+                            img_id.setImageId(0);
+                        } else {
 
-                        for (EProcessImagesModel.ImagesEProcessDatum2 imageCount : imageListDatum) {
+                            llPaddyImages.setVisibility(View.VISIBLE);
+                            tvPaddyColor.setVisibility(View.VISIBLE);
 
-                            imageId = Integer.parseInt(imageCount.process_image_id);
-                            imgList.add(new Images(imageId, imageCount.image_color, imageCount.process_image_name));
+                            imgList = new ArrayList<Images>();
+
+                            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 3);
+                            phvPaddyColor.setLayoutManager(mLayoutManager);
+                            adapter = new PaddyImagesAdapter2(getActivity(), imgList, img_id);
+                            Log.e("----img_iiiii----",String.valueOf(img_id));
+                            phvPaddyColor.setAdapter(adapter);
+
+                            Gson gson = new Gson();
+                            String json = gson.toJson(eProcsImgesResources.data2);
+                            JSONArray jArr = null;
+                            try {
+                                jArr = new JSONArray(json);
+                                for (int count = 0; count < jArr.length(); count++) {
+
+                                    JSONObject obj = jArr.getJSONObject(count);
+                                    imageId = Integer.parseInt(obj.getString("process_image_id"));
+                                    String imageName = obj.getString("process_image_name");
+                                    String imageColor = obj.getString("image_color");
+                                    imgList.add(new Images(imageId, imageColor, imageName));
+                                    //so on
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            adapter.setEmployees(imgList);
                         }
-                        adapter.setEmployees(imgList);
 
                     } else {
                         llPaddyImages.setVisibility(GONE);
+                        tvPaddyColor.setVisibility(View.GONE);
                         Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivHydrTank);
                         Glide.with(getActivity()).load(R.drawable.rice_mill).into(ivDryerMethodName);
 
@@ -358,7 +410,7 @@ public class SteamCuringFragment extends Fragment {
                          String preStmngCapcty, String noCookers, String cookerCapcty,
                          String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                          String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
-                         String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+                         String stmngTnkCapcty, String agingTanks, String agingTnkCapcty, String imageId) {
 
         if (procsId == null || procsId.isEmpty() || procsId.equals("null")) {
             procsId = "NA";
@@ -384,7 +436,7 @@ public class SteamCuringFragment extends Fragment {
         if (vrtyPaddy == null || vrtyPaddy.isEmpty() || vrtyPaddy.equals("null")) {
             vrtyPaddy = "NA";
         }
-        if (agePaddy == null || agePaddy.isEmpty() || agePaddy.equals("null")) {
+        if (agePaddy == null || agePaddy.isEmpty() || agePaddy.equals("null") || agePaddy.equals("0")) {
             agePaddy = "NA";
         }
         if (pincode == null || pincode.isEmpty() || pincode.equals("null")) {
@@ -439,7 +491,7 @@ public class SteamCuringFragment extends Fragment {
         postForms(usrId, procsId, modelId, dryerId, noHydn, hydrnTnkCapcty, batchDryerCapcty,
                 noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations, paddyMoisture, noPreStmngTnk,
                 preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk, finalStmngCapcty,
-                noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty);
+                noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty, imageId);
 
 
     }
@@ -451,7 +503,7 @@ public class SteamCuringFragment extends Fragment {
                           String preStmngCapcty, String noCookers, String cookerCapcty,
                           String mixedDryerCapcty, String noFinalStmngTnk, String finalStmngCapcty,
                           String noPostStmngTnk, String postStmngTnkCapcty, String noStmngTnk,
-                          String stmngTnkCapcty, String agingTanks, String agingTnkCapcty) {
+                          String stmngTnkCapcty, String agingTanks, String agingTnkCapcty, String imgId) {
         try {
             progressdialog.show();
         } catch (Exception e) {
@@ -462,7 +514,7 @@ public class SteamCuringFragment extends Fragment {
         EProcessSubmitFormModel epSubmitFormModel = new EProcessSubmitFormModel(usrId, procsId, modelId, dryerId,
                 noHydn, hydrnTnkCapcty, batchDryerCapcty, noDryers, vrtyPaddy, agePaddy, pincode, procesngLocations,
                 paddyMoisture, noPreStmngTnk, preStmngCapcty, noCookers, cookerCapcty, mixedDryerCapcty, noFinalStmngTnk,
-                finalStmngCapcty, noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty);
+                finalStmngCapcty, noPostStmngTnk, postStmngTnkCapcty, noStmngTnk, stmngTnkCapcty, agingTanks, agingTnkCapcty, imgId);
 
         Call<EProcessSubmitFormModel> epSubmitFormCall = apiInterface.postForm(epSubmitFormModel);
         epSubmitFormCall.enqueue(new Callback<EProcessSubmitFormModel>() {

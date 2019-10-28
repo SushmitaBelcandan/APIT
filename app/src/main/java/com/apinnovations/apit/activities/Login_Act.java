@@ -73,6 +73,7 @@ public class Login_Act extends AppCompatActivity {
                 Intent intentSignUp = new Intent(Login_Act.this,SignUp_Act.class);
                 intentSignUp.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentSignUp);
+                finish();
             }
         });
 

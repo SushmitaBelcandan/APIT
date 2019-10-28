@@ -52,7 +52,7 @@ public class EProcessImagesModel {
     }
 
     @SerializedName("data2")
-    public List<ImagesEProcessDatum2> data2 = null;
+    public Object data2;
 
     public class ImagesEProcessDatum2
     {
